@@ -1,0 +1,24 @@
+name: Deploy Website via SSH
+
+on:
+  push:
+    branches:
+      - main  # Or master, depending on your default branch name
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Server with rsync
+        uses: easingthemes/ssh-deploy@v5.1.0
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          SOURCE: "./"  # The root of your repository
+          TARGET: ${{ secrets.REMOTE_PATH }}
+          EXCLUDE: "/.github/, /node_modules/" # Exclude the workflow directory and other unnecessary files

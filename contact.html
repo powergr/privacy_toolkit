@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Project QRE</title>
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://projectqre.com/contact.html">
+    <meta property="og:title" content="Contact Project QRE">
+    <meta property="og:description" content="Have a question about our quantum-resistant encryption project, a technical inquiry, or want to collaborate? Get in touch with us.">
+    <meta property="og:image" content="https://projectqre.com/images/qre-social-share.webp">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://projectqre.com/contact.html">
+    <meta property="twitter:title" content="Contact Project QRE">
+    <meta property="twitter:description" content="Have a question about our quantum-resistant encryption project, a technical inquiry, or want to collaborate? Get in touch with us.">
+    <meta property="twitter:image" content="https://projectqre.com/images/qre-social-share.webp">
+    <meta name="description" content="Get in touch with the team at Project QRE.">
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="canonical" href="https://projectqre.com/contact.html" />
+    
+    <!-- Asynchronously load Google Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"></noscript>
+    
+    <style>
+        :root {
+            --heading-font: 'Orbitron', sans-serif;
+            --body-font: 'Roboto', sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #0D47A1;
+            --secondary-color-bg: #1976D2;
+            --secondary-color-text: #58AFFF;
+            --accent-color: #64B5F6;
+            --text-color: #E0E0E0;
+            --bg-color: #121212;
+            --card-bg-color: #1E1E1E;
+            --border-color: #333;
+            --input-border-color: #444;
+            --footer-bg: #0a0a0a;
+            --footer-border: #222;
+            --link-color: var(--accent-color);
+            --link-hover-color: #90caf9;
+            --header-overlay: rgba(0, 0, 0, 0.5);
+            --icon-color: #E0E0E0;
+            --icon-hover-bg: rgba(255, 255, 255, 0.1);
+            --footer-link-color: #aaa;
+            --footer-link-hover-color: #fff;
+        }
+
+        [data-theme="light"] {
+            --primary-color: #1565C0;
+            --secondary-color-bg: #1976D2;
+            --secondary-color-text: #0D47A1;
+            --accent-color: #1E88E5;
+            --text-color: #212121;
+            --bg-color: #f4f6f8;
+            --card-bg-color: #ffffff;
+            --border-color: #e0e0e0;
+            --input-border-color: #ccc;
+            --footer-bg: #e9ecef;
+            --footer-border: #dee2e6;
+            --link-color: #0D47A1;
+            --link-hover-color: #0b3a7d;
+            --header-overlay: rgba(0, 0, 0, 0.3);
+            --icon-color: #212121;
+            --icon-hover-bg: rgba(0, 0, 0, 0.05);
+            --footer-link-color: #555;
+            --footer-link-hover-color: #000;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--body-font);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        #theme-toggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            padding: 8px;
+            border-radius: 50%;
+            transition: background-color 0.2s ease-in-out;
+        }
+        #theme-toggle:hover,
+        #theme-toggle:focus {
+            background-color: var(--icon-hover-bg);
+            outline: none;
+        }
+        #theme-toggle svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--icon-color);
+            pointer-events: none; 
+        }
+
+        [data-theme="dark"] .moon-icon { display: none; }
+        [data-theme="dark"] .sun-icon { display: block; }
+        [data-theme="light"] .sun-icon { display: none; }
+        [data-theme="light"] .moon-icon { display: block; }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            background-image: url('images/quantum_header_bg.webp');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--header-overlay);
+            z-index: 1;
+        }
+
+        header .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        header h1 {
+            font-family: var(--heading-font);
+            font-size: 3.2em;
+            margin-bottom: 0.3em;
+            letter-spacing: 2px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        header .subtitle {
+            font-size: 1.4em;
+            font-weight: 300;
+            color: #E0E0E0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+            line-height: 1.5;
+        }
+
+        h2 {
+            font-family: var(--heading-font);
+            color: var(--accent-color);
+            text-align: center;
+            margin-bottom: 1.2em;
+            font-size: 2.2em;
+        }
+
+        .breadcrumb-nav {
+            padding: 15px 0;
+            font-size: 0.9em;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        .breadcrumb-nav a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+        .breadcrumb-nav a:hover {
+            text-decoration: underline;
+            color: var(--link-hover-color);
+        }
+        
+        .contact-intro {
+            text-align: center;
+            font-size: 1.1em;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+        }
+        
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--card-bg-color);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid var(--input-border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 1em;
+            font-family: var(--body-font);
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            background-color: var(--secondary-color-bg);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-family: var(--heading-font);
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--accent-color);
+        }
+
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--text-color);
+            text-align: center;
+            padding: 25px 0;
+            font-size: 0.9em;
+            margin-top: 40px;
+            border-top: 1px solid var(--footer-border);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .footer-links {
+            margin-top: 10px;
+        }
+        .footer-links a {
+            color: var(--footer-link-color);
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover {
+            color: var(--footer-link-hover-color);
+            text-decoration: underline;
+        }
+        .footer-links span {
+            color: var(--footer-link-color);
+        }
+        
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5em; }
+            .contact-form { padding: 20px; }
+        }
+    </style>
+    <script>
+        (function() {
+            const theme = localStorage.getItem('qre_theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+</head>
+<body>
+    <button id="theme-toggle" title="Toggle light/dark theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+    <header>
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p class="subtitle">We'd love to hear from you</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav container">
+        <a href="index.html">Home</a> > Contact
+    </nav>
+    
+    <main class="container">
+        <section>
+            <h2>Get In Touch</h2>
+            <p class="contact-intro">Have a question about the project, a technical inquiry, or want to follow our progress? Please fill out the form below, and we'll get back to you as soon as possible.</p>
+            
+            <form class="contact-form" action="https://formspree.io/f/mqabpeyj" method="POST">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+     <div class="container">
+        <p>© 2025 Project QRE. Last update: June 2025</p>
+        <div class="footer-links">
+            <a href="about.html" style="color:var(--link-color)">About Us</a>
+            <span>|</span>
+            <a href="blog.html" style="color:var(--link-color)">Blog</a>
+            <span>|</span>
+            <a href="contact.html" style="color:var(--link-color)">Contact</a>
+            <span>|</span>
+            <a href="terms.html" style="color:var(--link-color)">Terms</a>
+            <span>|</span>
+            <a href="privacy.html" style="color:var(--link-color)">Privacy</a>
+        </div>
+     </div>
+    </footer>
+
+    <script>
+        const themeToggleButton = document.getElementById('theme-toggle');
+        themeToggleButton.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('qre_theme', newTheme);
+        });
+    </script>
+</body>
+</html>

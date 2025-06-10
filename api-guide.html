@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Guide (PoC v0.1) - Project QRE Blog</title>
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://projectqre.com/api-guide.html">
+    <meta property="og:title" content="API Guide (PoC v0.1) | Project QRE Blog">
+    <meta property="og:description" content="A technical walkthrough of the v0.1 API, covering endpoints for encryption, decryption, and key management.">
+    <meta property="og:image" content="https://projectqre.com/images/qre-social-share.webp">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://projectqre.com/api-guide.html">
+    <meta property="twitter:title" content="API Guide (PoC v0.1) | Project QRE Blog">
+    <meta property="twitter:description" content="A technical walkthrough of the v0.1 API, covering endpoints for encryption, decryption, and key management.">
+    <meta property="twitter:image" content="https://projectqre.com/images/qre-social-share.webp">
+    <meta name="description" content="Technical API guide for the Project QRE v0.1 Proof-of-Concept, covering encryption, decryption, and key management endpoints.">
+
+    <link rel="canonical" href="https://projectqre.com/api-guide.html" />
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 ry=%2220%22 fill=%22%231976D2%22 /><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Orbitron, sans-serif%22 font-size=%2260%22 fill=%22white%22>Q</text></svg>">
+
+    <!-- Asynchronously load Google Fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"></noscript>
+    
+    <style>
+        :root{--heading-font:'Orbitron',sans-serif;--body-font:'Roboto',sans-serif;--mono-font:'Roboto Mono',monospace}[data-theme=dark]{--primary-color:#0d47a1;--secondary-color-bg:#1976d2;--secondary-color-text:#58afff;--accent-color:#64b5f6;--text-color:#e0e0e0;--bg-color:#121212;--card-bg-color:#1e1e1e;--border-color:#333;--footer-bg:#0a0a0a;--footer-border:#222;--link-color:var(--accent-color);--link-hover-color:#90caf9;--header-overlay:rgba(0,0,0,.5);--icon-color:#e0e0e0;--icon-hover-bg:rgba(255,255,255,.1);--footer-link-color:#aaa;--footer-link-hover-color:#fff;--code-bg:#2d2d2d;--code-text:#ccc}[data-theme=light]{--primary-color:#1565c0;--secondary-color-bg:#1976d2;--secondary-color-text:#0d47a1;--accent-color:#1e88e5;--text-color:#212121;--bg-color:#f4f6f8;--card-bg-color:#fff;--border-color:#e0e0e0;--footer-bg:#e9ecef;--footer-border:#dee2e6;--link-color:#0d47a1;--link-hover-color:#0b3a7d;--header-overlay:rgba(0,0,0,.3);--icon-color:#212121;--icon-hover-bg:rgba(0,0,0,.05);--footer-link-color:#555;--footer-link-hover-color:#000;--code-bg:#f0f0f0;--code-text:#333}*,:after,:before{box-sizing:border-box}body{margin:0;font-family:var(--body-font);background-color:var(--bg-color);color:var(--text-color);line-height:1.6;overflow-x:hidden;transition:background-color .3s ease,color .3s ease}#theme-toggle{position:fixed;top:15px;right:15px;z-index:1000;cursor:pointer;background-color:transparent;border:none;padding:8px;border-radius:50%;transition:background-color .2s ease-in-out}#theme-toggle:focus,#theme-toggle:hover{background-color:var(--icon-hover-bg);outline:0}#theme-toggle svg{width:24px;height:24px;stroke:var(--icon-color);pointer-events:none}[data-theme=dark] .moon-icon{display:none}[data-theme=dark] .sun-icon{display:block}[data-theme=light] .sun-icon{display:none}[data-theme=light] .moon-icon{display:block}.container{width:90%;max-width:900px;margin:0 auto;padding:20px 0}header{background-color:var(--primary-color);color:#fff;padding:60px 20px;text-align:center;position:relative;background-image:url(images/quantum_header_bg.webp);background-size:cover;background-position:50%;background-repeat:no-repeat;min-height:250px;display:flex;flex-direction:column;justify-content:center;align-items:center}header:before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-color:var(--header-overlay);z-index:1}header .container{position:relative;z-index:2}header h1{font-family:var(--heading-font);font-size:3.2em;margin-bottom:.3em;letter-spacing:2px;color:#fff;text-shadow:2px 2px 4px rgba(0,0,0,.7)}header .subtitle{font-size:1.4em;font-weight:300;color:#e0e0e0;text-shadow:1px 1px 3px rgba(0,0,0,.7);line-height:1.5}main{padding-top:20px}.breadcrumb-nav{padding:15px 0;font-size:.9em;border-bottom:1px solid var(--border-color);margin-bottom:20px}.breadcrumb-nav a{color:var(--link-color);text-decoration:none}.breadcrumb-nav a:hover{text-decoration:underline;color:var(--link-hover-color)}.post-content h1{font-family:var(--heading-font);color:var(--accent-color);font-size:2.5em;margin-bottom:1em;text-align:left}.post-content h2{font-family:var(--heading-font);color:var(--accent-color);font-size:2em;margin-top:2em;border-bottom:1px solid var(--border-color);padding-bottom:.3em;text-align:left}.post-content h3{font-family:var(--heading-font);color:var(--secondary-color-text);font-size:1.5em;margin-top:1.5em}.post-content h4{font-family:var(--heading-font);color:var(--accent-color);font-size:1.2em;margin-top:1.5em}.post-content p,.post-content ul{line-height:1.7;font-size:1.05em}.post-content code{background-color:var(--code-bg);color:var(--code-text);padding:.2em .4em;margin:0;font-size:85%;border-radius:6px;font-family:var(--mono-font)}.post-content pre{background-color:var(--code-bg);color:var(--code-text);padding:1em;border-radius:8px;overflow-x:auto}.post-content pre code{padding:0;font-size:100%;background:0 0;border-radius:0}footer{background-color:var(--footer-bg);color:var(--text-color);text-align:center;padding:25px 0;font-size:.9em;margin-top:40px;border-top:1px solid var(--footer-border);transition:background-color .3s ease,border-color .3s ease}.footer-links{margin-top:10px}.footer-links a{color:var(--footer-link-color);text-decoration:none;margin:0 10px;transition:color .2s}.footer-links a:hover{color:var(--footer-link-hover-color);text-decoration:underline}.footer-links span{color:var(--footer-link-color)}
+    </style>
+
+    <script>
+        (function() {
+            const theme = localStorage.getItem('qre_theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+</head>
+<body>
+    <button id="theme-toggle" title="Toggle light/dark theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </button>
+    <header>
+        <div class="container">
+            <h1>Project QRE Blog</h1>
+            <p class="subtitle">Updates, Research, and Technical Deep Dives</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumb-nav container">
+        <a href="index.html">Home</a> > <a href="blog.html">Blog</a> > API Guide (PoC v0.1)
+    </nav>
+
+    <main class="container">
+        <article class="post-content">
+            <h1>API Guide: Quantum-Resistant Encryption System v0.1 (PoC)</h1>
+            
+            <h2>1. Introduction</h2>
+            <p>This document provides a guide to using the API for the Quantum-Resistant Encryption System. The API allows for encryption and decryption using various hybrid and advanced schemes, with keys and sensitive components managed via HashiCorp Vault.</p>
+            <p><strong>Base URL:</strong> <code>http://127.0.0.1:8000/api/v1</code> (for local development)</p>
+            <p><strong>Authentication:</strong> All endpoints require an API key to be passed in the <code>X-API-Key</code> request header. For the PoC, the default key is <code>poc_super_secret_api_key_123!</code>. This can be overridden by setting the <code>SERVER_API_KEY</code> environment variable when starting the API server.</p>
+            <p><strong>Data Format:</strong> All request and response bodies are in JSON. Binary data (plaintext, ciphertext, passwords, factors, QNE keys) must be Base64 encoded strings.</p>
+            
+            <h2>2. Common Error Responses</h2>
+            <ul>
+                <li><strong>400 Bad Request:</strong> Invalid input format, missing required fields, or invalid Base64 encoding.
+                    <pre><code>{ "detail": "Descriptive error message." }</code></pre>
+                </li>
+                <li><strong>401 Unauthorized:</strong> Missing or invalid <code>X-API-Key</code> header.
+                    <pre><code>{ "detail": "Invalid API Key." }</code></pre>
+                </li>
+                <li><strong>404 Not Found:</strong> If a requested <code>key_id_hex</code> does not exist in Vault.
+                    <pre><code>{ "detail": "Key ID '<key_id_hex>' not found in Vault. Nothing to delete." }</code></pre>
+                </li>
+                <li><strong>422 Unprocessable Content:</strong> The request was well-formed, but a cryptographic processing error occurred.
+                    <pre><code>{ "detail": "<Operation> processing error: <specific_error>" }</code></pre>
+                </li>
+                 <li><strong>503 Service Unavailable:</strong> A required backend service (like the QNE Pool) is not available.
+                    <pre><code>{ "detail": "QNE Pool not available for API." }</code></pre>
+                </li>
+            </ul>
+
+            <h2>3. API Endpoints</h2>
+            
+            <h3>3.1 Layered Encryption (Epic 1)</h3>
+            <h4><code>POST /encrypt/layered</code></h4>
+            <p>Encrypts plaintext using the layered scheme (AES-CBC with KEM-encapsulated key). The KEM private key is stored in Vault.</p>
+            <p><strong>Request Body:</strong></p>
+            <pre><code>{
+    "plaintext_b64": "string (Base64 encoded plaintext)"
+}</code></pre>
+            <p><strong>Success Response (200 OK):</strong></p>
+            <pre><code>{
+    "ciphertext_b64": "string (Base64 encoded ciphertext, includes Vault key_id)"
+}</code></pre>
+            
+            <h4><code>POST /decrypt/layered</code></h4>
+            <p>Decrypts ciphertext from the layered scheme. Retrieves KEM private key from Vault using the embedded key_id.</p>
+            <p><strong>Request Body:</strong></p>
+            <pre><code>{
+    "ciphertext_b64": "string (Base64 encoded ciphertext from /encrypt/layered)"
+}</code></pre>
+            <p><strong>Success Response (200 OK):</strong></p>
+            <pre><code>{
+    "plaintext_b64": "string (Base64 encoded original plaintext)"
+}</code></pre>
+            
+            <h3>3.2 Parallel Encryption - Random K1 (Epic 1)</h3>
+            <h4><code>POST /encrypt/parallel/random</code></h4>
+            <p>Encrypts using the parallel scheme with a randomly generated K1. K1 and the KEM private key are stored in Vault.</p>
+            
+            <h4><code>POST /decrypt/parallel/random</code></h4>
+            <p>Decrypts parallel scheme ciphertext (PoC uses the C1 path by retrieving K1 from Vault).</p>
+
+            <h3>3.3 Parallel Encryption - KDF K1 (Epic 1 + Epic 3 Anchoring)</h3>
+            <h4><code>POST /encrypt/parallel/kdf</code></h4>
+            <p>Encrypts using the parallel scheme where K1 is derived via an anchored KDF from a password and other factors.</p>
+            
+            <h4><code>POST /decrypt/parallel/kdf</code></h4>
+            <p>Decrypts parallel scheme ciphertext (PoC uses the C1 path by re-deriving K1 with provided credentials and salts from Vault).</p>
+            
+            <h3>3.4 Layered Encryption with QNE Infusion (Epic 1 + Epic 2)</h3>
+            <h4><code>POST /encrypt/layered_qne</code></h4>
+            <p>Wraps the output of Layered Encryption with the QNE infusion layer (AES-GCM with AAD).</p>
+            
+            <h4><code>POST /decrypt/layered_qne</code></h4>
+            <p>Decrypts the QNE-infused ciphertext. Requires the QNE layer key (returned during encryption in the PoC).</p>
+            
+            <h3>3.5 Parallel KDF Encryption with QNE Infusion (Epic 1 + Epic 3 + Epic 2)</h3>
+            <h4><code>POST /encrypt/parallel_kdf_qne</code></h4>
+            <p>Wraps the output of Parallel KDF Encryption with the QNE infusion layer.</p>
+            
+            <h4><code>POST /decrypt/parallel_kdf_qne</code></h4>
+            <p>Decrypts the QNE-infused ciphertext. Requires credentials for KDF re-derivation and the QNE layer key.</p>
+            
+            <h3>3.6 Key Management (Vault)</h3>
+            <h4><code>DELETE /vault/keys/{key_id_hex}</code></h4>
+            <p>Deletes a key set from Vault associated with an encryption operation, identified by its 32-character hex UUID.</p>
+            
+        </article>
+    </main>
+
+    <footer>
+     <div class="container">
+        <p>© 2025 Project QRE. Last update: June 2025</p>
+        <div class="footer-links">
+            <a href="about.html" style="color:var(--link-color)">About Us</a>
+            <span>|</span>
+            <a href="blog.html" style="color:var(--link-color)">Blog</a>
+            <span>|</span>
+            <a href="contact.html" style="color:var(--link-color)">Contact</a>
+            <span>|</span>
+            <a href="terms.html" style="color:var(--link-color)">Terms</a>
+            <span>|</span>
+            <a href="privacy.html" style="color:var(--link-color)">Privacy</a>
+        </div>
+     </div>
+    </footer>
+
+    <script>
+        const themeToggleButton = document.getElementById('theme-toggle');
+        themeToggleButton.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('qre_theme', newTheme);
+        });
+    </script>
+</body>
+</html>

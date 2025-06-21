@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using Docker with Project QRE - Project QRE</title>
+    <meta name="description" content="A guide on how to build and run the Project QRE application and its dependencies (HashiCorp Vault) using Docker and Docker Compose for a consistent development environment.">
+    <!-- Add your favicon code here -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1976d2"><meta name="msapplication-TileColor" content="#0d47a1"><meta name="theme-color" content="#ffffff">
+    
+    <!-- Fonts and Styles -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"></noscript>
+    <style>
+        :root{--heading-font:'Orbitron',sans-serif;--body-font:'Roboto',sans-serif;--mono-font:'Roboto Mono',monospace;}[data-theme=dark]{--primary-color:#0d47a1;--secondary-color-bg:#1976d2;--secondary-color-text:#58afff;--accent-color:#64b5f6;--text-color:#e0e0e0;--bg-color:#121212;--card-bg-color:#1e1e1e;--border-color:#333;--footer-bg:#0a0a0a;--footer-border:#222;--link-color:var(--accent-color);--link-hover-color:#90caf9;--header-overlay:rgba(0,0,0,.5);--icon-color:#e0e0e0;--icon-hover-bg:rgba(255,255,255,.1);--footer-link-color:#aaa;--footer-link-hover-color:#fff;--code-bg:#282c34}[data-theme=light]{--primary-color:#1565c0;--secondary-color-bg:#1976d2;--secondary-color-text:#0d47a1;--accent-color:#1e88e5;--text-color:#212121;--bg-color:#f4f6f8;--card-bg-color:#fff;--border-color:#e0e0e0;--footer-bg:#e9ecef;--footer-border:#dee2e6;--link-color:#0d47a1;--link-hover-color:#0b3a7d;--header-overlay:rgba(0,0,0,.3);--icon-color:#212121;--icon-hover-bg:rgba(0,0,0,.05);--footer-link-color:#555;--footer-link-hover-color:#000;--code-bg:#f6f8fa}*,:after,:before{box-sizing:border-box}body{margin:0;font-family:var(--body-font);background-color:var(--bg-color);color:var(--text-color);line-height:1.6;overflow-x:hidden;transition:background-color .3s ease,color .3s ease}#theme-toggle{position:fixed;top:15px;right:15px;z-index:1000;cursor:pointer;background-color:transparent;border:none;padding:8px;border-radius:50%;transition:background-color .2s ease-in-out}#theme-toggle:focus,#theme-toggle:hover{background-color:var(--icon-hover-bg);outline:0}#theme-toggle svg{width:24px;height:24px;stroke:var(--icon-color);pointer-events:none}[data-theme=dark] .moon-icon{display:none}[data-theme=dark] .sun-icon{display:block}[data-theme=light] .sun-icon{display:none}[data-theme=light] .moon-icon{display:block}.container{width:90%;max-width:900px;margin:0 auto;padding:20px 0}header{background-color:var(--primary-color);color:#fff;padding:60px 20px;text-align:center;position:relative;background-image:url(images/quantum_header_bg.webp);background-size:cover;background-position:50%;background-repeat:no-repeat;min-height:250px;display:flex;flex-direction:column;justify-content:center;align-items:center}header:before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-color:var(--header-overlay);z-index:1}header .container{position:relative;z-index:2}header h1{font-family:var(--heading-font);font-size:3.2em;margin-bottom:.3em;letter-spacing:2px;color:#fff;text-shadow:2px 2px 4px rgba(0,0,0,.7)}header .subtitle{font-size:1.4em;font-weight:300;color:#e0e0e0;text-shadow:1px 1px 3px rgba(0,0,0,.7);line-height:1.5}main{padding-top:20px}.breadcrumb-nav{padding:15px 0;font-size:.9em;border-bottom:1px solid var(--border-color);margin-bottom:20px}.breadcrumb-nav a{color:var(--link-color);text-decoration:none}.breadcrumb-nav a:hover{text-decoration:underline;color:var(--link-hover-color)}.content-section h2{font-family:var(--heading-font);color:var(--accent-color);text-align:left;margin-top:2em;margin-bottom:.8em;font-size:2em;border-bottom:1px solid var(--border-color);padding-bottom:.3em}.content-section h2:first-child{margin-top:0}.content-section h3{font-family:var(--heading-font);font-size:1.5em;color:var(--secondary-color-text);margin-top:2em;margin-bottom:.5em}.content-section p,.content-section ul{margin-bottom:1.2em;line-height:1.7;font-size:1.05em}.content-section ul{list-style:disc;padding-left:25px}pre{background-color:var(--code-bg);color:var(--text-color);padding:1.5em;border-radius:8px;overflow-x:auto;margin:20px 0;border:1px solid var(--border-color)}code{font-family:var(--mono-font);font-size:.9em}footer{background-color:var(--footer-bg);color:var(--text-color);text-align:center;padding:25px 0;font-size:.9em;margin-top:40px;border-top:1px solid var(--footer-border);transition:background-color .3s ease,border-color .3s ease}.footer-links{margin-top:10px}.footer-links a{color:var(--footer-link-color);text-decoration:none;margin:0 10px;transition:color .2s}.footer-links a:hover{color:var(--footer-link-hover-color);text-decoration:underline}.footer-links span{color:var(--footer-link-color)}
+    </style>
+    <script>
+        (function() {const theme = localStorage.getItem('qre_theme') || 'dark'; document.documentElement.setAttribute('data-theme', theme);})();
+    </script>
+</head>
+<body>
+    <button id="theme-toggle" title="Toggle light/dark theme"><svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg><svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+    <header>
+        <div class="container"><h1>Using Docker with Project QRE</h1><p class="subtitle">A Guide to Containerized Development</p></div>
+    </header>
+    <nav class="breadcrumb-nav container"><a href="index.html">Home</a> > <a href="blog.html">Blog</a> > Using Docker with Project QRE</nav>
+    <main class="container">
+        <article class="content-section">
+            <p>To ensure a consistent and reproducible environment for development and testing, Project QRE is fully containerized using Docker. This guide provides instructions on how to build and run the application and its dependency (HashiCorp Vault) using Docker and Docker Compose.</p>
+
+            <h2>Prerequisites</h2>
+            <ul>
+                <li><strong>Docker Desktop:</strong> Must be installed for your operating system.</li>
+                <li><strong>Git:</strong> To clone the project repository.</li>
+                <li><strong>A terminal/shell:</strong> Such as Bash, PowerShell, or your system's default.</li>
+            </ul>
+
+            <h2>Step 1: Project Files</h2>
+            <p>Ensure your project contains a `requirements.txt`, `.dockerignore` file, `Dockerfile`, and `docker-compose.yml` in the root directory. These files define the Python dependencies, files to exclude from the build, instructions for building the application image, and the services to run.</p>
+
+            <h3>The `.dockerignore` File</h3>
+            <p>This file prevents unnecessary or sensitive files from being included in the Docker image, optimizing the build process. It should exclude virtual environments, Git history, and IDE configuration files.</p>
+            <pre><code># .dockerignore
+__pycache__/
+*.pyc
+.git/
+.venv/
+.env
+docs/
+tests/</code></pre>
+
+            <h3>The `Dockerfile`</h3>
+            <p>This contains the recipe for building our FastAPI application image. It sets up the Python environment, installs dependencies, and copies the application code.</p>
+            <pre><code># Dockerfile
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /app
+
+# Note: System dependencies like cmake or build-essential
+# might be needed here if pip cannot find pre-compiled wheels.
+# RUN apt-get update && apt-get install -y build-essential cmake
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 8000
+
+CMD ["uvicorn", "api_server.main:app", "--host", "0.0.0.0", "--port", "8000"]</code></pre>
+
+            <h3>The `docker-compose.yml` File</h3>
+            <p>This file is the heart of our containerized setup. It defines two services: our `api_server` and the `vault` dependency, and configures them to communicate with each other.</p>
+            <pre><code># docker-compose.yml
+version: '3.8'
+
+services:
+  vault:
+    image: hashicorp/vault:latest
+    ports: ["8200:8200"]
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: "mydevroot"
+      VAULT_DEV_LISTEN_ADDRESS: "0.0.0.0:8200"
+    cap_add: [IPC_LOCK]
+
+  api_server:
+    build: .
+    ports: ["8000:8000"]
+    volumes: [".:/app"] # For live-reloading in development
+    environment:
+      VAULT_ADDR: "http://vault:8200"
+      VAULT_TOKEN: "mydevroot"
+      SERVER_API_KEY: "poc_super_secret_api_key_123!"
+    depends_on: [vault]
+    command: uvicorn api_server.main:app --host 0.0.0.0 --port 8000 --reload
+</code></pre>
+
+            <h2>Step 2: Running the Application</h2>
+            <p>With these files in your project root, running the entire stack is simple.</p>
+            <ol>
+                <li>Open a terminal in your project's root directory.</li>
+                <li>Run the command:
+                    <pre><code>docker-compose up --build</code></pre>
+                </li>
+                <li>This command builds the `api_server` image and starts both the API and Vault containers. You will see logs from both services in your terminal.</li>
+            </ol>
+
+            <h2>Step 3: Accessing Services and Testing</h2>
+            <p>Once the containers are running, you can access the services:</p>
+            <ul>
+                <li><strong>API Server:</strong> <a href="http://localhost:8000" target="_blank" rel="noopener noreferrer">http://localhost:8000</a></li>
+                <li><strong>Interactive API Docs (Swagger UI):</strong> <a href="http://localhost:8000/docs" target="_blank" rel="noopener noreferrer">http://localhost:8000/docs</a></li>
+                <li><strong>Vault UI:</strong> <a href="http://localhost:8200" target="_blank" rel="noopener noreferrer">http://localhost:8200</a> (use token `mydevroot` to log in)</li>
+            </ul>
+            <p>You can run your `pytest` suite from a separate terminal against the running API at `http://localhost:8000/api/v1`.</p>
+
+            <h2>Stopping the Services</h2>
+            <p>To stop the containers, press `Ctrl+C` in the terminal where `docker-compose up` is running. To remove the containers and network completely, run:</p>
+            <pre><code>docker-compose down</code></pre>
+        </article>
+    </main>
+    <footer>
+        <div class="container">
+            <p>© 2025 Project QRE. Last update: June 2025</p>
+            <div class="footer-links"><a href="about.html">About Us</a><span>|</span><a href="https://github.com/powergr/Project_QRE" target="_blank" rel="noopener noreferrer">GitHub</a><span>|</span><a href="blog.html">Blog</a><span>|</span><a href="contact.html">Contact</a><span>|</span><a href="terms.html">Terms</a><span>|</span><a href="privacy.html">Privacy</a></div>
+        </div>
+    </footer>
+    <script>
+        const themeToggleButton = document.getElementById('theme-toggle');themeToggleButton.addEventListener('click', () => {const currentTheme = document.documentElement.getAttribute('data-theme');const newTheme = currentTheme === 'dark' ? 'light' : 'dark';document.documentElement.setAttribute('data-theme', newTheme);localStorage.setItem('qre_theme', newTheme);});
+    </script>
+</body>
+</html>

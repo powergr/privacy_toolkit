@@ -1,0 +1,23 @@
+project_name: Project QRE
+
+project_goal: To create a quantum-resistant encryption (QRE) system designed to secure sensitive data against the threats posed by quantum computing. [1]
+
+description: Project QRE is an initiative to develop a multi-layered, quantum-resistant encryption system for the post-quantum era. [1] Traditional encryption methods like RSA and ECC are vulnerable to quantum computing advancements, such as Shor's and Grover's algorithms. [1] Project QRE aims to provide a robust solution to safeguard digital information for the future. [1]
+
+core_innovations:
+- Hybrid Cipher Layering: This approach combines the security of established symmetric algorithms (like AES-256) with post-quantum asymmetric algorithms. [4] This creates a dual-layer of protection, enhancing overall security. [10]
+- Quantum Noise Entropy (QNE): This technique introduces dynamic, quantum-inspired randomness into the ciphertext. [1] The goal is to thwart brute-force attacks by making the encrypted data more complex and unpredictable. [1]
+- Entropy Anchoring: This method generates robust cryptographic keys by using real-world chaotic systems as a source of high-quality entropy. [3] The proof-of-concept phase used data from solar flares to anchor the randomness of the keys, making them harder to predict. [3]
+
+development_roadmap:
+- Phase 1: Proof-of-Concept (PoC) - (Ended June 2025). Successfully implemented the core concepts, including Hybrid Cipher Layering, simulated QNE, and used pre-collected solar flare data for Entropy Anchoring. The deliverable was a functional PoC.
+- Phase 2: Prototype - (June 2025 – June 2026). Currently in this phase. The goals are to optimize performance, explore the use of hardware Quantum Random Number Generators (QRNGs), conduct initial security audits, and develop an API. The deliverable will be an enhanced prototype for pilot testing.
+- Phase 3: Full Implementation - (July 2027 – December 2028). This phase will focus on scaling the system for production, incorporating feedback from testing, and pursuing official certifications, such as those from NIST for Post-Quantum Cryptography.
+
+current_status: The project is in Phase 2, focusing on optimizing the prototype, hardening its security, developing a robust API, and researching the feasibility of integrating hardware QRNGs. [1]
+
+links:
+- GitHub Repository: https://github.com/powergr/Project_QRE
+- Project Overview: project-overview.html
+- Technical Whitepaper: whitepaper.html
+- Contact: contact.html

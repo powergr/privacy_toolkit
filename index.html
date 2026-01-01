@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Project QRE: Quantum-resistant encryption for the post-quantum era. Explore our innovations in Hybrid Cipher Layering, Quantum Noise Entropy, and Entropy Anchoring.">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Project QRE: Quantum-resistant encryption for the post-quantum era. Explore our innovations in Hybrid Cipher Layering, Quantum Noise Entropy, and Entropy Anchoring."
+    />
     <title>Project QRE: Quantum-Resistant Encryption</title>
-    
+
     <!-- Add your favicon code here -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -14,99 +17,863 @@
     <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Open Graph & Twitter Cards -->
-    <meta property="og:type" content="website"><meta property="og:url" content="https://projectqre.com/index.html"><meta property="og:title" content="Project QRE: Quantum-Resistant Encryption"><meta property="og:description" content="A multi-layered approach to post-quantum security, pioneering Hybrid Ciphers, Entropy Anchoring, and Quantum Noise Entropy."><meta property="og:image" content="https://projectqre.com/images/qre-social-share.webp"><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://projectqre.com/index.html"><meta property="twitter:title" content="Project QRE: Quantum-Resistant Encryption"><meta property="twitter:description" content="A multi-layered approach to post-quantum security, pioneering Hybrid Ciphers, Entropy Anchoring, and Quantum Noise Entropy."><meta property="twitter:image" content="https://projectqre.com/images/qre-social-share.webp">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://projectqre.com/index.html" />
+    <meta
+      property="og:title"
+      content="Project QRE: Quantum-Resistant Encryption"
+    />
+    <meta
+      property="og:description"
+      content="A multi-layered approach to post-quantum security, pioneering Hybrid Ciphers, Entropy Anchoring, and Quantum Noise Entropy."
+    />
+    <meta
+      property="og:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://projectqre.com/index.html" />
+    <meta
+      property="twitter:title"
+      content="Project QRE: Quantum-Resistant Encryption"
+    />
+    <meta
+      property="twitter:description"
+      content="A multi-layered approach to post-quantum security, pioneering Hybrid Ciphers, Entropy Anchoring, and Quantum Noise Entropy."
+    />
+    <meta
+      property="twitter:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
     <link rel="canonical" href="https://projectqre.com/" />
-    
+
     <!-- Fonts and Styles -->
-    <link rel="preload" href="images/quantum_header_bg.webp" as="image"><link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"></noscript>
+    <link rel="preload" href="images/quantum_header_bg.webp" as="image" />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+    /></noscript>
     <style>
-        :root{--heading-font:'Orbitron',sans-serif;--body-font:'Roboto',sans-serif}[data-theme=dark]{--primary-color:#0d47a1;--secondary-color-bg:#1976d2;--secondary-color-text:#58afff;--accent-color:#64b5f6;--text-color:#e0e0e0;--bg-color:#121212;--card-bg-color:#1e1e1e;--border-color:#333;--timeline-future-dot-bg:#444;--timeline-future-dot-border:#666;--timeline-duration-color:#aaa;--footer-bg:#0a0a0a;--footer-border:#222;--link-color:var(--accent-color);--link-hover-color:#90caf9;--header-overlay:rgba(0,0,0,.5);--shadow-color:rgba(0,0,0,.3);--hover-shadow-color:rgba(66,165,245,.35);--icon-color:#e0e0e0;--icon-hover-bg:rgba(255,255,255,.1);--status-passed-color:#4caf50;--footer-link-color:#aaa;--footer-link-hover-color:#fff;--cta-secondary-bg: #373e47; --cta-secondary-hover-bg: #4a525e;}[data-theme=light]{--primary-color:#1565c0;--secondary-color-bg:#1976d2;--secondary-color-text:#0d47a1;--accent-color:#1e88e5;--text-color:#212121;--bg-color:#f4f6f8;--card-bg-color:#fff;--border-color:#e0e0e0;--timeline-future-dot-bg:#bdbdbd;--timeline-future-dot-border:#9e9e9e;--timeline-duration-color:#757575;--footer-bg:#e9ecef;--footer-border:#dee2e6;--link-color:#0d47a1;--link-hover-color:#0b3a7d;--header-overlay:rgba(0,0,0,.3);--shadow-color:rgba(0,0,0,.1);--hover-shadow-color:rgba(25,118,210,.25);--icon-color:#212121;--icon-hover-bg:rgba(0,0,0,.05);--status-passed-color:#2e7d32;--footer-link-color:#555;--footer-link-hover-color:#000;--cta-secondary-bg: #e1e4e8; --cta-secondary-hover-bg: #d1d5da;}*,:after,:before{box-sizing:border-box}body{margin:0;font-family:var(--body-font);background-color:var(--bg-color);color:var(--text-color);line-height:1.6;overflow-x:hidden;transition:background-color .3s ease,color .3s ease}#theme-toggle{position:fixed;top:15px;right:15px;z-index:1000;cursor:pointer;background-color:transparent;border:none;padding:8px;border-radius:50%;transition:background-color .2s ease-in-out}#theme-toggle:focus,#theme-toggle:hover{background-color:var(--icon-hover-bg);outline:0}#theme-toggle svg{width:24px;height:24px;stroke:var(--icon-color);pointer-events:none}[data-theme=dark] .moon-icon{display:none}[data-theme=dark] .sun-icon{display:block}[data-theme=light] .sun-icon{display:none}[data-theme=light] .moon-icon{display:block}.container{width:90%;max-width:1100px;margin:0 auto;padding:20px 0}header{color:#fff;padding:60px 20px;text-align:center;position:relative;background-image:url(images/quantum_header_bg.webp);background-size:cover;background-position:50%;background-repeat:no-repeat;min-height:300px;display:flex;flex-direction:column;justify-content:center;align-items:center}header:before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-color:var(--header-overlay);z-index:1;transition:background-color .3s ease}header .container{position:relative;z-index:2;max-width:800px}header h1{font-family:var(--heading-font);font-size:3.5em;margin-bottom:.3em;letter-spacing:2px;color:#fff;text-shadow:2px 2px 4px rgba(0,0,0,.7)}header .subtitle{font-size:1.4em;font-weight:300;color:#e0e0e0;text-shadow:1px 1px 3px rgba(0,0,0,.7);line-height:1.5}h2{font-family:var(--heading-font);color:var(--accent-color);text-align:center;margin-bottom:1.2em;font-size:2.2em}h3{font-family:var(--heading-font);color:var(--secondary-color-text);font-size:1.5em;margin-top:0}section{padding:40px 0;border-bottom:1px solid var(--border-color);transition:border-color .3s ease}section:last-of-type{border-bottom:none}.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;margin-top:20px;align-items:stretch}.feature-card{background-color:var(--card-bg-color);padding:25px;border-radius:8px;box-shadow:0 4px 15px var(--shadow-color);transition:transform .3s ease,box-shadow .3s ease,background-color .3s ease;display:flex;flex-direction:column;text-align:center}.feature-card:hover{transform:translateY(-8px);box-shadow:0 8px 25px var(--hover-shadow-color)}.feature-icon-wrapper{width:80px;height:80px;margin:0 auto 20px;border-radius:50%;background-color:var(--secondary-color-bg);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.25);transition:background-color .3s ease;flex-shrink:0}.feature-svg-icon{width:40px;height:40px;color:#fff}.feature-card:hover .feature-icon-wrapper{background-color:var(--accent-color)}.feature-card h3{margin-top:0;margin-bottom:15px;color:var(--secondary-color-text);font-size:1.5em;flex-shrink:0}.feature-card-text-content{display:flex;flex-direction:column;flex-grow:1;justify-content:space-between}.feature-card-text-content p{color:var(--text-color);font-size:.95em;line-height:1.6;margin-bottom:15px}.learn-more-link{display:inline-block;margin-top:auto;padding-top:10px;color:var(--link-color)!important;text-decoration:none;font-weight:700}.learn-more-link:hover{text-decoration:underline;color:var(--link-hover-color)!important}.timeline-container{position:relative;max-width:800px;margin:30px auto 0;min-height:100%;padding-bottom:20px}.timeline-container:after{content:"";position:absolute;width:4px;background-color:var(--secondary-color-bg);top:0;bottom:0;left:50%;margin-left:-2px;z-index:1;height:100%}.timeline-item{padding:10px 40px;position:relative;background-color:inherit;width:50%;box-sizing:border-box;z-index:2;margin-bottom:20px}.timeline-item:last-child{margin-bottom:0}.timeline-item:nth-child(odd){left:0;padding-right:30px}.timeline-item:nth-child(even){left:50%;padding-left:30px}.timeline-dot{content:"";position:absolute;width:24px;height:24px;background-color:var(--bg-color);border:4px solid var(--secondary-color-bg);top:25px;border-radius:50%;z-index:3;transition:background-color .3s ease,border-color .3s ease;display:flex;align-items:center;justify-content:center}.timeline-dot svg{width:12px;height:12px;stroke:#fff}.timeline-item:nth-child(odd) .timeline-dot{right:-12px}.timeline-item:nth-child(even) .timeline-dot{left:-12px}.timeline-content{padding:20px 25px;background-color:var(--card-bg-color);position:relative;border-radius:6px;box-shadow:0 3px 10px var(--shadow-color);transition:background-color .3s ease}.timeline-item.past .timeline-dot{background-color:var(--status-passed-color);border-color:var(--status-passed-color)}.timeline-item.past .timeline-content{opacity:.7}.timeline-item.current .timeline-dot{background-color:var(--accent-color);border-color:var(--bg-color);transform:scale(1.3);box-shadow:0 0 0 3px var(--accent-color)}.timeline-item.current .timeline-content{border:2px solid var(--accent-color);box-shadow:0 4px 15px var(--hover-shadow-color)}.timeline-item.future .timeline-dot{background-color:var(--timeline-future-dot-bg);border-color:var(--timeline-future-dot-border)}.timeline-item.future .timeline-content{opacity:.85}.timeline-duration{font-style:italic;font-size:.9em;color:var(--timeline-duration-color);margin-bottom:8px}#status p{text-align:center;font-size:1.1em;max-width:700px;margin-left:auto;margin-right:auto}#contact{text-align:center}#contact p{text-align:center;font-size:1.1em;max-width:700px;margin-left:auto;margin-right:auto;margin-bottom:25px}.cta-button-group{display:flex;justify-content:center;align-items:center;gap:20px;flex-wrap:wrap}.cta-button{display:inline-flex;align-items:center;gap:10px;padding:12px 25px;background-color:var(--secondary-color-bg);color:#fff;text-decoration:none;border-radius:5px;font-weight:700;transition:background-color .3s ease;font-size:1.1em}.cta-button:hover{background-color:var(--accent-color)}.cta-button.secondary{background-color:var(--cta-secondary-bg);color:var(--text-color);}.cta-button.secondary:hover{background-color:var(--cta-secondary-hover-bg)}.cta-button svg{width:20px;height:20px}footer{background-color:var(--footer-bg);color:var(--text-color);text-align:center;padding:25px 0;font-size:.9em;margin-top:40px;border-top:1px solid var(--footer-border);transition:background-color .3s ease,border-color .3s ease}.footer-links{margin-top:10px}.footer-links a{color:var(--footer-link-color);text-decoration:none;margin:0 10px;transition:color .2s}.footer-links a:hover{color:var(--footer-link-hover-color);text-decoration:underline}.footer-links span{color:var(--footer-link-color)}@media (max-width:768px){header h1{font-size:2.5em}header .subtitle{font-size:1.1em}h2{font-size:1.8em}.features-grid{grid-template-columns:1fr}.timeline-container{max-width:100%;margin:20px 0}.timeline-item{width:90%;left:0!important;padding-left:20px!important;padding-right:20px!important;margin:0 auto 20px 10%}.timeline-container:after{left:20px}.timeline-item:nth-child(even){left:0!important}.timeline-dot{left:-10px!important}.timeline-item .timeline-content{margin-left:20px}.timeline-item .timeline-dot{left:8px!important}}
+      :root {
+        --heading-font: "Orbitron", sans-serif;
+        --body-font: "Roboto", sans-serif;
+      }
+      [data-theme="dark"] {
+        --primary-color: #0d47a1;
+        --secondary-color-bg: #1976d2;
+        --secondary-color-text: #58afff;
+        --accent-color: #64b5f6;
+        --text-color: #e0e0e0;
+        --bg-color: #121212;
+        --card-bg-color: #1e1e1e;
+        --border-color: #333;
+        --timeline-future-dot-bg: #444;
+        --timeline-future-dot-border: #666;
+        --timeline-duration-color: #aaa;
+        --footer-bg: #0a0a0a;
+        --footer-border: #222;
+        --link-color: var(--accent-color);
+        --link-hover-color: #90caf9;
+        --header-overlay: rgba(0, 0, 0, 0.5);
+        --shadow-color: rgba(0, 0, 0, 0.3);
+        --hover-shadow-color: rgba(66, 165, 245, 0.35);
+        --icon-color: #e0e0e0;
+        --icon-hover-bg: rgba(255, 255, 255, 0.1);
+        --status-passed-color: #4caf50;
+        --footer-link-color: #aaa;
+        --footer-link-hover-color: #fff;
+        --cta-secondary-bg: #373e47;
+        --cta-secondary-hover-bg: #4a525e;
+      }
+      [data-theme="light"] {
+        --primary-color: #1565c0;
+        --secondary-color-bg: #1976d2;
+        --secondary-color-text: #0d47a1;
+        --accent-color: #1e88e5;
+        --text-color: #212121;
+        --bg-color: #f4f6f8;
+        --card-bg-color: #fff;
+        --border-color: #e0e0e0;
+        --timeline-future-dot-bg: #bdbdbd;
+        --timeline-future-dot-border: #9e9e9e;
+        --timeline-duration-color: #757575;
+        --footer-bg: #e9ecef;
+        --footer-border: #dee2e6;
+        --link-color: #0d47a1;
+        --link-hover-color: #0b3a7d;
+        --header-overlay: rgba(0, 0, 0, 0.3);
+        --shadow-color: rgba(0, 0, 0, 0.1);
+        --hover-shadow-color: rgba(25, 118, 210, 0.25);
+        --icon-color: #212121;
+        --icon-hover-bg: rgba(0, 0, 0, 0.05);
+        --status-passed-color: #2e7d32;
+        --footer-link-color: #555;
+        --footer-link-hover-color: #000;
+        --cta-secondary-bg: #e1e4e8;
+        --cta-secondary-hover-bg: #d1d5da;
+      }
+      *,
+      :after,
+      :before {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: var(--body-font);
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        overflow-x: hidden;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      #theme-toggle {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        z-index: 1000;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        padding: 8px;
+        border-radius: 50%;
+        transition: background-color 0.2s ease-in-out;
+      }
+      #theme-toggle:focus,
+      #theme-toggle:hover {
+        background-color: var(--icon-hover-bg);
+        outline: 0;
+      }
+      #theme-toggle svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--icon-color);
+        pointer-events: none;
+      }
+      [data-theme="dark"] .moon-icon {
+        display: none;
+      }
+      [data-theme="dark"] .sun-icon {
+        display: block;
+      }
+      [data-theme="light"] .sun-icon {
+        display: none;
+      }
+      [data-theme="light"] .moon-icon {
+        display: block;
+      }
+      .container {
+        width: 90%;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 20px 0;
+      }
+      header {
+        color: #fff;
+        padding: 60px 20px;
+        text-align: center;
+        position: relative;
+        background-image: url(images/quantum_header_bg.webp);
+        background-size: cover;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      header:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--header-overlay);
+        z-index: 1;
+        transition: background-color 0.3s ease;
+      }
+      header .container {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+      }
+      header h1 {
+        font-family: var(--heading-font);
+        font-size: 3.5em;
+        margin-bottom: 0.3em;
+        letter-spacing: 2px;
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+      header .subtitle {
+        font-size: 1.4em;
+        font-weight: 300;
+        color: #e0e0e0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        line-height: 1.5;
+      }
+      h2 {
+        font-family: var(--heading-font);
+        color: var(--accent-color);
+        text-align: center;
+        margin-bottom: 1.2em;
+        font-size: 2.2em;
+      }
+      h3 {
+        font-family: var(--heading-font);
+        color: var(--secondary-color-text);
+        font-size: 1.5em;
+        margin-top: 0;
+      }
+      section {
+        padding: 40px 0;
+        border-bottom: 1px solid var(--border-color);
+        transition: border-color 0.3s ease;
+      }
+      section:last-of-type {
+        border-bottom: none;
+      }
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin-top: 20px;
+        align-items: stretch;
+      }
+      .feature-card {
+        background-color: var(--card-bg-color);
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px var(--shadow-color);
+        transition: transform 0.3s ease, box-shadow 0.3s ease,
+          background-color 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+      }
+      .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 25px var(--hover-shadow-color);
+      }
+      .feature-icon-wrapper {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 20px;
+        border-radius: 50%;
+        background-color: var(--secondary-color-bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        transition: background-color 0.3s ease;
+        flex-shrink: 0;
+      }
+      .feature-svg-icon {
+        width: 40px;
+        height: 40px;
+        color: #fff;
+      }
+      .feature-card:hover .feature-icon-wrapper {
+        background-color: var(--accent-color);
+      }
+      .feature-card h3 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        color: var(--secondary-color-text);
+        font-size: 1.5em;
+        flex-shrink: 0;
+      }
+      .feature-card-text-content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: space-between;
+      }
+      .feature-card-text-content p {
+        color: var(--text-color);
+        font-size: 0.95em;
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+      .learn-more-link {
+        display: inline-block;
+        margin-top: auto;
+        padding-top: 10px;
+        color: var(--link-color) !important;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .learn-more-link:hover {
+        text-decoration: underline;
+        color: var(--link-hover-color) !important;
+      }
+      .timeline-container {
+        position: relative;
+        max-width: 800px;
+        margin: 30px auto 0;
+        min-height: 100%;
+        padding-bottom: 20px;
+      }
+      .timeline-container:after {
+        content: "";
+        position: absolute;
+        width: 4px;
+        background-color: var(--secondary-color-bg);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -2px;
+        z-index: 1;
+        height: 100%;
+      }
+      .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        background-color: inherit;
+        width: 50%;
+        box-sizing: border-box;
+        z-index: 2;
+        margin-bottom: 20px;
+      }
+      .timeline-item:last-child {
+        margin-bottom: 0;
+      }
+      .timeline-item:nth-child(odd) {
+        left: 0;
+        padding-right: 30px;
+      }
+      .timeline-item:nth-child(even) {
+        left: 50%;
+        padding-left: 30px;
+      }
+      .timeline-dot {
+        content: "";
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        background-color: var(--bg-color);
+        border: 4px solid var(--secondary-color-bg);
+        top: 25px;
+        border-radius: 50%;
+        z-index: 3;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .timeline-dot svg {
+        width: 12px;
+        height: 12px;
+        stroke: #fff;
+      }
+      .timeline-item:nth-child(odd) .timeline-dot {
+        right: -12px;
+      }
+      .timeline-item:nth-child(even) .timeline-dot {
+        left: -12px;
+      }
+      .timeline-content {
+        padding: 20px 25px;
+        background-color: var(--card-bg-color);
+        position: relative;
+        border-radius: 6px;
+        box-shadow: 0 3px 10px var(--shadow-color);
+        transition: background-color 0.3s ease;
+      }
+      .timeline-item.past .timeline-dot {
+        background-color: var(--status-passed-color);
+        border-color: var(--status-passed-color);
+      }
+      .timeline-item.past .timeline-content {
+        opacity: 0.7;
+      }
+      .timeline-item.current .timeline-dot {
+        background-color: var(--accent-color);
+        border-color: var(--bg-color);
+        transform: scale(1.3);
+        box-shadow: 0 0 0 3px var(--accent-color);
+      }
+      .timeline-item.current .timeline-content {
+        border: 2px solid var(--accent-color);
+        box-shadow: 0 4px 15px var(--hover-shadow-color);
+      }
+      .timeline-item.future .timeline-dot {
+        background-color: var(--timeline-future-dot-bg);
+        border-color: var(--timeline-future-dot-border);
+      }
+      .timeline-item.future .timeline-content {
+        opacity: 0.85;
+      }
+      .timeline-duration {
+        font-style: italic;
+        font-size: 0.9em;
+        color: var(--timeline-duration-color);
+        margin-bottom: 8px;
+      }
+      #status p {
+        text-align: center;
+        font-size: 1.1em;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      #contact {
+        text-align: center;
+      }
+      #contact p {
+        text-align: center;
+        font-size: 1.1em;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 25px;
+      }
+      .cta-button-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 25px;
+        background-color: var(--secondary-color-bg);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 700;
+        transition: background-color 0.3s ease;
+        font-size: 1.1em;
+      }
+      .cta-button:hover {
+        background-color: var(--accent-color);
+      }
+      .cta-button.secondary {
+        background-color: var(--cta-secondary-bg);
+        color: var(--text-color);
+      }
+      .cta-button.secondary:hover {
+        background-color: var(--cta-secondary-hover-bg);
+      }
+      .cta-button svg {
+        width: 20px;
+        height: 20px;
+      }
+      footer {
+        background-color: var(--footer-bg);
+        color: var(--text-color);
+        text-align: center;
+        padding: 25px 0;
+        font-size: 0.9em;
+        margin-top: 40px;
+        border-top: 1px solid var(--footer-border);
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+      .footer-links {
+        margin-top: 10px;
+      }
+      .footer-links a {
+        color: var(--footer-link-color);
+        text-decoration: none;
+        margin: 0 10px;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--footer-link-hover-color);
+        text-decoration: underline;
+      }
+      .footer-links span {
+        color: var(--footer-link-color);
+      }
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 2.5em;
+        }
+        header .subtitle {
+          font-size: 1.1em;
+        }
+        h2 {
+          font-size: 1.8em;
+        }
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+        .timeline-container {
+          max-width: 100%;
+          margin: 20px 0;
+        }
+        .timeline-item {
+          width: 90%;
+          left: 0 !important;
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+          margin: 0 auto 20px 10%;
+        }
+        .timeline-container:after {
+          left: 20px;
+        }
+        .timeline-item:nth-child(even) {
+          left: 0 !important;
+        }
+        .timeline-dot {
+          left: -10px !important;
+        }
+        .timeline-item .timeline-content {
+          margin-left: 20px;
+        }
+        .timeline-item .timeline-dot {
+          left: 8px !important;
+        }
+      }
     </style>
     <script>
-        (function() {const theme = localStorage.getItem('qre_theme') || 'dark'; document.documentElement.setAttribute('data-theme', theme);})();
+      (function () {
+        const theme = localStorage.getItem("qre_theme") || "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
     </script>
-</head>
-<body>
-    <button id="theme-toggle" title="Toggle light/dark theme"><svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg><svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button>
+  </head>
+  <body>
+    <button id="theme-toggle" title="Toggle light/dark theme">
+      <svg
+        class="sun-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg
+      ><svg
+        class="moon-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
     <header>
-        <div class="container">
-            <h1>Project QRE</h1>
-            <p class="subtitle"><strong>Quantum-Resistant Encryption</strong></p>
-            <p class="subtitle">Securing Data in the Post-Quantum Era</p>
-        </div>
+      <div class="container">
+        <h1>Project QRE</h1>
+        <p class="subtitle"><strong>Quantum-Resistant Encryption</strong></p>
+        <p class="subtitle">Securing Data in the Post-Quantum Era</p>
+      </div>
     </header>
     <main>
-        <section id="intro" class="container">
-            <h2>The Quantum Threat is Real. Our Solution is Ready.</h2>
-            <p>Traditional encryption methods like RSA and ECC are facing an existential threat from advancements in quantum computing. Algorithms like Shor’s and Grover’s could soon break the cryptographic foundations of our digital world. <strong>Project QRE</strong> is developing a quantum-resistant encryption system to safeguard sensitive data for the future.</p>
-        </section>
+      <section id="intro" class="container">
+        <h2>The Quantum Threat is Real. Our Solution is Ready.</h2>
+        <p>
+          Traditional encryption methods like RSA and ECC are facing an
+          existential threat from advancements in quantum computing. Algorithms
+          like Shor’s and Grover’s could soon break the cryptographic
+          foundations of our digital world. <strong>Project QRE</strong> is
+          developing a quantum-resistant encryption system to safeguard
+          sensitive data for the future.
+        </p>
+      </section>
 
-        <!-- START: MODIFIED CTA SECTION -->
-        <section id="project-overview-cta-section" style="border-bottom: 1px solid var(--border-color);">
-            <div class="container" style="text-align: center; padding-top: 30px; padding-bottom: 30px;">
-                <div class="cta-button-group">
-                    <a href="project-overview.html" class="cta-button">Project Overview</a>
-                    <a href="https://github.com/powergr/Project_QRE" class="cta-button secondary" target="_blank" rel="noopener noreferrer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                        <span>View on GitHub</span>
-                    </a>
-                </div>
+      <!-- START: MODIFIED CTA SECTION -->
+      <section
+        id="project-overview-cta-section"
+        style="border-bottom: 1px solid var(--border-color)"
+      >
+        <div
+          class="container"
+          style="text-align: center; padding-top: 30px; padding-bottom: 30px"
+        >
+          <div class="cta-button-group">
+            <a href="project-overview.html" class="cta-button"
+              >Project Overview</a
+            >
+            <a
+              href="https://github.com/powergr/Project_QRE"
+              class="cta-button secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                />
+              </svg>
+              <span>View on GitHub</span>
+            </a>
+          </div>
+        </div>
+      </section>
+      <!-- END: MODIFIED CTA SECTION -->
+
+      <section id="innovations" class="container">
+        <h2>Our Core Innovations</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feature-svg-icon"
+              >
+                <path d="M9 12l2 2l4 -4" />
+                <path
+                  d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3"
+                />
+              </svg>
             </div>
-        </section>
-        <!-- END: MODIFIED CTA SECTION -->
-
-        <section id="innovations" class="container">
-            <h2>Our Core Innovations</h2>
-            <div class="features-grid">
-                <div class="feature-card"><div class="feature-icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feature-svg-icon"><path d="M9 12l2 2l4 -4" /><path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" /></svg></div><h3>Hybrid Cipher Layering</h3><div class="feature-card-text-content"><p>Combines symmetric (e.g., AES-256) and post-quantum asymmetric algorithms for enhanced security.</p><a href="hybrid-cipher-layering.html" class="learn-more-link">Learn more »</a></div></div>
-                <div class="feature-card"><div class="feature-icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feature-svg-icon"><path d="M21 12h-2c-.894 0 -1.662 -.857 -1.761 -2c-.296 -3.45 -.749 -6 -2.739 -6c-1.99 0 -2.444 2.55 -2.739 6c-.1 .943 -.867 2 -1.761 2h-2c-.894 0 -1.662 -.857 -1.761 -2c-.296 -3.45 -.749 -6 -2.739 -6c-1.99 0 -2.444 2.55 -2.739 6c-.1 .943 -.867 2 -1.761 2h-2" /></svg></div><h3>Quantum Noise Entropy (QNE)</h3><div class="feature-card-text-content"><p>Introduces dynamic, quantum-inspired randomness into ciphertext to thwart brute-force attacks.</p><a href="quantum-noise-entropy.html" class="learn-more-link">Learn more »</a></div></div>
-                <div class="feature-card"><div class="feature-icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feature-svg-icon"><path d="M12 9v12m-8 -8a8 8 0 0 0 16 0m1 0h-2m-14 0h-2" /><path d="M12 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /></svg></div><h3>Entropy Anchoring</h3><div class="feature-card-text-content"><p>Generates robust keys from real-world chaos, providing novel high-quality entropy for security.</p><a href="entropy-anchoring.html" class="learn-more-link">Learn more »</a></div></div>
+            <h3>Hybrid Cipher Layering</h3>
+            <div class="feature-card-text-content">
+              <p>
+                Combines symmetric (e.g., AES-256) and post-quantum asymmetric
+                algorithms for enhanced security.
+              </p>
+              <a href="hybrid-cipher-layering.html" class="learn-more-link"
+                >Learn more »</a
+              >
             </div>
-        </section>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feature-svg-icon"
+              >
+                <path
+                  d="M21 12h-2c-.894 0 -1.662 -.857 -1.761 -2c-.296 -3.45 -.749 -6 -2.739 -6c-1.99 0 -2.444 2.55 -2.739 6c-.1 .943 -.867 2 -1.761 2h-2c-.894 0 -1.662 -.857 -1.761 -2c-.296 -3.45 -.749 -6 -2.739 -6c-1.99 0 -2.444 2.55 -2.739 6c-.1 .943 -.867 2 -1.761 2h-2"
+                />
+              </svg>
+            </div>
+            <h3>Quantum Noise Entropy (QNE)</h3>
+            <div class="feature-card-text-content">
+              <p>
+                Introduces dynamic, quantum-inspired randomness into ciphertext
+                to thwart brute-force attacks.
+              </p>
+              <a href="quantum-noise-entropy.html" class="learn-more-link"
+                >Learn more »</a
+              >
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon-wrapper">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feature-svg-icon"
+              >
+                <path d="M12 9v12m-8 -8a8 8 0 0 0 16 0m1 0h-2m-14 0h-2" />
+                <path d="M12 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+              </svg>
+            </div>
+            <h3>Entropy Anchoring</h3>
+            <div class="feature-card-text-content">
+              <p>
+                Generates robust keys from real-world chaos, providing novel
+                high-quality entropy for security.
+              </p>
+              <a href="entropy-anchoring.html" class="learn-more-link"
+                >Learn more »</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <section id="whitepaper-cta-section" style="border-bottom: 1px solid var(--border-color);"><div class="container" style="text-align: center; padding: 30px 0;"><a href="whitepaper.html" class="cta-button">Read Our Technical Whitepaper</a></div></section>
+      <section
+        id="whitepaper-cta-section"
+        style="border-bottom: 1px solid var(--border-color)"
+      >
+        <div class="container" style="text-align: center; padding: 30px 0">
+          <a href="whitepaper.html" class="cta-button"
+            >Read Our Technical Whitepaper</a
+          >
+        </div>
+      </section>
 
-        <section id="timeline" class="container">
-            <h2>Development Roadmap</h2>
-			<div class="timeline-container">
-              <div class="timeline-item past"><div class="timeline-dot"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg></div><div class="timeline-content"><h3>Phase 1: Proof-of-Concept (PoC)</h3><div class="timeline-duration">Ended June 2025</div><p><strong>Goals:</strong> Implement Hybrid Cipher Layering (AES-256 + Lattice), simulate Quantum Noise Entropy (QNE), use pre-collected solar flare data for Entropy Anchoring.</p><p><strong>Deliverable:</strong> Functional PoC with basic encryption/decryption capabilities.</p></div></div>
-			  <div class="timeline-item current"><div class="timeline-dot"></div><div class="timeline-content"><h3>Phase 2: Prototype</h3><div class="timeline-duration">June 2025 – June 2026 (12 Months)</div><p><strong>Goals:</strong> Optimize performance, explore integration of hardware Quantum Random Number Generators (QRNGs) if feasible, conduct initial security audits, develop API and user interface.</p><p><strong>Deliverable:</strong> Enhanced prototype ready for pilot testing.</p></div></div>
-			  <div class="timeline-item future"><div class="timeline-dot"></div><div class="timeline-content"><h3>Phase 3: Full Implementation</h3><div class="timeline-duration">July 2027 – December 2028 (18 Months)</div><p><strong>Goals:</strong> Scale system for production, incorporate pilot testing feedback, pursue certification (e.g., NIST Post-Quantum Cryptography standards).</p><p><strong>Deliverable:</strong> Production-ready quantum-resistant encryption system.</p></div></div>
-			</div>
-        </section>
+      <section id="timeline" class="container">
+        <h2>Development Roadmap</h2>
+        <div class="timeline-container">
+          <div class="timeline-item past">
+            <div class="timeline-dot">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-check"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="3"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M5 12l5 5l10 -10" />
+              </svg>
+            </div>
+            <div class="timeline-content">
+              <h3>Phase 1: Proof-of-Concept (PoC)</h3>
+              <div class="timeline-duration">Ended June 2025</div>
+              <p>
+                <strong>Goals:</strong> Implement Hybrid Cipher Layering
+                (AES-256 + Lattice), simulate Quantum Noise Entropy (QNE), use
+                pre-collected solar flare data for Entropy Anchoring.
+              </p>
+              <p>
+                <strong>Deliverable:</strong> Functional PoC with basic
+                encryption/decryption capabilities.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item current">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Phase 2: Prototype</h3>
+              <div class="timeline-duration">
+                June 2025 – June 2026 (12 Months)
+              </div>
+              <p>
+                <strong>Goals:</strong> Optimize performance, explore
+                integration of hardware Quantum Random Number Generators (QRNGs)
+                if feasible, conduct initial security audits, develop API and
+                user interface.
+              </p>
+              <p>
+                <strong>Deliverable:</strong> Enhanced prototype ready for pilot
+                testing.
+              </p>
+            </div>
+          </div>
+          <div class="timeline-item future">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h3>Phase 3: Full Implementation</h3>
+              <div class="timeline-duration">
+                July 2027 – December 2028 (18 Months)
+              </div>
+              <p>
+                <strong>Goals:</strong> Scale system for production, incorporate
+                pilot testing feedback, pursue certification (e.g., NIST
+                Post-Quantum Cryptography standards).
+              </p>
+              <p>
+                <strong>Deliverable:</strong> Production-ready quantum-resistant
+                encryption system.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <section id="status" class="container">
-            <h2>Current Status: We Are Here!</h2>
-            <p>We are actively working on <strong>Phase 2: Prototype</strong>. Our focus is on optimizing the performance of our Proof-of-Concept, hardening security through internal audits, and developing a robust API for future integration. We are also exploring the feasibility of integrating hardware-based Quantum Random Number Generators (QRNGs).</p>
-        </section>
+      <section id="status" class="container">
+        <h2>Current Status: We Are Here!</h2>
+        <p>
+          We are actively working on <strong>Phase 2: Prototype</strong>. Our
+          focus is on optimizing the performance of our Proof-of-Concept,
+          hardening security through internal audits, and developing a robust
+          API for future integration. We are also exploring the feasibility of
+          integrating hardware-based Quantum Random Number Generators (QRNGs).
+        </p>
+      </section>
 
-        <section id="contact" class="container">
-            <h2>Get In Touch</h2>
-            <p>Have a question or want to follow our progress? We'd love to hear from you.</p>
-            <a href="contact.html" class="cta-button">Contact Us</a>
-        </section>
+      <section id="contact" class="container">
+        <h2>Get In Touch</h2>
+        <p>
+          Have a question or want to follow our progress? We'd love to hear from
+          you.
+        </p>
+        <a href="contact.html" class="cta-button">Contact Us</a>
+      </section>
     </main>
 
     <footer>
-        <div class="container">
-            <p>© 2025 Project QRE. Last update: June 2025</p>
-            <div class="footer-links">
-                <a href="about.html">About Us</a>
-                <span>|</span>
-                <a href="https://github.com/powergr/Project_QRE" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <span>|</span>
-                <a href="blog.html">Blog</a>
-                <span>|</span>
-                <a href="contact.html">Contact</a>
-                <span>|</span>
-                <a href="terms.html">Terms</a>
-                <span>|</span>
-                <a href="privacy.html">Privacy</a>
-            </div>
+      <div class="container">
+        <p>
+          © 2025–<span id="year"></span> Project QRE. Last updated:
+          <span id="last-updated">December 2025</span>
+        </p>
+
+        <div class="footer-links">
+          <a href="about.html">About Us</a>
+          <span>|</span>
+          <a
+            href="https://github.com/powergr/Project_QRE"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub</a
+          >
+          <span>|</span>
+          <a href="blog.html">Blog</a>
+          <span>|</span>
+          <a href="contact.html">Contact</a>
+          <span>|</span>
+          <a href="terms.html">Terms</a>
+          <span>|</span>
+          <a href="privacy.html">Privacy</a>
         </div>
+      </div>
     </footer>
+
     <script>
-        const themeToggleButton = document.getElementById('theme-toggle');themeToggleButton.addEventListener('click', () => {const currentTheme = document.documentElement.getAttribute('data-theme');const newTheme = currentTheme === 'dark' ? 'light' : 'dark';document.documentElement.setAttribute('data-theme', newTheme);localStorage.setItem('qre_theme', newTheme);});
+      const startYear = 2025;
+      const currentYear = new Date().getFullYear();
+      document.getElementById("year").textContent =
+        currentYear > startYear ? currentYear : startYear;
     </script>
-</body>
+
+    <script>
+      const themeToggleButton = document.getElementById("theme-toggle");
+      themeToggleButton.addEventListener("click", () => {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("qre_theme", newTheme);
+      });
+    </script>
+  </body>
 </html>

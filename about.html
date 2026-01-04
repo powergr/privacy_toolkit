@@ -1,22 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Us - Project QRE</title>
     <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://projectqre.com/about.html">
-    <meta property="og:title" content="About Project QRE | Mission & Founder">
-    <meta property="og:description" content="Learn about the mission driving Project QRE, our core philosophy, and the founder dedicated to building the future of post-quantum security.">
-    <meta property="og:image" content="https://projectqre.com/images/qre-social-share.webp">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://projectqre.com/about.html" />
+    <meta property="og:title" content="About Project QRE | Mission & Founder" />
+    <meta
+      property="og:description"
+      content="Learn about the mission driving Project QRE, our core philosophy, and the founder dedicated to building the future of post-quantum security."
+    />
+    <meta
+      property="og:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://projectqre.com/about.html">
-    <meta property="twitter:title" content="About Project QRE | Mission & Founder">
-    <meta property="twitter:description" content="Learn about the mission driving Project QRE, our core philosophy, and the founder dedicated to building the future of post-quantum security.">
-    <meta property="twitter:image" content="https://projectqre.com/images/qre-social-share.webp">
-    <meta name="description" content="Learn about the mission, philosophy, and founder behind Project QRE, and find answers to frequently asked questions.">
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://projectqre.com/about.html" />
+    <meta
+      property="twitter:title"
+      content="About Project QRE | Mission & Founder"
+    />
+    <meta
+      property="twitter:description"
+      content="Learn about the mission driving Project QRE, our core philosophy, and the founder dedicated to building the future of post-quantum security."
+    />
+    <meta
+      property="twitter:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
+    <meta
+      name="description"
+      content="Learn about the mission, philosophy, and founder behind Project QRE, and find answers to frequently asked questions."
+    />
 
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -27,103 +45,497 @@
     <link rel="canonical" href="https://projectqre.com/about.html" />
 
     <!-- Asynchronously load Google Fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"></noscript>
-    
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+    /></noscript>
+
     <style>
-        :root{--heading-font:'Orbitron',sans-serif;--body-font:'Roboto',sans-serif}[data-theme=dark]{--primary-color:#0d47a1;--secondary-color-bg:#1976d2;--secondary-color-text:#58afff;--accent-color:#64b5f6;--text-color:#e0e0e0;--bg-color:#121212;--card-bg-color:#1e1e1e;--border-color:#333;--footer-bg:#0a0a0a;--footer-border:#222;--link-color:var(--accent-color);--link-hover-color:#90caf9;--header-overlay:rgba(0,0,0,.5);--icon-color:#e0e0e0;--icon-hover-bg:rgba(255,255,255,.1);--footer-link-color:#aaa;--footer-link-hover-color:#fff}[data-theme=light]{--primary-color:#1565c0;--secondary-color-bg:#1976d2;--secondary-color-text:#0d47a1;--accent-color:#1e88e5;--text-color:#212121;--bg-color:#f4f6f8;--card-bg-color:#fff;--border-color:#e0e0e0;--footer-bg:#e9ecef;--footer-border:#dee2e6;--link-color:#0d47a1;--link-hover-color:#0b3a7d;--header-overlay:rgba(0,0,0,.3);--icon-color:#212121;--icon-hover-bg:rgba(0,0,0,.05);--footer-link-color:#555;--footer-link-hover-color:#000}*,:after,:before{box-sizing:border-box}body{margin:0;font-family:var(--body-font);background-color:var(--bg-color);color:var(--text-color);line-height:1.6;overflow-x:hidden;transition:background-color .3s ease,color .3s ease}#theme-toggle{position:fixed;top:15px;right:15px;z-index:1000;cursor:pointer;background-color:transparent;border:none;padding:8px;border-radius:50%;transition:background-color .2s ease-in-out}#theme-toggle:focus,#theme-toggle:hover{background-color:var(--icon-hover-bg);outline:0}#theme-toggle svg{width:24px;height:24px;stroke:var(--icon-color);pointer-events:none}[data-theme=dark] .moon-icon{display:none}[data-theme=dark] .sun-icon{display:block}[data-theme=light] .sun-icon{display:none}[data-theme=light] .moon-icon{display:block}.container{width:90%;max-width:900px;margin:0 auto;padding:20px 0}header{background-color:var(--primary-color);color:#fff;padding:60px 20px;text-align:center;position:relative;background-image:url(images/quantum_header_bg.webp);background-size:cover;background-position:50%;background-repeat:no-repeat;min-height:250px;display:flex;flex-direction:column;justify-content:center;align-items:center}header:before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background-color:var(--header-overlay);z-index:1}header .container{position:relative;z-index:2}header h1{font-family:var(--heading-font);font-size:3.2em;margin-bottom:.3em;letter-spacing:2px;color:#fff;text-shadow:2px 2px 4px rgba(0,0,0,.7)}header .subtitle{font-size:1.4em;font-weight:300;color:#e0e0e0;text-shadow:1px 1px 3px rgba(0,0,0,.7);line-height:1.5}main{padding-top:20px}.content-section h2{font-family:var(--heading-font);color:var(--accent-color);text-align:left;margin-top:2em;margin-bottom:.8em;font-size:2em;border-bottom:1px solid var(--border-color);padding-bottom:.3em}.content-section h2:first-child{margin-top:0}.content-section h3{font-family:var(--heading-font);font-size:1.5em;color:var(--secondary-color-text);margin-top:1.5em;margin-bottom:.5em}.content-section p,.content-section ul{margin-bottom:1.2em;line-height:1.7;font-size:1.05em}.content-section ul{list-style:disc;padding-left:25px}.content-section li{margin-bottom:.5em}.breadcrumb-nav{padding:15px 0;font-size:.9em;border-bottom:1px solid var(--border-color);margin-bottom:20px}.breadcrumb-nav a{color:var(--link-color);text-decoration:none}.breadcrumb-nav a:hover{text-decoration:underline;color:var(--link-hover-color)}.founder-profile{display:flex;align-items:center;gap:30px;background-color:var(--card-bg-color);padding:30px;border-radius:8px;margin-top:1.5em}.founder-photo{width:150px;height:150px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid var(--secondary-color-bg)}.founder-info h4{margin:0 0 10px 0;font-family:var(--heading-font);font-size:1.8em;color:var(--accent-color)}.founder-info .title{font-style:italic;color:var(--text-color);opacity:.8;margin-bottom:15px;display:block}.social-links a{color:var(--accent-color);margin-right:15px;text-decoration:none;font-size:1.2em}.social-links a:hover{color:var(--link-hover-color)}footer{background-color:var(--footer-bg);color:var(--text-color);text-align:center;padding:25px 0;font-size:.9em;margin-top:40px;border-top:1px solid var(--footer-border);transition:background-color .3s ease,border-color .3s ease}.footer-links{margin-top:10px}.footer-links a{color:var(--footer-link-color);text-decoration:none;margin:0 10px;transition:color .2s}.footer-links a:hover{color:var(--footer-link-hover-color);text-decoration:underline}.footer-links span{color:var(--footer-link-color)}@media (max-width:768px){header h1{font-size:2.2em}.content-section h2{font-size:1.6em}.founder-profile{flex-direction:column;text-align:center}.founder-info h4{font-size:1.5em}}
+      :root {
+        --heading-font: "Orbitron", sans-serif;
+        --body-font: "Roboto", sans-serif;
+      }
+      [data-theme="dark"] {
+        --primary-color: #0d47a1;
+        --secondary-color-bg: #1976d2;
+        --secondary-color-text: #58afff;
+        --accent-color: #64b5f6;
+        --text-color: #e0e0e0;
+        --bg-color: #121212;
+        --card-bg-color: #1e1e1e;
+        --border-color: #333;
+        --footer-bg: #0a0a0a;
+        --footer-border: #222;
+        --link-color: var(--accent-color);
+        --link-hover-color: #90caf9;
+        --header-overlay: rgba(0, 0, 0, 0.5);
+        --icon-color: #e0e0e0;
+        --icon-hover-bg: rgba(255, 255, 255, 0.1);
+        --footer-link-color: #aaa;
+        --footer-link-hover-color: #fff;
+      }
+      [data-theme="light"] {
+        --primary-color: #1565c0;
+        --secondary-color-bg: #1976d2;
+        --secondary-color-text: #0d47a1;
+        --accent-color: #1e88e5;
+        --text-color: #212121;
+        --bg-color: #f4f6f8;
+        --card-bg-color: #fff;
+        --border-color: #e0e0e0;
+        --footer-bg: #e9ecef;
+        --footer-border: #dee2e6;
+        --link-color: #0d47a1;
+        --link-hover-color: #0b3a7d;
+        --header-overlay: rgba(0, 0, 0, 0.3);
+        --icon-color: #212121;
+        --icon-hover-bg: rgba(0, 0, 0, 0.05);
+        --footer-link-color: #555;
+        --footer-link-hover-color: #000;
+      }
+      *,
+      :after,
+      :before {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: var(--body-font);
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        overflow-x: hidden;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      #theme-toggle {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        z-index: 1000;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        padding: 8px;
+        border-radius: 50%;
+        transition: background-color 0.2s ease-in-out;
+      }
+      #theme-toggle:focus,
+      #theme-toggle:hover {
+        background-color: var(--icon-hover-bg);
+        outline: 0;
+      }
+      #theme-toggle svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--icon-color);
+        pointer-events: none;
+      }
+      [data-theme="dark"] .moon-icon {
+        display: none;
+      }
+      [data-theme="dark"] .sun-icon {
+        display: block;
+      }
+      [data-theme="light"] .sun-icon {
+        display: none;
+      }
+      [data-theme="light"] .moon-icon {
+        display: block;
+      }
+      .container {
+        width: 90%;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px 0;
+      }
+      header {
+        background-color: var(--primary-color);
+        color: #fff;
+        padding: 60px 20px;
+        text-align: center;
+        position: relative;
+        background-image: url(images/quantum_header_bg.webp);
+        background-size: cover;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      header:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--header-overlay);
+        z-index: 1;
+      }
+      header .container {
+        position: relative;
+        z-index: 2;
+      }
+      header h1 {
+        font-family: var(--heading-font);
+        font-size: 3.2em;
+        margin-bottom: 0.3em;
+        letter-spacing: 2px;
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+      header .subtitle {
+        font-size: 1.4em;
+        font-weight: 300;
+        color: #e0e0e0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        line-height: 1.5;
+      }
+      main {
+        padding-top: 20px;
+      }
+      .content-section h2 {
+        font-family: var(--heading-font);
+        color: var(--accent-color);
+        text-align: left;
+        margin-top: 2em;
+        margin-bottom: 0.8em;
+        font-size: 2em;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 0.3em;
+      }
+      .content-section h2:first-child {
+        margin-top: 0;
+      }
+      .content-section h3 {
+        font-family: var(--heading-font);
+        font-size: 1.5em;
+        color: var(--secondary-color-text);
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+      }
+      .content-section p,
+      .content-section ul {
+        margin-bottom: 1.2em;
+        line-height: 1.7;
+        font-size: 1.05em;
+      }
+      .content-section ul {
+        list-style: disc;
+        padding-left: 25px;
+      }
+      .content-section li {
+        margin-bottom: 0.5em;
+      }
+      .breadcrumb-nav {
+        padding: 15px 0;
+        font-size: 0.9em;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 20px;
+      }
+      .breadcrumb-nav a {
+        color: var(--link-color);
+        text-decoration: none;
+      }
+      .breadcrumb-nav a:hover {
+        text-decoration: underline;
+        color: var(--link-hover-color);
+      }
+      .founder-profile {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        background-color: var(--card-bg-color);
+        padding: 30px;
+        border-radius: 8px;
+        margin-top: 1.5em;
+      }
+      .founder-photo {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: 3px solid var(--secondary-color-bg);
+      }
+      .founder-info h4 {
+        margin: 0 0 10px 0;
+        font-family: var(--heading-font);
+        font-size: 1.8em;
+        color: var(--accent-color);
+      }
+      .founder-info .title {
+        font-style: italic;
+        color: var(--text-color);
+        opacity: 0.8;
+        margin-bottom: 15px;
+        display: block;
+      }
+      .social-links a {
+        color: var(--accent-color);
+        margin-right: 15px;
+        text-decoration: none;
+        font-size: 1.2em;
+      }
+      .social-links a:hover {
+        color: var(--link-hover-color);
+      }
+      footer {
+        background-color: var(--footer-bg);
+        color: var(--text-color);
+        text-align: center;
+        padding: 25px 0;
+        font-size: 0.9em;
+        margin-top: 40px;
+        border-top: 1px solid var(--footer-border);
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+      .footer-links {
+        margin-top: 10px;
+      }
+      .footer-links a {
+        color: var(--footer-link-color);
+        text-decoration: none;
+        margin: 0 10px;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--footer-link-hover-color);
+        text-decoration: underline;
+      }
+      .footer-links span {
+        color: var(--footer-link-color);
+      }
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 2.2em;
+        }
+        .content-section h2 {
+          font-size: 1.6em;
+        }
+        .founder-profile {
+          flex-direction: column;
+          text-align: center;
+        }
+        .founder-info h4 {
+          font-size: 1.5em;
+        }
+      }
     </style>
 
     <script>
-        (function() {
-            const theme = localStorage.getItem('qre_theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', theme);
-        })();
+      (function () {
+        const theme = localStorage.getItem("qre_theme") || "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <button id="theme-toggle" title="Toggle light/dark theme">
-        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      <svg
+        class="sun-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg
+        class="moon-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
     </button>
     <header>
-        <div class="container">
-            <h1>About Project QRE</h1>
-            <p class="subtitle">Our Mission, Philosophy, and People</p>
-        </div>
+      <div class="container">
+        <h1>About Project QRE</h1>
+        <p class="subtitle">Our Mission, Philosophy, and People</p>
+      </div>
     </header>
 
     <nav class="breadcrumb-nav container">
-        <a href="index.html">Home</a> > About Us
+      <a href="index.html">Home</a> > About Us
     </nav>
 
     <main class="container">
-        <div class="content-section">
-            <h2>Our Mission</h2>
-            <p>Project QRE was founded on a single, critical principle: to build the cryptographic shield for the coming quantum era. We are dedicated to pioneering accessible, multi-layered security solutions that safeguard our digital future against both current and emerging computational threats. Our work is driven by a commitment to proactive, resilient, and forward-thinking security design.</p>
-            
-            <h3>Meet the Founder</h3>
-            <div class="founder-profile">
-                <!-- Replace 'placeholder.jpg' with the path to your actual photo -->
-                <img src="images/plphoto.webp" alt="Photo of Pashalis Laoutaris" class="founder-photo">
-                <div class="founder-info">
-                    <h4>Pashalis Laoutaris</h4>
-                    <span class="title">Founder & Principal Researcher</span>
-                    <p>With over 10 years of experience in software engineering and security architecture, Pashalis Laoutaris has a deep focus on applied cryptography and secure system design. Driven by a passion for data privacy and future-proofing technology, he initiated Project QRE to create a tangible, defense-in-depth solution to one of the most significant security challenges of our time.</p>
-                    <div class="social-links">
-                        <!-- Replace '#' with your actual profile links -->
-                        <a href="https://www.linkedin.com/in/laoutaris/" target="_blank" title="LinkedIn">LinkedIn</a>
-                        <a href="https://github.com/powergr" target="_blank" title="GitHub">GitHub</a>
-                    </div>
-                </div>
+      <div class="content-section">
+        <h2>Our Mission</h2>
+        <p>
+          Project QRE was founded on a single, critical principle: to build the
+          cryptographic shield for the coming quantum era. We are dedicated to
+          pioneering accessible, multi-layered security solutions that safeguard
+          our digital future against both current and emerging computational
+          threats. Our work is driven by a commitment to proactive, resilient,
+          and forward-thinking security design.
+        </p>
+
+        <h3>Meet the Founder</h3>
+        <div class="founder-profile">
+          <!-- Replace 'placeholder.jpg' with the path to your actual photo -->
+          <img
+            src="images/plphoto.webp"
+            alt="Photo of Pashalis Laoutaris"
+            class="founder-photo"
+          />
+          <div class="founder-info">
+            <h4>Pashalis Laoutaris</h4>
+            <span class="title">Founder & Principal Researcher</span>
+            <p>
+              With over 10 years of experience in software engineering and
+              security architecture, Pashalis Laoutaris has a deep focus on
+              applied cryptography and secure system design. Driven by a passion
+              for data privacy and future-proofing technology, he initiated
+              Project QRE to create a tangible, defense-in-depth solution to one
+              of the most significant security challenges of our time.
+            </p>
+            <div class="social-links">
+              <!-- Replace '#' with your actual profile links -->
+              <a
+                href="https://www.linkedin.com/in/laoutaris/"
+                target="_blank"
+                title="LinkedIn"
+                >LinkedIn</a
+              >
+              <a
+                href="https://github.com/powergr"
+                target="_blank"
+                title="GitHub"
+                >GitHub</a
+              >
             </div>
-
-            <h2>Frequently Asked Questions (FAQ)</h2>
-
-            <h3>What is the "quantum threat"?</h3>
-            <p>The quantum threat refers to the risk posed by future fault-tolerant quantum computers, which will be capable of breaking many of the public-key encryption algorithms (like RSA and ECC) that currently protect sensitive data worldwide. This means data intercepted today could be decrypted in the future.</p>
-
-            <h3>How is Project QRE different from the new NIST standards?</h3>
-            <p>Project QRE fully embraces the algorithms selected by NIST (like ML-KEM/Kyber). Our innovation is not in creating new algorithms, but in building a resilient *framework* around them. We use a hybrid approach, combining these new standards with established cryptography (like AES-256) and enhancing security further with novel techniques like Entropy Anchoring and dynamic ciphertext authentication (QNE).</p>
-            
-            <h3>Is this project open source?</h3>
-            <p>The Proof-of-Concept (PoC) code is currently maintained in a private repository. A key goal of the Prototype phase is to clean, document, and prepare the codebase for a potential open-source release to encourage community review and collaboration.</p>
-
-            <h3>What is the current status of the project?</h3>
-            <p>Project QRE is currently in **Phase 2: Prototype**. We have completed the foundational Proof-of-Concept and are now focused on performance optimization, hardening security, and developing a stable API for pilot testing and integration.</p>
-            
-            <h3>How can I or my organization get involved?</h3>
-            <p>We are always open to collaboration with researchers, academic institutions, and organizations interested in post-quantum security. For inquiries about pilot testing, partnerships, or technical discussions, please reach out to us via our <a href="contact.html" style="color:var(--link-color)">Contact Page</a>.</p>
+          </div>
         </div>
+
+        <h2>Frequently Asked Questions (FAQ)</h2>
+
+        <h3>Q: What is "Hybrid" encryption, and why use it?</h3>
+        <p>
+          Hybrid encryption means we use two layers of protection: a classical
+          layer (AES-256) and a post-quantum layer (ML-KEM/Kyber). We do this so
+          you don't have to choose between proven speed and future-proof
+          security. Even if one algorithm fails, your data remains protected by
+          the other.
+        </p>
+
+        <h3>Q: What happens if I lose my Keyfile or Passphrase?</h3>
+        <p>
+          <strong>Your data will be permanently inaccessible.</strong> QRE
+          Locker is designed with zero backdoors. Because we use a stateless
+          architecture (the keys are derived from your inputs, not stored on a
+          server), we cannot recover your files for you. We recommend keeping
+          backups of your Keyfiles in a secure, physical location.
+        </p>
+
+        <h3>Q: Do I need an internet connection to use QRE Locker?</h3>
+        <p>
+          No. QRE Locker v2.1 is an <strong>offline-first</strong> desktop
+          application. All encryption, key derivation, and entropy generation
+          happen locally on your device. We do not transmit your keys or data to
+          the cloud.
+        </p>
+
+        <h3>Q: Is this project open source?</h3>
+        <p>
+          Yes! We believe security tools must be transparent to be trusted. The
+          full source code for QRE Locker (built in Rust and React) is available
+          on our
+          <a
+            href="https://github.com/powergr/quantum-locker/"
+            style="color: var(--link-color)"
+            >GitHub repository</a
+          >
+          under the MIT License.
+        </p>
+
+        <h3>Q: Why did you switch from Python to Rust?</h3>
+        <p>
+          Our initial research Proof-of-Concept was in Python. For v2.0, we
+          rewrote the core engine in Rust to achieve
+          <strong>memory safety</strong> (preventing key leaks in RAM),
+          <strong>portability</strong> (single executable file), and
+          significantly higher <strong>performance</strong> (near-instant
+          encryption of large files).
+        </p>
+
+        <h3>Q: What is "Paranoid Mode"?</h3>
+        <p>
+          Paranoid Mode is an optional feature for users who don't trust their
+          operating system's random number generator. When enabled, QRE Locker
+          mixes randomness from your hardware interactions (mouse movements,
+          system timing) into the encryption keys, ensuring they are truly
+          unpredictable.
+        </p>
+      </div>
     </main>
 
-<footer>
-    <div class="container">
-        <p>© 2025 Project QRE. Last update: June 2025</p>
+    <footer>
+      <div class="container">
+        <p>
+          © 2025–<span id="year"></span> Project QRE. Last updated:
+          <span id="last-updated">January 2026</span>
+        </p>
         <div class="footer-links">
-            <a href="about.html">About Us</a>
-            <span>|</span>
-            <a href="https://github.com/powergr/Project_QRE" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <span>|</span>
-            <a href="blog.html">Blog</a>
-            <span>|</span>
-            <a href="contact.html">Contact</a>
-            <span>|</span>
-            <a href="terms.html">Terms</a>
-            <span>|</span>
-            <a href="privacy.html">Privacy</a>
+          <a href="about.html">About Us</a>
+          <span>|</span>
+          <a
+            href="https://github.com/powergr/quantum-locker/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub</a
+          >
+          <span>|</span>
+          <a href="blog.html">Blog</a>
+          <span>|</span>
+          <a href="contact.html">Contact</a>
+          <span>|</span>
+          <a href="terms.html">Terms</a>
+          <span>|</span>
+          <a href="privacy.html">Privacy</a>
         </div>
-    </div>
-</footer>
+      </div>
+    </footer>
 
     <script>
-        const themeToggleButton = document.getElementById('theme-toggle');
-        themeToggleButton.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('qre_theme', newTheme);
-        });
+      const startYear = 2025;
+      const currentYear = new Date().getFullYear();
+      document.getElementById("year").textContent =
+        currentYear > startYear ? currentYear : startYear;
     </script>
-</body>
+    <script>
+      const themeToggleButton = document.getElementById("theme-toggle");
+      themeToggleButton.addEventListener("click", () => {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("qre_theme", newTheme);
+      });
+    </script>
+  </body>
 </html>

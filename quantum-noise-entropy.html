@@ -1,22 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quantum Noise Entropy (QNE) - Project QRE</title>
 
     <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://projectqre.com/quantum-noise-entropy.html">
-    <meta property="og:title" content="Quantum Noise Entropy (QNE) | Project QRE">
-    <meta property="og:description" content="Explore how dynamic, quantum-inspired randomness is infused into ciphertexts to thwart brute-force attacks and enhance security.">
-    <meta property="og:image" content="https://projectqre.com/images/qre-social-share.webp">
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://projectqre.com/quantum-noise-entropy.html"
+    />
+    <meta
+      property="og:title"
+      content="Quantum Noise Entropy (QNE) | Project QRE"
+    />
+    <meta
+      property="og:description"
+      content="Explore how dynamic, quantum-inspired randomness is infused into ciphertexts to thwart brute-force attacks and enhance security."
+    />
+    <meta
+      property="og:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://projectqre.com/quantum-noise-entropy.html">
-    <meta property="twitter:title" content="Quantum Noise Entropy (QNE) | Project QRE">
-    <meta property="twitter:description" content="Explore how dynamic, quantum-inspired randomness is infused into ciphertexts to thwart brute-force attacks and enhance security.">
-    <meta property="twitter:image" content="https://projectqre.com/images/qre-social-share.webp">
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://projectqre.com/quantum-noise-entropy.html"
+    />
+    <meta
+      property="twitter:title"
+      content="Quantum Noise Entropy (QNE) | Project QRE"
+    />
+    <meta
+      property="twitter:description"
+      content="Explore how dynamic, quantum-inspired randomness is infused into ciphertexts to thwart brute-force attacks and enhance security."
+    />
+    <meta
+      property="twitter:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
 
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -24,361 +48,491 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <link rel="canonical" href="https://projectqre.com/quantum-noise-entropy.html" />
-    <meta name="description" content="Explore how dynamic, quantum-inspired randomness is infused into ciphertexts to thwart brute-force attacks and enhance security.">
-    <meta name="keywords" content="quantum noise entropy, QNE, quantum security, randomness, cryptography, brute-force attack prevention, quantum-inspired randomness, secure encryption">
+    <link
+      rel="canonical"
+      href="https://projectqre.com/quantum-noise-entropy.html"
+    />
+    <meta
+      name="description"
+      content="Explore how dynamic, quantum-inspired randomness is infused into ciphertexts to thwart brute-force attacks and enhance security."
+    />
+    <meta
+      name="keywords"
+      content="quantum noise entropy, QNE, quantum security, randomness, cryptography, brute-force attack prevention, quantum-inspired randomness, secure encryption"
+    />
 
     <!-- Asynchronously load Google Fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"></noscript>
-    
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+    /></noscript>
+
     <style>
-        :root {
-            --heading-font: 'Orbitron', sans-serif;
-            --body-font: 'Roboto', sans-serif;
-        }
+      :root {
+        --heading-font: "Orbitron", sans-serif;
+        --body-font: "Roboto", sans-serif;
+      }
 
-        [data-theme="dark"] {
-            --primary-color: #0D47A1;
-            --secondary-color-bg: #1976D2;
-            --secondary-color-text: #58AFFF;
-            --accent-color: #64B5F6;
-            --text-color: #E0E0E0;
-            --bg-color: #121212;
-            --card-bg-color: #1E1E1E;
-            --border-color: #333;
-            --footer-bg: #0a0a0a;
-            --footer-border: #222;
-            --link-color: var(--accent-color);
-            --link-hover-color: #90caf9;
-            --header-overlay: rgba(0, 0, 0, 0.5);
-            --icon-color: #E0E0E0;
-            --icon-hover-bg: rgba(255, 255, 255, 0.1);
-            --footer-link-color: #aaa;
-            --footer-link-hover-color: #fff;
-        }
+      [data-theme="dark"] {
+        --primary-color: #0d47a1;
+        --secondary-color-bg: #1976d2;
+        --secondary-color-text: #58afff;
+        --accent-color: #64b5f6;
+        --text-color: #e0e0e0;
+        --bg-color: #121212;
+        --card-bg-color: #1e1e1e;
+        --border-color: #333;
+        --footer-bg: #0a0a0a;
+        --footer-border: #222;
+        --link-color: var(--accent-color);
+        --link-hover-color: #90caf9;
+        --header-overlay: rgba(0, 0, 0, 0.5);
+        --icon-color: #e0e0e0;
+        --icon-hover-bg: rgba(255, 255, 255, 0.1);
+        --footer-link-color: #aaa;
+        --footer-link-hover-color: #fff;
+      }
 
-        [data-theme="light"] {
-            --primary-color: #1565C0;
-            --secondary-color-bg: #1976D2;
-            --secondary-color-text: #0D47A1;
-            --accent-color: #1E88E5;
-            --text-color: #212121;
-            --bg-color: #f4f6f8;
-            --card-bg-color: #ffffff;
-            --border-color: #e0e0e0;
-            --footer-bg: #e9ecef;
-            --footer-border: #dee2e6;
-            --link-color: #0D47A1;
-            --link-hover-color: #0b3a7d;
-            --header-overlay: rgba(0, 0, 0, 0.3);
-            --icon-color: #212121;
-            --icon-hover-bg: rgba(0, 0, 0, 0.05);
-            --footer-link-color: #555;
-            --footer-link-hover-color: #000;
-        }
+      [data-theme="light"] {
+        --primary-color: #1565c0;
+        --secondary-color-bg: #1976d2;
+        --secondary-color-text: #0d47a1;
+        --accent-color: #1e88e5;
+        --text-color: #212121;
+        --bg-color: #f4f6f8;
+        --card-bg-color: #ffffff;
+        --border-color: #e0e0e0;
+        --footer-bg: #e9ecef;
+        --footer-border: #dee2e6;
+        --link-color: #0d47a1;
+        --link-hover-color: #0b3a7d;
+        --header-overlay: rgba(0, 0, 0, 0.3);
+        --icon-color: #212121;
+        --icon-hover-bg: rgba(0, 0, 0, 0.05);
+        --footer-link-color: #555;
+        --footer-link-hover-color: #000;
+      }
 
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
 
-        body {
-            margin: 0;
-            font-family: var(--body-font);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        #theme-toggle {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            z-index: 1000;
-            cursor: pointer;
-            background-color: transparent;
-            border: none;
-            padding: 8px;
-            border-radius: 50%;
-            transition: background-color 0.2s ease-in-out;
-        }
-        #theme-toggle:hover,
-        #theme-toggle:focus {
-            background-color: var(--icon-hover-bg);
-            outline: none;
-        }
-        #theme-toggle svg {
-            width: 24px;
-            height: 24px;
-            stroke: var(--icon-color);
-            pointer-events: none; 
-        }
+      body {
+        margin: 0;
+        font-family: var(--body-font);
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        overflow-x: hidden;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
 
-        [data-theme="dark"] .moon-icon { display: none; }
-        [data-theme="dark"] .sun-icon { display: block; }
-        [data-theme="light"] .sun-icon { display: none; }
-        [data-theme="light"] .moon-icon { display: block; }
+      #theme-toggle {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        z-index: 1000;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        padding: 8px;
+        border-radius: 50%;
+        transition: background-color 0.2s ease-in-out;
+      }
+      #theme-toggle:hover,
+      #theme-toggle:focus {
+        background-color: var(--icon-hover-bg);
+        outline: none;
+      }
+      #theme-toggle svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--icon-color);
+        pointer-events: none;
+      }
 
-        .container {
-            width: 90%;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px 0;
-        }
+      [data-theme="dark"] .moon-icon {
+        display: none;
+      }
+      [data-theme="dark"] .sun-icon {
+        display: block;
+      }
+      [data-theme="light"] .sun-icon {
+        display: none;
+      }
+      [data-theme="light"] .moon-icon {
+        display: block;
+      }
 
+      .container {
+        width: 90%;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px 0;
+      }
+
+      header {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 60px 20px;
+        text-align: center;
+        position: relative;
+        background-image: url("images/quantum_header_bg.webp");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--header-overlay);
+        z-index: 1;
+      }
+
+      header .container {
+        position: relative;
+        z-index: 2;
+      }
+
+      header h1 {
+        font-family: var(--heading-font);
+        font-size: 3.2em;
+        margin-bottom: 0.3em;
+        letter-spacing: 2px;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+
+      header .subtitle {
+        font-size: 1.4em;
+        font-weight: 300;
+        color: #e0e0e0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        line-height: 1.5;
+      }
+
+      h2 {
+        font-family: var(--heading-font);
+        color: var(--accent-color);
+        text-align: left;
+        margin-top: 1.5em;
+        margin-bottom: 0.8em;
+        font-size: 2em;
+      }
+      h2:first-child {
+        margin-top: 0;
+      }
+
+      h3 {
+        font-family: var(--heading-font);
+        color: var(--secondary-color-text);
+        font-size: 1.4em;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+      }
+
+      section {
+        padding: 20px 0;
+      }
+
+      .breadcrumb-nav {
+        padding: 15px 0;
+        font-size: 0.9em;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 20px;
+      }
+      .breadcrumb-nav a {
+        color: var(--link-color);
+        text-decoration: none;
+      }
+      .breadcrumb-nav a:hover {
+        text-decoration: underline;
+        color: var(--link-hover-color);
+      }
+
+      .content-section p,
+      .content-section ul {
+        margin-bottom: 1.2em;
+        line-height: 1.7;
+        font-size: 1.05em;
+      }
+      .content-section ul {
+        list-style: disc;
+        padding-left: 25px;
+      }
+      .content-section li {
+        margin-bottom: 0.5em;
+      }
+
+      .step-details {
+        margin-bottom: 2em;
+        padding-left: 15px;
+        border-left: 3px solid var(--secondary-color-bg);
+      }
+
+      footer {
+        background-color: var(--footer-bg);
+        color: var(--text-color);
+        text-align: center;
+        padding: 25px 0;
+        font-size: 0.9em;
+        margin-top: 40px;
+        border-top: 1px solid var(--footer-border);
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+      .footer-links {
+        margin-top: 10px;
+      }
+      .footer-links a {
+        color: var(--footer-link-color);
+        text-decoration: none;
+        margin: 0 10px;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--footer-link-hover-color);
+        text-decoration: underline;
+      }
+      .footer-links span {
+        color: var(--footer-link-color);
+      }
+
+      @media (max-width: 768px) {
         header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-            position: relative;
-            background-image: url('images/quantum_header_bg.webp');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            min-height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+          padding: 40px 20px;
+          min-height: 200px;
         }
-
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: var(--header-overlay);
-            z-index: 1;
-        }
-
-        header .container {
-            position: relative;
-            z-index: 2;
-        }
-
         header h1 {
-            font-family: var(--heading-font);
-            font-size: 3.2em;
-            margin-bottom: 0.3em;
-            letter-spacing: 2px;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+          font-size: 2.2em;
         }
-
         header .subtitle {
-            font-size: 1.4em;
-            font-weight: 300;
-            color: #E0E0E0;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
-            line-height: 1.5;
+          font-size: 1.1em;
         }
-
         h2 {
-            font-family: var(--heading-font);
-            color: var(--accent-color);
-            text-align: left;
-            margin-top: 1.5em;
-            margin-bottom: 0.8em;
-            font-size: 2em;
+          font-size: 1.6em;
         }
-        h2:first-child {
-            margin-top: 0;
-        }
-
-        h3 {
-            font-family: var(--heading-font);
-            color: var(--secondary-color-text);
-            font-size: 1.4em;
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
-        }
-
-        section {
-            padding: 20px 0;
-        }
-
         .breadcrumb-nav {
-            padding: 15px 0;
-            font-size: 0.9em;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 20px;
+          padding: 10px 0;
         }
-        .breadcrumb-nav a {
-            color: var(--link-color);
-            text-decoration: none;
+        h3 {
+          font-size: 1.2em;
         }
-        .breadcrumb-nav a:hover {
-            text-decoration: underline;
-            color: var(--link-hover-color);
-        }
-
-        .content-section p, .content-section ul {
-            margin-bottom: 1.2em;
-            line-height: 1.7;
-            font-size: 1.05em;
-        }
-        .content-section ul {
-            list-style: disc;
-            padding-left: 25px;
-        }
-        .content-section li {
-            margin-bottom: 0.5em;
-        }
-
-        .step-details {
-            margin-bottom: 2em;
-            padding-left: 15px;
-            border-left: 3px solid var(--secondary-color-bg);
-        }
-
-        footer {
-            background-color: var(--footer-bg);
-            color: var(--text-color);
-            text-align: center;
-            padding: 25px 0;
-            font-size: 0.9em;
-            margin-top: 40px;
-            border-top: 1px solid var(--footer-border);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-        .footer-links {
-            margin-top: 10px;
-        }
-        .footer-links a {
-            color: var(--footer-link-color);
-            text-decoration: none;
-            margin: 0 10px;
-            transition: color 0.2s;
-        }
-        .footer-links a:hover {
-            color: var(--footer-link-hover-color);
-            text-decoration: underline;
-        }
-        .footer-links span {
-            color: var(--footer-link-color);
-        }
-        
-        @media (max-width: 768px) {
-            header {
-                padding: 40px 20px;
-                min-height: 200px;
-            }
-            header h1 {
-                font-size: 2.2em;
-            }
-            header .subtitle {
-                font-size: 1.1em;
-            }
-            h2 {
-                font-size: 1.6em;
-            }
-            .breadcrumb-nav {
-                padding: 10px 0;
-            }
-            h3 {
-                font-size: 1.2em;
-            }
-        }
+      }
     </style>
 
     <script>
-        (function() {
-            const theme = localStorage.getItem('qre_theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', theme);
-        })();
+      (function () {
+        const theme = localStorage.getItem("qre_theme") || "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <button id="theme-toggle" title="Toggle light/dark theme">
-        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      <svg
+        class="sun-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg
+        class="moon-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
     </button>
     <header class="page-header">
-        <div class="container">
-            <h1>Quantum Noise Entropy (QNE)</h1>
-            <p class="subtitle">An Innovative Security Enhancement in Project QRE</p>
-        </div>
+      <div class="container">
+        <h1>Quantum Noise Entropy (QNE)</h1>
+        <p class="subtitle">
+          An Innovative Security Enhancement in Project QRE
+        </p>
+      </div>
     </header>
 
     <nav class="breadcrumb-nav container">
-        <a href="index.html">Home</a> > Quantum Noise Entropy
+      <a href="index.html">Home</a> > Quantum Noise Entropy
     </nav>
 
     <main>
-        <section id="qne-description" class="container content-section">
-            <h2>Making Our Digital Messages Even Harder to Crack with "Quantum Noise"</h2>
-            <p>Imagine our secure digital messages are like super-secret notes written in a special code. We're currently working on an exciting new technique to make these notes even more secure, almost like adding an extra layer of "shimmering static" or "digital noise" to them that only we know how to ignore. We call this idea "Quantum Noise Entropy" (QNE).</p>
+      <section id="qne-description" class="container content-section">
+        <h2>Paranoid Mode: Injecting Chaos into Cryptography</h2>
+        <p>
+          Standard encryption tools rely entirely on the Operating System's
+          random number generator (RNG). While generally secure, what if the OS
+          itself is compromised, or its entropy pool is predictable? QRE Locker
+          introduces <strong>Paranoid Mode</strong> to solve this.
+        </p>
 
-            <h2>The Big Idea: Using "Digital Static" for Extra Security</h2>
-            <p>The core idea is to make our encrypted information (our "coded notes") constantly change in tiny, unpredictable ways on the outside, without actually changing the secret message hidden inside. Think of it like this: if someone tries to guess our code by trying millions of combinations (a "brute-force attack"), this ever-changing "digital static" makes their job incredibly harder. It's like trying to pick a lock that subtly changes its shape every few seconds.</p>
-            <p>This "static" is inspired by the inherent randomness found in the quantum world, which is the most truly unpredictable randomness we know.</p>
+        <h3>1. The Problem with "Standard" Randomness</h3>
+        <div class="step-details">
+          <p>
+            Encryption keys are just random numbers. If an attacker can guess
+            the random number generator's state at the moment you clicked
+            "Lock," they can predict your key. This is a theoretical but
+            high-stakes attack vector, especially in virtualized environments or
+            compromised systems.
+          </p>
+        </div>
 
-            <h2>What We're Working On (In Simple Terms):</h2>
+        <h3>2. Our Solution: User-Driven Entropy</h3>
+        <div class="step-details">
+          <p>
+            When you check the <strong>"Paranoid Mode"</strong> box in QRE
+            Locker v2.0, we stop trusting the computer to be random on its own.
+            We bring <em>you</em> into the loop.
+          </p>
+          <p>
+            The application begins harvesting "Hardware Events" directly from
+            your physical interactions with the machine. Specifically, we
+            capture the microsecond-level timing of your mouse movements and
+            system interrupts.
+          </p>
+        </div>
 
-            <div class="step-details">
-                <h3>Creating "Digital Static" in Software (For Now)</h3>
-                <p>To start, we're developing a way to create this "digital static" using very advanced software techniques. Our computers can generate sequences of numbers that are extremely random and unpredictable, closely mimicking the kind of randomness we'd get from a real quantum device.</p>
-                <p>This software-based "static generator" will be the first version we use to test and build our system.</p>
-            </div>
+        <h3>3. How It Works Under the Hood</h3>
+        <div class="step-details">
+          <p>The technical flow of Paranoid Mode is unique to QRE Locker:</p>
+          <ol>
+            <li>
+              <strong>Harvesting:</strong> The browser engine (Frontend)
+              collects a buffer of cryptographic randomness generated from your
+              immediate hardware session.
+            </li>
+            <li>
+              <strong>Injection:</strong> This "Chaos Buffer" is passed down to
+              the Rust backend during the locking process.
+            </li>
+            <li>
+              <strong>Mixing:</strong> We initialize a
+              <code>ChaCha20</code> stream cipher, but instead of seeding it
+              with just OS data, we mix in your Chaos Buffer using a SHA-256
+              hash.
+            </li>
+            <li>
+              <strong>Generation:</strong> This hybrid seed is then used to
+              generate the critical Nonces (IVs) and Salts used for the file
+              encryption.
+            </li>
+          </ol>
+        </div>
 
-            <div class="step-details">
-                <h3>Building a Constantly Shifting "Pool of Randomness"</h3>
-                <p>We're designing a special "pool" within our system that holds this digital static. But this isn't a stagnant pool; it's more like a bubbling spring.</p>
-                <p>Every few seconds (say, 2 to 5 seconds), new, fresh "static" is added to the pool, keeping it constantly refreshed and unpredictable.</p>
-                <p>We'll keep this pool to a manageable size (around 1024 characters or bytes) so it's effective but doesn't slow things down.</p>
-            </div>
+        <h3>4. Why This Matters</h3>
+        <div class="step-details">
+          <p>
+            By injecting external entropy that is physically tied to the real
+            world (your hand movements), we break the deterministic chain of the
+            computer's internal state. Even if an attacker has a perfect
+            snapshot of your computer's memory the moment before you encrypt,
+            they cannot predict the exact chaotic data you introduced during the
+            process.
+          </p>
+          <p>
+            It is an optional "Extra Layer" for those who demand the
+            mathematical maximum of unpredictability.
+          </p>
+        </div>
 
-            <div class="step-details">
-                <h3>Weaving the "Static" into Our Coded Messages</h3>
-                <p>This is the clever part. We're figuring out how to subtly weave bits of this constantly changing "static" from our pool directly into our coded messages.</p>
-                <p>The trick is to do this in a way that doesn't actually change the original secret message. When our system goes to unlock the message, it will know how to identify and ignore this added "static," getting back to the original, clear information.</p>
-                <p>For anyone else trying to break the code, this embedded "static" just looks like more garbled nonsense, making the true message even harder to find.</p>
-            </div>
-
-            <div class="step-details">
-                <h3>Getting Ready for Real "Quantum Static" Generators</h3>
-                <p>While we're starting with software-based "static," we know that specialized hardware devices called Quantum Random Number Generators (QRNGs) can produce even higher-quality, truly quantum randomness.</p>
-                <p>So, as we build our system, we're also designing it with a "plug-and-play" approach in mind. We're creating a clear instruction manual (an interface) so that in the future, we can easily connect a real hardware QRNG to our system to provide this "digital static," making it even stronger.</p>
-            </div>
-
-            <h2>Why This Matters:</h2>
-            <p>By adding this dynamic, quantum-inspired "noise" or "static" to our already strong encryption, we're aiming to build an even more formidable defense. It's another innovative layer designed to keep our sensitive information safe from prying eyes, especially against the powerful brute-force attacks that try to guess their way into our data. This work is ongoing, and we're excited about its potential to significantly boost our security.</p>
-
-        </section>
+        <div style="text-align: center; margin-top: 40px">
+          <a
+            href="https://github.com/powergr/quantum-locker/releases/latest"
+            class="cta-button"
+            style="
+              display: inline-block;
+              padding: 12px 30px;
+              background-color: var(--secondary-color-bg);
+              color: white;
+              text-decoration: none;
+              border-radius: 5px;
+              font-weight: bold;
+            "
+            >Try Paranoid Mode</a
+          >
+        </div>
+      </section>
     </main>
 
-<footer>
-    <div class="container">
-        <p>© 2025 Project QRE. Last update: June 2025</p>
+    <footer>
+      <div class="container">
+        <p>
+          © 2025–<span id="year"></span> Project QRE. Last updated:
+          <span id="last-updated">January 2026</span>
+        </p>
         <div class="footer-links">
-            <a href="about.html">About Us</a>
-            <span>|</span>
-            <a href="https://github.com/powergr/Project_QRE" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <span>|</span>
-            <a href="blog.html">Blog</a>
-            <span>|</span>
-            <a href="contact.html">Contact</a>
-            <span>|</span>
-            <a href="terms.html">Terms</a>
-            <span>|</span>
-            <a href="privacy.html">Privacy</a>
+          <a href="about.html">About Us</a>
+          <span>|</span>
+          <a
+            href="https://github.com/powergr/quantum-locker/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub</a
+          >
+          <span>|</span>
+          <a href="blog.html">Blog</a>
+          <span>|</span>
+          <a href="contact.html">Contact</a>
+          <span>|</span>
+          <a href="terms.html">Terms</a>
+          <span>|</span>
+          <a href="privacy.html">Privacy</a>
         </div>
-    </div>
-</footer>
+      </div>
+    </footer>
 
     <script>
-        const themeToggleButton = document.getElementById('theme-toggle');
-
-        themeToggleButton.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('qre_theme', newTheme);
-        });
+      const startYear = 2025;
+      const currentYear = new Date().getFullYear();
+      document.getElementById("year").textContent =
+        currentYear > startYear ? currentYear : startYear;
     </script>
-</body>
+    <script>
+      const themeToggleButton = document.getElementById("theme-toggle");
+
+      themeToggleButton.addEventListener("click", () => {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("qre_theme", newTheme);
+      });
+    </script>
+  </body>
 </html>

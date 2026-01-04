@@ -1,22 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Whitepaper - Project QRE</title>
     <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://projectqre.com/whitepaper.html">
-    <meta property="og:title" content="Technical Whitepaper | Project QRE">
-    <meta property="og:description" content="Read the technical deep dive into Project QRE's multi-layered approach, including Hybrid Ciphers, Entropy Anchoring, and more.">
-    <meta property="og:image" content="https://projectqre.com/images/qre-social-share.webp">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://projectqre.com/whitepaper.html" />
+    <meta property="og:title" content="Technical Whitepaper | Project QRE" />
+    <meta
+      property="og:description"
+      content="Read the technical deep dive into Project QRE's multi-layered approach, including Hybrid Ciphers, Entropy Anchoring, and more."
+    />
+    <meta
+      property="og:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://projectqre.com/whitepaper.html">
-    <meta property="twitter:title" content="Technical Whitepaper | Project QRE">
-    <meta property="twitter:description" content="Read the technical deep dive into Project QRE's multi-layered approach, including Hybrid Ciphers, Entropy Anchoring, and more.">
-    <meta property="twitter:image" content="https://projectqre.com/images/qre-social-share.webp">
-    <meta name="description" content="Read the technical whitepaper for Project QRE, detailing our multi-layered approach to quantum-resistant encryption.">
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://projectqre.com/whitepaper.html"
+    />
+    <meta
+      property="twitter:title"
+      content="Technical Whitepaper | Project QRE"
+    />
+    <meta
+      property="twitter:description"
+      content="Read the technical deep dive into Project QRE's multi-layered approach, including Hybrid Ciphers, Entropy Anchoring, and more."
+    />
+    <meta
+      property="twitter:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
+    <meta
+      name="description"
+      content="Read the technical whitepaper for Project QRE, detailing our multi-layered approach to quantum-resistant encryption."
+    />
 
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -25,461 +46,620 @@
     <link rel="manifest" href="/site.webmanifest" />
 
     <link rel="canonical" href="https://projectqre.com/whitepaper.html" />
-    
+
     <!-- Asynchronously load Google Fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"></noscript>
-    
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+    /></noscript>
+
     <style>
-        :root {
-            --heading-font: 'Orbitron', sans-serif;
-            --body-font: 'Roboto', sans-serif;
-            --mono-font: 'Roboto Mono', 'Courier New', Courier, monospace;
-        }
+      :root {
+        --heading-font: "Orbitron", sans-serif;
+        --body-font: "Roboto", sans-serif;
+        --mono-font: "Roboto Mono", "Courier New", Courier, monospace;
+      }
 
-        [data-theme="dark"] {
-            --primary-color: #0D47A1;
-            --secondary-color-bg: #1976D2;
-            --secondary-color-text: #58AFFF;
-            --accent-color: #64B5F6;
-            --text-color: #E0E0E0;
-            --bg-color: #121212;
-            --card-bg-color: #1E1E1E;
-            --border-color: #333;
-            --table-row-border: #383838;
-            --footer-bg: #0a0a0a;
-            --footer-border: #222;
-            --link-color: var(--accent-color);
-            --link-hover-color: #90caf9;
-            --header-overlay: rgba(0, 0, 0, 0.5);
-            --icon-color: #E0E0E0;
-            --icon-hover-bg: rgba(255, 255, 255, 0.1);
-            --shadow-color: rgba(0,0,0,0.35);
-            --status-passed-color: #81C784;
-            --footer-link-color: #aaa;
-            --footer-link-hover-color: #fff;
-        }
+      [data-theme="dark"] {
+        --primary-color: #0d47a1;
+        --secondary-color-bg: #1976d2;
+        --secondary-color-text: #58afff;
+        --accent-color: #64b5f6;
+        --text-color: #e0e0e0;
+        --bg-color: #121212;
+        --card-bg-color: #1e1e1e;
+        --border-color: #333;
+        --table-row-border: #383838;
+        --footer-bg: #0a0a0a;
+        --footer-border: #222;
+        --link-color: var(--accent-color);
+        --link-hover-color: #90caf9;
+        --header-overlay: rgba(0, 0, 0, 0.5);
+        --icon-color: #e0e0e0;
+        --icon-hover-bg: rgba(255, 255, 255, 0.1);
+        --shadow-color: rgba(0, 0, 0, 0.35);
+        --status-passed-color: #81c784;
+        --footer-link-color: #aaa;
+        --footer-link-hover-color: #fff;
+      }
 
-        [data-theme="light"] {
-            --primary-color: #1565C0;
-            --secondary-color-bg: #1976D2;
-            --secondary-color-text: #0D47A1;
-            --accent-color: #1E88E5;
-            --text-color: #212121;
-            --bg-color: #f4f6f8;
-            --card-bg-color: #ffffff;
-            --border-color: #e0e0e0;
-            --table-row-border: #e0e0e0;
-            --footer-bg: #e9ecef;
-            --footer-border: #dee2e6;
-            --link-color: #0D47A1;
-            --link-hover-color: #0b3a7d;
-            --header-overlay: rgba(0, 0, 0, 0.3);
-            --icon-color: #212121;
-            --icon-hover-bg: rgba(0, 0, 0, 0.05);
-            --shadow-color: rgba(0,0,0,0.1);
-            --status-passed-color: #2E7D32;
-            --footer-link-color: #555;
-            --footer-link-hover-color: #000;
-        }
+      [data-theme="light"] {
+        --primary-color: #1565c0;
+        --secondary-color-bg: #1976d2;
+        --secondary-color-text: #0d47a1;
+        --accent-color: #1e88e5;
+        --text-color: #212121;
+        --bg-color: #f4f6f8;
+        --card-bg-color: #ffffff;
+        --border-color: #e0e0e0;
+        --table-row-border: #e0e0e0;
+        --footer-bg: #e9ecef;
+        --footer-border: #dee2e6;
+        --link-color: #0d47a1;
+        --link-hover-color: #0b3a7d;
+        --header-overlay: rgba(0, 0, 0, 0.3);
+        --icon-color: #212121;
+        --icon-hover-bg: rgba(0, 0, 0, 0.05);
+        --shadow-color: rgba(0, 0, 0, 0.1);
+        --status-passed-color: #2e7d32;
+        --footer-link-color: #555;
+        --footer-link-hover-color: #000;
+      }
 
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
 
-        body {
-            margin: 0;
-            font-family: var(--body-font);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        #theme-toggle {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            z-index: 1000;
-            cursor: pointer;
-            background-color: transparent;
-            border: none;
-            padding: 8px;
-            border-radius: 50%;
-            transition: background-color 0.2s ease-in-out;
-        }
-        #theme-toggle:hover,
-        #theme-toggle:focus {
-            background-color: var(--icon-hover-bg);
-            outline: none;
-        }
-        #theme-toggle svg {
-            width: 24px;
-            height: 24px;
-            stroke: var(--icon-color);
-            pointer-events: none; 
-        }
+      body {
+        margin: 0;
+        font-family: var(--body-font);
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        overflow-x: hidden;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
 
-        [data-theme="dark"] .moon-icon { display: none; }
-        [data-theme="dark"] .sun-icon { display: block; }
-        [data-theme="light"] .sun-icon { display: none; }
-        [data-theme="light"] .moon-icon { display: block; }
+      #theme-toggle {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        z-index: 1000;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        padding: 8px;
+        border-radius: 50%;
+        transition: background-color 0.2s ease-in-out;
+      }
+      #theme-toggle:hover,
+      #theme-toggle:focus {
+        background-color: var(--icon-hover-bg);
+        outline: none;
+      }
+      #theme-toggle svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--icon-color);
+        pointer-events: none;
+      }
 
-        .container {
-            width: 90%;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px 0;
-        }
+      [data-theme="dark"] .moon-icon {
+        display: none;
+      }
+      [data-theme="dark"] .sun-icon {
+        display: block;
+      }
+      [data-theme="light"] .sun-icon {
+        display: none;
+      }
+      [data-theme="light"] .moon-icon {
+        display: block;
+      }
 
+      .container {
+        width: 90%;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px 0;
+      }
+
+      header {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 60px 20px;
+        text-align: center;
+        position: relative;
+        background-image: url("images/quantum_header_bg.webp");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--header-overlay);
+        z-index: 1;
+      }
+
+      header .container {
+        position: relative;
+        z-index: 2;
+      }
+
+      header h1 {
+        font-family: var(--heading-font);
+        font-size: 3.2em;
+        margin-bottom: 0.3em;
+        letter-spacing: 2px;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+
+      header .subtitle {
+        font-size: 1.4em;
+        font-weight: 300;
+        color: #e0e0e0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        line-height: 1.5;
+      }
+
+      main {
+        padding-top: 20px;
+      }
+
+      h1.page-title {
+        font-family: var(--heading-font);
+        color: var(--accent-color);
+        text-align: center;
+        font-size: 2.8em;
+        margin-bottom: 1em;
+      }
+
+      .content-section h2 {
+        font-family: var(--heading-font);
+        color: var(--accent-color);
+        text-align: left;
+        margin-top: 2em;
+        margin-bottom: 0.8em;
+        font-size: 2em;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 0.3em;
+      }
+      .content-section h3 {
+        font-family: var(--heading-font);
+        font-size: 1.5em;
+        color: var(--secondary-color-text);
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+      }
+      .content-section p,
+      .content-section ul {
+        margin-bottom: 1.2em;
+        line-height: 1.7;
+        font-size: 1.05em;
+      }
+      .content-section ul {
+        list-style: disc;
+        padding-left: 25px;
+      }
+      .content-section li {
+        margin-bottom: 0.5em;
+      }
+
+      .breadcrumb-nav {
+        padding: 15px 0;
+        font-size: 0.9em;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 20px;
+      }
+      .breadcrumb-nav a {
+        color: var(--link-color);
+        text-decoration: none;
+      }
+      .breadcrumb-nav a:hover {
+        text-decoration: underline;
+        color: var(--link-hover-color);
+      }
+
+      .benchmark-table-container {
+        margin: 40px auto;
+        background-color: var(--card-bg-color);
+        border-radius: 8px;
+        box-shadow: 0 6px 18px var(--shadow-color);
+        overflow: hidden;
+      }
+      .benchmark-table-container table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9em;
+      }
+      .benchmark-table-container th,
+      .benchmark-table-container td {
+        padding: 12px 15px;
+        text-align: left;
+      }
+      .benchmark-table-container thead tr {
+        background-color: var(--secondary-color-bg);
+        color: white;
+      }
+      .benchmark-table-container tbody tr {
+        border-bottom: 1px solid var(--table-row-border);
+      }
+      .benchmark-table-container tbody tr:last-child {
+        border-bottom: none;
+      }
+      .benchmark-table-container td:nth-child(2),
+      .benchmark-table-container td:nth-child(3),
+      .benchmark-table-container th:nth-child(2),
+      .benchmark-table-container th:nth-child(3) {
+        text-align: center;
+        font-family: var(--mono-font);
+      }
+      .benchmark-table-container td:nth-child(4),
+      .benchmark-table-container th:nth-child(4) {
+        text-align: center;
+        font-weight: bold;
+      }
+      .benchmark-table-container td.status-passed {
+        color: var(--status-passed-color);
+      }
+
+      footer {
+        background-color: var(--footer-bg);
+        color: var(--text-color);
+        text-align: center;
+        padding: 25px 0;
+        font-size: 0.9em;
+        margin-top: 40px;
+        border-top: 1px solid var(--footer-border);
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+      .footer-links {
+        margin-top: 10px;
+      }
+      .footer-links a {
+        color: var(--footer-link-color);
+        text-decoration: none;
+        margin: 0 10px;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--footer-link-hover-color);
+        text-decoration: underline;
+      }
+      .footer-links span {
+        color: var(--footer-link-color);
+      }
+
+      @media (max-width: 768px) {
         header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-            position: relative;
-            background-image: url('images/quantum_header_bg.webp');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            min-height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+          padding: 40px 20px;
+          min-height: 200px;
         }
-
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: var(--header-overlay);
-            z-index: 1;
-        }
-
-        header .container {
-            position: relative;
-            z-index: 2;
-        }
-
         header h1 {
-            font-family: var(--heading-font);
-            font-size: 3.2em;
-            margin-bottom: 0.3em;
-            letter-spacing: 2px;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+          font-size: 2.2em;
         }
-
         header .subtitle {
-            font-size: 1.4em;
-            font-weight: 300;
-            color: #E0E0E0;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
-            line-height: 1.5;
+          font-size: 1.1em;
         }
-        
-        main {
-            padding-top: 20px;
-        }
-
         h1.page-title {
-            font-family: var(--heading-font);
-            color: var(--accent-color);
-            text-align: center;
-            font-size: 2.8em;
-            margin-bottom: 1em;
+          font-size: 2em;
         }
-
         .content-section h2 {
-            font-family: var(--heading-font);
-            color: var(--accent-color);
-            text-align: left;
-            margin-top: 2em;
-            margin-bottom: 0.8em;
-            font-size: 2em;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.3em;
+          font-size: 1.6em;
         }
         .content-section h3 {
-            font-family: var(--heading-font);
-            font-size: 1.5em;
-            color: var(--secondary-color-text);
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
+          font-size: 1.2em;
         }
-        .content-section p, .content-section ul {
-            margin-bottom: 1.2em;
-            line-height: 1.7;
-            font-size: 1.05em;
-        }
-        .content-section ul {
-            list-style: disc;
-            padding-left: 25px;
-        }
-        .content-section li {
-            margin-bottom: 0.5em;
-        }
-
-        .breadcrumb-nav {
-            padding: 15px 0;
-            font-size: 0.9em;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 20px;
-        }
-        .breadcrumb-nav a {
-            color: var(--link-color);
-            text-decoration: none;
-        }
-        .breadcrumb-nav a:hover {
-            text-decoration: underline;
-            color: var(--link-hover-color);
-        }
-        
-        .benchmark-table-container {
-            margin: 40px auto;
-            background-color: var(--card-bg-color);
-            border-radius: 8px;
-            box-shadow: 0 6px 18px var(--shadow-color);
-            overflow: hidden;
-        }
-        .benchmark-table-container table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9em;
-        }
-        .benchmark-table-container th, .benchmark-table-container td {
-            padding: 12px 15px;
-            text-align: left;
-        }
-        .benchmark-table-container thead tr {
-            background-color: var(--secondary-color-bg);
-            color: white;
-        }
-        .benchmark-table-container tbody tr {
-            border-bottom: 1px solid var(--table-row-border);
-        }
-        .benchmark-table-container tbody tr:last-child {
-            border-bottom: none;
-        }
-        .benchmark-table-container td:nth-child(2),
-        .benchmark-table-container td:nth-child(3),
-        .benchmark-table-container th:nth-child(2),
-        .benchmark-table-container th:nth-child(3) {
-            text-align: center;
-            font-family: var(--mono-font);
-        }
-        .benchmark-table-container td:nth-child(4),
-        .benchmark-table-container th:nth-child(4) {
-            text-align: center;
-            font-weight: bold;
-        }
-        .benchmark-table-container td.status-passed { color: var(--status-passed-color); }
-
-
-        footer {
-            background-color: var(--footer-bg);
-            color: var(--text-color);
-            text-align: center;
-            padding: 25px 0;
-            font-size: 0.9em;
-            margin-top: 40px;
-            border-top: 1px solid var(--footer-border);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-        .footer-links {
-            margin-top: 10px;
-        }
-        .footer-links a {
-            color: var(--footer-link-color);
-            text-decoration: none;
-            margin: 0 10px;
-            transition: color 0.2s;
-        }
-        .footer-links a:hover {
-            color: var(--footer-link-hover-color);
-            text-decoration: underline;
-        }
-        .footer-links span {
-            color: var(--footer-link-color);
-        }
-        
-        @media (max-width: 768px) {
-            header { padding: 40px 20px; min-height: 200px; }
-            header h1 { font-size: 2.2em; }
-            header .subtitle { font-size: 1.1em; }
-            h1.page-title { font-size: 2em; }
-            .content-section h2 { font-size: 1.6em; }
-            .content-section h3 { font-size: 1.2em; }
-        }
+      }
     </style>
 
     <script>
-        (function() {
-            const theme = localStorage.getItem('qre_theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', theme);
-        })();
+      (function () {
+        const theme = localStorage.getItem("qre_theme") || "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <button id="theme-toggle" title="Toggle light/dark theme">
-        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      <svg
+        class="sun-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg
+        class="moon-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
     </button>
     <header>
-        <div class="container">
-            <h1>Project QRE Whitepaper</h1>
-            <p class="subtitle">A Technical Deep Dive into Our Quantum-Resistant Approach</p>
-        </div>
+      <div class="container">
+        <h1>Project QRE Whitepaper</h1>
+        <p class="subtitle">
+          A Technical Deep Dive into Our Quantum-Resistant Approach
+        </p>
+      </div>
     </header>
 
     <nav class="breadcrumb-nav container">
-        <a href="index.html">Home</a> > Whitepaper
+      <a href="index.html">Home</a> > Whitepaper
     </nav>
 
     <main class="container">
-        <div class="content-section">
+      <div class="content-section">
+        <h2>Abstract / Executive Summary</h2>
+        <p>
+          The advent of fault-tolerant quantum computing poses an existential
+          threat to current public-key cryptography, jeopardizing global data
+          security. This white paper introduces
+          <strong>QRE Locker v2.0</strong>, a desktop application designed for
+          robust file security in the post-quantum era. Our approach pioneers a
+          defense-in-depth strategy by integrating three core pillars: (1)
+          <strong>Hybrid Cipher Techniques</strong>, combining AES-256-GCM with
+          NIST-standard ML-KEM-1024 (Kyber); (2)
+          <strong>Multi-Factor Key Derivation</strong>, which generates strong
+          keys from user passphrases and local keyfiles using Argon2id; and (3)
+          <strong>Paranoid Mode Entropy Injection</strong>, allowing users to
+          seed the cryptographic process with physical hardware randomness. This
+          paper details the architecture and implementation of QRE Locker,
+          presenting a practical, offline-first solution for long-term data
+          archival.
+        </p>
 
-             <a href="/downloads/Project_QRE_Whitepaper.pdf" class="cta-button" style="color:var(--link-color)" download>Download Whitepaper (PDF)</a>
-            
-            <h2>Abstract / Executive Summary</h2>
-            <p>The advent of fault-tolerant quantum computing poses an existential threat to current public-key cryptography, jeopardizing global data security. This white paper introduces Project QRE (Quantum-Resistant Encryption), a novel, multifaceted encryption system designed for robust protection in the post-quantum era. Our approach pioneers a defense-in-depth strategy by integrating three core pillars: (1) <strong>Hybrid Cipher Techniques</strong>, which combine the strengths of AES-256 with NIST-selected post-quantum Key Encapsulation Mechanisms (ML-KEM/Kyber) in both parallel and layered configurations; (2) <strong>Advanced Key Derivation with Entropy Anchoring</strong>, which generates strong cryptographic keys from user-provided secrets and multiple factors, uniquely enhancing salt generation with entropy derived from real-world chaotic systems (e.g., solar flare data); and (3) <strong>Dynamic Ciphertext Authentication with External Entropy</strong>, an optional layer that incorporates dynamic, simulated quantum randomness as Authenticated Data (AAD) into ciphertexts using AES-GCM, further strengthening their integrity and context-binding. This paper details the architecture, proof-of-concept implementation, and a roadmap for Project QRE, presenting a practical and adaptable solution for safeguarding sensitive information against both current and future computational threats.</p>
+        <h2>1. Introduction</h2>
+        <p>
+          The trajectory of quantum computing capabilities signals an urgent
+          need to transition our digital security infrastructures towards
+          quantum-resistant cryptographic solutions. Algorithms like Shor's
+          threaten to break widely deployed public-key cryptosystems such as RSA
+          and ECC. Failure to prepare for this shift could lead to catastrophic
+          breaches of sensitive data archived today ("Harvest Now, Decrypt
+          Later").
+        </p>
+        <p>
+          Addressing this challenge requires more than just replacing old
+          algorithms; it necessitates a holistic approach to cryptographic
+          design. QRE Locker is an open-source tool engineered to provide such a
+          comprehensive defense. It is founded on the principle of
+          defense-in-depth, leveraging a synergistic combination of established
+          cryptographic primitives and emerging post-quantum standards.
+        </p>
 
-            <h2>1. Introduction</h2>
-            <p>The trajectory of quantum computing capabilities signals an urgent need to transition our digital security infrastructures towards quantum-resistant cryptographic solutions. Algorithms like Shor's threaten to break widely deployed public-key cryptosystems such as RSA and ECC, while Grover's algorithm impacts symmetric key security. Failure to prepare for this "Y_Q_Day_One" (the day a sufficiently powerful quantum computer exists) could lead to catastrophic breaches of sensitive data across governmental, commercial, and personal domains.</p>
-            <p>Addressing this challenge requires more than just replacing old algorithms with new ones; it necessitates a holistic approach to cryptographic design. Project QRE (Quantum-Resistant Encryption) is a proof-of-concept (PoC) system engineered to provide such a comprehensive defense. It is founded on the principle of defense-in-depth, leveraging a synergistic combination of established cryptographic primitives, emerging post-quantum standards, and innovative techniques for entropy generation and ciphertext enhancement.</p>
-            <p>This whitepaper will detail the architecture and implementation of Project QRE, focusing on its three foundational components: Hybrid Cipher Techniques, Advanced Key Derivation with Entropy Anchoring, and Dynamic Ciphertext Authentication with External Entropy. We will discuss the technical implementation of each, the security rationale, and how they collectively contribute to a resilient and forward-looking encryption framework. We aim to present a practical blueprint that not only addresses the quantum threat but also enhances security against sophisticated classical attacks.</p>
+        <h2>2. The Challenge: The Quantum Threat</h2>
+        <p>
+          For decades, digital security has been underpinned by cryptographic
+          algorithms like RSA and ECC. The security of these algorithms relies
+          on the computational difficulty of certain mathematical problems for
+          classical computers. However, Shor's algorithm running on a
+          sufficiently powerful quantum computer could solve these problems in
+          polynomial time, rendering current encryption vulnerable.
+        </p>
+        <p>
+          Additionally, Grover's algorithm offers a quadratic speedup for
+          unstructured search problems, effectively halving the security
+          strength of symmetric keys. QRE Locker addresses this by standardizing
+          on <strong>AES-256</strong>, which retains 128 bits of security even
+          against quantum adversaries.
+        </p>
 
-            <h2>2. The Challenge: The Quantum Threat to Modern Cryptography</h2>
-            <p>For decades, digital security has been underpinned by cryptographic algorithms, such as RSA (Rivest-Shamir-Adleman) and ECC (Elliptic Curve Cryptography), for tasks including establishing secure communication channels (e.g., HTTPS via TLS/SSL) and protecting data at rest with digital signatures. The security of these public-key algorithms relies on the computational difficulty of some mathematical issues for classical computers, primarily integer factorization (for RSA) and the discrete logarithm problem over elliptic curves (for ECC).</p>
-            <p>However, the theoretical and experimental advancements in quantum computing present a paradigm shift. In 1994, Peter Shor developed a quantum algorithm capable of solving both integer factorization and the discrete logarithm problem in polynomial time. This means that a sufficiently large and stable fault-tolerant quantum computer would be able to break RSA and ECC encryption, rendering vast amounts of currently secured data and communication channels vulnerable. This retrospective risk is particularly concerning, as adversaries could be harvesting encrypted data now with the intent of decrypting it once such quantum computers become available (a "harvest now, decrypt later" attack).</p>
-            <p>Beyond public-key cryptography, Grover's quantum algorithm offers a quadratic speedup for unstructured search problems. While not as devastating as Shor's algorithm, it effectively reduces the security strength of symmetric-key algorithms. For instance, AES-256, which has a 256-bit key, would provide approximately 128 bits of security against an attacker using Grover's algorithm. While 128-bit security is still considered strong, this reduction highlights the need to consider quantum effects, even in symmetric cryptography.</p>
-            <p>The global cryptographic community, led by organizations like the U.S. National Institute of Standards and Technology (NIST), has been actively working to identify, standardize, and promote new public-key cryptographic algorithms that are resistant to attacks by both classical and quantum computers. The Post-Quantum Cryptography (PQC) standardization process has identified promising candidates, primarily based on mathematical problems found in lattice-based, code-based, hash-based, and multivariate cryptography.</p>
-            <p>Project QRE directly addresses this evolving threat landscape by not only incorporating these emerging PQC standards (specifically ML-KEM, formerly Kyber, a lattice-based KEM selected by NIST) but also by building a multi-layered defense strategy. It acknowledges that a simple one-for-one replacement of algorithms might not be sufficient and that a transition period will require hybrid approaches that combine the proven security of classical cryptography with the future-proofing of PQC. Furthermore, Project QRE explores novel methods for enhancing the foundational elements of cryptographic systems, such as key derivation and the intrinsic properties of ciphertexts, to build a more resilient security posture.</p>
+        <h2>3. The Proposed Solution: QRE Locker Architecture</h2>
+        <p>
+          QRE Locker is architected as a
+          <strong>Stateless, Local-First Application</strong>. It does not rely
+          on central servers or cloud key management, ensuring that users retain
+          absolute sovereignty over their data.
+        </p>
 
-            <h2>3. The Proposed Solution: Project QRE - A Multi-Pillar Approach</h2>
-            <p>Project QRE is architected around three distinct yet complementary pillars designed to provide a comprehensive, defense-in-depth security posture against both current and future quantum threats. These pillars are Hybrid Cipher Techniques, Advanced Key Derivation with Entropy Anchoring, and Dynamic Ciphertext Authentication with External Entropy.</p>
+        <h3>3.1 Hybrid Cipher Techniques</h3>
+        <p>
+          We employ a hybrid approach to ensure security against both classical
+          and quantum attacks:
+        </p>
+        <ul>
+          <li>
+            <strong>Symmetric Layer:</strong> The file content is encrypted
+            using AES-256-GCM. A unique, random 256-bit session key is generated
+            for every single file.
+          </li>
+          <li>
+            <strong>Post-Quantum Layer:</strong> This session key is
+            encapsulated using ML-KEM-1024 (Kyber). The encapsulated key is
+            stored in the file header.
+          </li>
+        </ul>
 
-            <h3>3.1 Pillar 1: Hybrid Cipher Techniques</h3>
-            <p>Recognizing that the transition to fully quantum-resistant cryptography will take time and that new post-quantum cryptography (PQC) algorithms are still undergoing intense scrutiny, Project QRE employs a hybrid cryptographic approach. This strategy combines the proven security of established classical algorithms with the forward-looking protection of post-quantum cryptography.</p>
-            
-            <h3>3.2 Pillar 2: Advanced Key Derivation with Entropy Anchoring</h3>
-            <p>Project QRE implements an advanced Key Derivation Function (KDF) subsystem to generate strong keys from multiple sources, enhanced by entropy from chaotic systems.</p>
-           
-            <h3>3.3 Pillar 3: Dynamic Ciphertext Authentication with External Entropy</h3>
-            <p>This component provides an optional outer layer of security by embedding dynamic entropy as Authenticated Data (AAD) into ciphertexts using AES-256-GCM.</p>
-            
-            <h3>3.4 Key Management (Proof of Concept using HashiCorp Vault)</h3>
-            <p>Project QRE's PoC implements basic key management using HashiCorp Vault for storing sensitive cryptographic materials.</p>
-            
-            <h2>4. Technical Implementation Overview (Proof of Concept)</h2>
-            <p>Project QRE's PoC is implemented in Python, leveraging established cryptographic libraries and a modular architecture.</p>
-            <ul>
-                <li><strong>Programming Language:</strong> Python 3.13.1.</li>
-                <li><strong>Core Cryptographic Libraries:</strong> `cryptography` (AES, KDFs, hashes), `oqs` (ML-KEM-512), `argon2-cffi` (Argon2id).</li>
-                <li><strong>Key Management (PoC):</strong> HashiCorp Vault (`-dev` mode) with the `hvac` Python client.</li>
-                <li><strong>Entropy Sources (PoC):</strong> `requests` for NOAA solar flare data; `secrets` and `os.urandom` for QRNG simulation; custom AES-CTR PRNG.</li>
-                <li><strong>API Development (Initial Phase):</strong> FastAPI with Uvicorn. Pydantic for data validation.</li>
-                <li><strong>Concurrency:</strong> `ThreadPoolExecutor` for parallel AES; `threading` for the Dynamic Entropy Pool.</li>
-                <li><strong>Modularity:</strong> Organized into packages for hybrid ciphers, QNE, entropy anchoring, and API.</li>
-                <li><strong>Testing:</strong> `unittest` and `pytest` (with `httpx`, `pytest-dotenv`).</li>
-            </ul>
+        <h3>3.2 Advanced Key Derivation (Argon2id)</h3>
+        <p>
+          To protect the private keys used to unlock the file, we use Argon2id,
+          a memory-hard key derivation function. This resists GPU-based
+          brute-force attacks. We support Multi-Factor Authentication by
+          allowing users to combine a <strong>Passphrase</strong> with a
+          <strong>Keyfile</strong> (any arbitrary file on their computer). The
+          SHA-256 hash of the keyfile is mixed with the passphrase before
+          derivation, exponentially increasing the search space for an attacker.
+        </p>
 
-            <h2>5. Security Analysis and Considerations (Summary)</h2>
-            <p>Project QRE's multi-layered design aims for robust security. Key aspects include:</p>
-            <ul>
-                <li><strong>Hybrid Security Strength:</strong> Combining AES-256 with ML-KEM-512 provides resilience against classical and quantum attacks targeting a single algorithm type.</li>
-                <li><strong>Key Derivation Security:</strong> Argon2id and PBKDF2, with unique anchored salts, mitigate password brute-forcing and pre-computation attacks.</li>
-                <li><strong>Dynamic Ciphertext Authentication (QNE):</strong> AES-GCM with AAD ensures the integrity of both the ciphertext and the dynamic entropy, binding them together.</li>
-                <li><strong>Randomness Quality:</strong> Relies on OS CSPRNGs and aims to incorporate higher-quality entropy from chaotic systems and (future) hardware QRNGs. The PoC's chaotic entropy processing is illustrative and needs rigorous validation for production.</li>
-                <li><strong>Key Management:</strong> While the PoC uses Vault in development mode, a transition to production requires a hardened Vault setup, potentially with HSM integration, robust authentication, and strict access controls.</li>
-                <li><strong>Implementation Security:</strong> Relies on well-vetted cryptographic libraries.</li>
-            </ul>
+        <h3>3.3 Paranoid Mode (Entropy Injection)</h3>
+        <p>
+          Standard software relies on the Operating System's RNG. In "Paranoid
+          Mode," QRE Locker captures micro-timing events from user hardware
+          interactions (mouse movements, system interrupts) and mixes this
+          entropy into the `ChaCha20` random number generator used to create the
+          encryption keys. This mitigates risks associated with compromised or
+          predictable OS entropy pools.
+        </p>
 
-            <h2>6. Performance Insights (Proof of Concept)</h2>
-            <p>The PoC aimed to encrypt and decrypt 1MB data blocks in under 100ms. Benchmarks include Vault interaction overhead for key and salt management.</p>
-            <p><em>Benchmark Environment: (User to fill in: CPU, RAM, OS, Python version, cryptography version, oqs (Python Wrapper) version, liboqs (C Library) version, hvac version, Vault version dev mode).</em></p>
-            <div class="benchmark-table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Operation</th>
-                            <th>Average Time (ms)</th>
-                            <th>Std. Deviation (ms)</th>
-                            <th>Status (Target < 100ms)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Layered Encrypt (ML-KEM + AES-CBC, Vault KEM SK)</td>
-                            <td>22.104</td>
-                            <td>8.534</td>
-                            <td class="status-passed">PASSED</td>
-                        </tr>
-                        <tr>
-                            <td>Layered Decrypt (ML-KEM + AES-CBC, Vault KEM SK)</td>
-                            <td>22.627</td>
-                            <td>7.409</td>
-                            <td class="status-passed">PASSED</td>
-                        </tr>
-                        <tr>
-                            <td>Parallel Encrypt (Random K1 + KEM K2, Vault, Concurrent)</td>
-                            <td>26.509</td>
-                            <td>7.465</td>
-                            <td class="status-passed">PASSED</td>
-                        </tr>
-                        <tr>
-                            <td>Parallel Decrypt (Random K1 path, Vault)</td>
-                            <td>21.336</td>
-                            <td>9.766</td>
-                            <td class="status-passed">PASSED</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <h2>4. Technical Implementation Overview</h2>
+        <p>
+          QRE Locker v2.0 is built for performance and security using modern
+          systems programming languages.
+        </p>
+        <ul>
+          <li>
+            <strong>Core Engine:</strong> Written in <strong>Rust</strong> for
+            memory safety and zero-cost abstractions.
+          </li>
+          <li>
+            <strong>Cryptography:</strong> Uses `pqcrypto-kyber` (FIPS 203
+            compliant), `aes-gcm` (hardware accelerated), and `argon2`.
+          </li>
+          <li>
+            <strong>Memory Security:</strong> Implements the `Zeroize` trait to
+            securely wipe sensitive keys from RAM immediately after use.
+          </li>
+          <li>
+            <strong>GUI Framework:</strong> Built with
+            <strong>Tauri v2</strong>, providing a lightweight, secure frontend
+            using React/TypeScript while keeping all cryptographic logic
+            isolated in the Rust backend.
+          </li>
+          <li>
+            <strong>Compression:</strong> Integrates Zstd compression to
+            minimize file size overhead.
+          </li>
+        </ul>
 
-            <h2>7. Future Work & Roadmap</h2>
-            <p>The PoC establishes a strong foundation. The development roadmap envisions:</p>
-            <ul>
-                <li><strong>Prototype Phase (Next 6-12 months):</strong> Complete the API and develop a basic Key Management UI, integrate a hardware QRNG if feasible, rigorously validate and refine entropy sources for Entropy Anchoring, conduct initial security audits, and refine key management for the QNE layer's AES-GCM key.</li>
-                <li><strong>Full Implementation Phase (12-18 months post-Prototype):</strong> Production-grade key management (hardened Vault, HSM integration), scalability and reliability enhancements for the API, continuous alignment with PQC standards and algorithm agility, consideration of AEAD modes (like AES-GCM) for core hybrid schemes, and comprehensive third-party security audits.</li>
-            </ul>
+        <h2>5. Security Model</h2>
+        <p>
+          QRE Locker's security model assumes the attacker has full access to
+          the encrypted file but no access to the user's passphrase or keyfile.
+        </p>
+        <ul>
+          <li>
+            <strong>Confidentiality:</strong> Protected by AES-256 and
+            Kyber-1024.
+          </li>
+          <li>
+            <strong>Integrity:</strong> Protected by GCM authentication tags.
+            Modification of the ciphertext or header is detected instantly.
+          </li>
+          <li>
+            <strong>Forward Secrecy:</strong> Each file uses a unique ephemeral
+            keypair. Compromise of one file does not decrypt others.
+          </li>
+        </ul>
 
-            <h2>8. Conclusion</h2>
-            <p>Project QRE has successfully demonstrated a viable, multi-layered strategy for building a quantum-resistant encryption system through its Proof of Concept. By synergistically combining Hybrid Cipher Techniques, Advanced Key Derivation with Entropy Anchoring, and Dynamic Ciphertext Authentication with External Entropy, Project QRE offers a robust and adaptable framework for the post-quantum era. The PoC validates the core cryptographic mechanics, the integration of diverse entropy sources, basic secure key management, and meets initial performance targets. Its modular architecture is designed for future evolution. While significant work remains for production hardening and full feature implementation, Project QRE provides a practical blueprint for organizations seeking to safeguard critical digital assets against both current and future computational threats.</p>
-        </div>
+        <h2>6. Performance</h2>
+        <p>
+          Unlike Python-based prototypes, the Rust implementation achieves
+          near-native performance. By leveraging AES-NI hardware instructions
+          and efficient memory management, QRE Locker can encrypt and decrypt
+          large files (GBs) at speeds limited primarily by disk I/O, with
+          negligible overhead from the post-quantum operations.
+        </p>
+
+        <h2>7. Future Roadmap</h2>
+        <p>Development is ongoing with a focus on expanding the ecosystem:</p>
+        <ul>
+          <li>
+            <strong>Mobile Support:</strong> Android and iOS applications to
+            allow decryption on the go.
+          </li>
+          <li>
+            <strong>Hardware Tokens:</strong> Integration with YubiKey/FIDO2 for
+            hardware-backed key derivation.
+          </li>
+          <li>
+            <strong>Steganography:</strong> Hiding encrypted payloads within
+            other file types.
+          </li>
+        </ul>
+
+        <h2>8. Conclusion</h2>
+        <p>
+          QRE Locker demonstrates that post-quantum security does not need to be
+          complex or slow. By combining state-of-the-art cryptographic research
+          with modern software engineering practices, we provide a tool that is
+          accessible to everyone—from journalists and activists to enterprise
+          archivists—ensuring their data remains secure for decades to come.
+        </p>
+      </div>
     </main>
 
-<footer>
-    <div class="container">
-        <p>© 2025 Project QRE. Last update: June 2025</p>
+    <footer>
+      <div class="container">
+        <p>
+          © 2025–<span id="year"></span> Project QRE. Last updated:
+          <span id="last-updated">January 2026</span>
+        </p>
         <div class="footer-links">
-            <a href="about.html">About Us</a>
-            <span>|</span>
-            <a href="https://github.com/powergr/Project_QRE" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <span>|</span>
-            <a href="blog.html">Blog</a>
-            <span>|</span>
-            <a href="contact.html">Contact</a>
-            <span>|</span>
-            <a href="terms.html">Terms</a>
-            <span>|</span>
-            <a href="privacy.html">Privacy</a>
+          <a href="about.html">About Us</a>
+          <span>|</span>
+          <a
+            href="https://github.com/powergr/quantum-locker/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub</a
+          >
+          <span>|</span>
+          <a href="blog.html">Blog</a>
+          <span>|</span>
+          <a href="contact.html">Contact</a>
+          <span>|</span>
+          <a href="terms.html">Terms</a>
+          <span>|</span>
+          <a href="privacy.html">Privacy</a>
         </div>
-    </div>
-</footer>
+      </div>
+    </footer>
 
     <script>
-        const themeToggleButton = document.getElementById('theme-toggle');
-        themeToggleButton.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('qre_theme', newTheme);
-        });
+      const startYear = 2025;
+      const currentYear = new Date().getFullYear();
+      document.getElementById("year").textContent =
+        currentYear > startYear ? currentYear : startYear;
     </script>
-</body>
+    <script>
+      const themeToggleButton = document.getElementById("theme-toggle");
+      themeToggleButton.addEventListener("click", () => {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("qre_theme", newTheme);
+      });
+    </script>
+  </body>
 </html>

@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hybrid Cipher Layering - Project QRE</title>
     <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://projectqre.com/hybrid-cipher-layering.html">
-    <meta property="og:title" content="Hybrid Cipher Layering | Project QRE">
-    <meta property="og:description" content="Learn how Project QRE combines classical and post-quantum algorithms for a defense-in-depth security posture.">
-    <meta property="og:image" content="https://projectqre.com/images/qre-social-share.webp">
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://projectqre.com/hybrid-cipher-layering.html"
+    />
+    <meta property="og:title" content="Hybrid Cipher Layering | Project QRE" />
+    <meta
+      property="og:description"
+      content="Learn how Project QRE combines classical and post-quantum algorithms for a defense-in-depth security posture."
+    />
+    <meta
+      property="og:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://projectqre.com/hybrid-cipher-layering.html">
-    <meta property="twitter:title" content="Hybrid Cipher Layering | Project QRE">
-    <meta property="twitter:description" content="Learn how Project QRE combines classical and post-quantum algorithms for a defense-in-depth security posture.">
-    <meta property="twitter:image" content="https://projectqre.com/images/qre-social-share.webp">
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://projectqre.com/hybrid-cipher-layering.html"
+    />
+    <meta
+      property="twitter:title"
+      content="Hybrid Cipher Layering | Project QRE"
+    />
+    <meta
+      property="twitter:description"
+      content="Learn how Project QRE combines classical and post-quantum algorithms for a defense-in-depth security posture."
+    />
+    <meta
+      property="twitter:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
 
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -23,530 +44,677 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <link rel="canonical" href="https://projectqre.com/hybrid-cipher-layering.html" />
-    
+    <link
+      rel="canonical"
+      href="https://projectqre.com/hybrid-cipher-layering.html"
+    />
+
     <!-- Asynchronously load Google Fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"></noscript>
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+    /></noscript>
 
     <style>
-        :root {
-            --heading-font: 'Orbitron', sans-serif;
-            --body-font: 'Roboto', sans-serif;
-            --mono-font: 'Roboto Mono', 'Courier New', Courier, monospace;
-        }
+      :root {
+        --heading-font: "Orbitron", sans-serif;
+        --body-font: "Roboto", sans-serif;
+        --mono-font: "Roboto Mono", "Courier New", Courier, monospace;
+      }
 
-        [data-theme="dark"] {
-            --primary-color: #0D47A1;
-            --secondary-color-bg: #1976D2;
-            --secondary-color-text: #58AFFF;
-            --accent-color: #64B5F6;
-            --text-color: #E0E0E0;
-            --bg-color: #121212;
-            --card-bg-color: #1E1E1E;
-            --border-color: #333;
-            --table-row-border: #383838;
-            --table-hover-bg: #2a2a2a;
-            --footer-bg: #0a0a0a;
-            --footer-border: #222;
-            --link-color: var(--accent-color);
-            --link-hover-color: #90caf9;
-            --header-overlay: rgba(0, 0, 0, 0.5);
-            --icon-color: #E0E0E0;
-            --icon-hover-bg: rgba(255, 255, 255, 0.1);
-            --shadow-color: rgba(0,0,0,0.35);
-            --status-passed-color: #81C784;
-            --status-failed-color: #E57373;
-            --footer-link-color: #aaa;
-            --footer-link-hover-color: #fff;
-        }
+      [data-theme="dark"] {
+        --primary-color: #0d47a1;
+        --secondary-color-bg: #1976d2;
+        --secondary-color-text: #58afff;
+        --accent-color: #64b5f6;
+        --text-color: #e0e0e0;
+        --bg-color: #121212;
+        --card-bg-color: #1e1e1e;
+        --border-color: #333;
+        --table-row-border: #383838;
+        --table-hover-bg: #2a2a2a;
+        --footer-bg: #0a0a0a;
+        --footer-border: #222;
+        --link-color: var(--accent-color);
+        --link-hover-color: #90caf9;
+        --header-overlay: rgba(0, 0, 0, 0.5);
+        --icon-color: #e0e0e0;
+        --icon-hover-bg: rgba(255, 255, 255, 0.1);
+        --shadow-color: rgba(0, 0, 0, 0.35);
+        --status-passed-color: #81c784;
+        --status-failed-color: #e57373;
+        --footer-link-color: #aaa;
+        --footer-link-hover-color: #fff;
+      }
 
-        [data-theme="light"] {
-            --primary-color: #1565C0;
-            --secondary-color-bg: #1976D2;
-            --secondary-color-text: #0D47A1;
-            --accent-color: #1E88E5;
-            --text-color: #212121;
-            --bg-color: #f4f6f8;
-            --card-bg-color: #ffffff;
-            --border-color: #e0e0e0;
-            --table-row-border: #e0e0e0;
-            --table-hover-bg: #f5f5f5;
-            --footer-bg: #e9ecef;
-            --footer-border: #dee2e6;
-            --link-color: #0D47A1;
-            --link-hover-color: #0b3a7d;
-            --header-overlay: rgba(0, 0, 0, 0.3);
-            --icon-color: #212121;
-            --icon-hover-bg: rgba(0, 0, 0, 0.05);
-            --shadow-color: rgba(0,0,0,0.1);
-            --status-passed-color: #2E7D32;
-            --status-failed-color: #C62828;
-            --footer-link-color: #555;
-            --footer-link-hover-color: #000;
-        }
+      [data-theme="light"] {
+        --primary-color: #1565c0;
+        --secondary-color-bg: #1976d2;
+        --secondary-color-text: #0d47a1;
+        --accent-color: #1e88e5;
+        --text-color: #212121;
+        --bg-color: #f4f6f8;
+        --card-bg-color: #ffffff;
+        --border-color: #e0e0e0;
+        --table-row-border: #e0e0e0;
+        --table-hover-bg: #f5f5f5;
+        --footer-bg: #e9ecef;
+        --footer-border: #dee2e6;
+        --link-color: #0d47a1;
+        --link-hover-color: #0b3a7d;
+        --header-overlay: rgba(0, 0, 0, 0.3);
+        --icon-color: #212121;
+        --icon-hover-bg: rgba(0, 0, 0, 0.05);
+        --shadow-color: rgba(0, 0, 0, 0.1);
+        --status-passed-color: #2e7d32;
+        --status-failed-color: #c62828;
+        --footer-link-color: #555;
+        --footer-link-hover-color: #000;
+      }
 
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
 
-        body {
-            margin: 0;
-            font-family: var(--body-font);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        #theme-toggle {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            z-index: 1000;
-            cursor: pointer;
-            background-color: transparent;
-            border: none;
-            padding: 8px;
-            border-radius: 50%;
-            transition: background-color 0.2s ease-in-out;
-        }
-        #theme-toggle:hover,
-        #theme-toggle:focus {
-            background-color: var(--icon-hover-bg);
-            outline: none;
-        }
-        #theme-toggle svg {
-            width: 24px;
-            height: 24px;
-            stroke: var(--icon-color);
-            pointer-events: none; 
-        }
+      body {
+        margin: 0;
+        font-family: var(--body-font);
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        overflow-x: hidden;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
 
-        [data-theme="dark"] .moon-icon { display: none; }
-        [data-theme="dark"] .sun-icon { display: block; }
-        [data-theme="light"] .sun-icon { display: none; }
-        [data-theme="light"] .moon-icon { display: block; }
+      #theme-toggle {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        z-index: 1000;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        padding: 8px;
+        border-radius: 50%;
+        transition: background-color 0.2s ease-in-out;
+      }
+      #theme-toggle:hover,
+      #theme-toggle:focus {
+        background-color: var(--icon-hover-bg);
+        outline: none;
+      }
+      #theme-toggle svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--icon-color);
+        pointer-events: none;
+      }
 
-        .container {
-            width: 90%;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px 0;
-        }
+      [data-theme="dark"] .moon-icon {
+        display: none;
+      }
+      [data-theme="dark"] .sun-icon {
+        display: block;
+      }
+      [data-theme="light"] .sun-icon {
+        display: none;
+      }
+      [data-theme="light"] .moon-icon {
+        display: block;
+      }
 
+      .container {
+        width: 90%;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px 0;
+      }
+
+      header {
+        background-color: var(--primary-color);
+        color: white;
+        padding: 60px 20px;
+        text-align: center;
+        position: relative;
+        background-image: url("images/quantum_header_bg.webp");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: var(--header-overlay);
+        z-index: 1;
+      }
+
+      header .container {
+        position: relative;
+        z-index: 2;
+      }
+
+      header h1 {
+        font-family: var(--heading-font);
+        font-size: 3.2em;
+        margin-bottom: 0.3em;
+        letter-spacing: 2px;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      }
+
+      header .subtitle {
+        font-size: 1.4em;
+        font-weight: 300;
+        color: #e0e0e0;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        line-height: 1.5;
+      }
+
+      h2 {
+        font-family: var(--heading-font);
+        color: var(--accent-color);
+        text-align: left;
+        margin-top: 1.5em;
+        margin-bottom: 0.8em;
+        font-size: 2em;
+      }
+      h2:first-child {
+        margin-top: 0;
+      }
+
+      h3 {
+        font-family: var(--heading-font);
+        color: var(--accent-color);
+        font-size: 1.4em;
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+      }
+
+      section {
+        padding: 20px 0;
+      }
+
+      .breadcrumb-nav {
+        padding: 15px 0;
+        font-size: 0.9em;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 20px;
+      }
+      .breadcrumb-nav a {
+        color: var(--link-color);
+        text-decoration: none;
+      }
+      .breadcrumb-nav a:hover {
+        text-decoration: underline;
+        color: var(--link-hover-color);
+      }
+
+      .content-section p,
+      .content-section ul {
+        margin-bottom: 1.2em;
+        line-height: 1.7;
+        font-size: 1.05em;
+      }
+      .content-section ul {
+        list-style: disc;
+        padding-left: 25px;
+      }
+      .content-section li {
+        margin-bottom: 0.5em;
+      }
+
+      .step-details {
+        margin-bottom: 2em;
+        padding-left: 15px;
+        border-left: 3px solid var(--secondary-color-bg);
+      }
+
+      .benchmark-table-container {
+        margin: 40px auto;
+        background-color: var(--card-bg-color);
+        border-radius: 8px;
+        box-shadow: 0 6px 18px var(--shadow-color);
+        max-width: 800px;
+        overflow: hidden;
+      }
+      .benchmark-table-container table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9em;
+      }
+      .benchmark-table-container caption {
+        padding: 15px;
+        font-size: 1.1em;
+        font-weight: bold;
+        font-family: var(--heading-font);
+        color: var(--secondary-color-text);
+        text-align: left;
+      }
+      .benchmark-table-container thead tr {
+        background-color: var(--secondary-color-bg);
+        color: white;
+      }
+      .benchmark-table-container th,
+      .benchmark-table-container td {
+        padding: 12px 15px;
+        text-align: left;
+      }
+      .benchmark-table-container tbody tr {
+        border-bottom: 1px solid var(--table-row-border);
+        transition: background-color 0.2s ease-in-out;
+      }
+      .benchmark-table-container tbody tr:last-child {
+        border-bottom: none;
+      }
+      .benchmark-table-container tbody tr:hover {
+        background-color: var(--table-hover-bg);
+      }
+      .benchmark-table-container td:nth-child(2),
+      .benchmark-table-container td:nth-child(3),
+      .benchmark-table-container th:nth-child(2),
+      .benchmark-table-container th:nth-child(3) {
+        text-align: right;
+        font-family: var(--mono-font);
+      }
+      .benchmark-table-container td:nth-child(4),
+      .benchmark-table-container th:nth-child(4) {
+        text-align: center;
+        font-weight: bold;
+      }
+      .benchmark-table-container td.status-passed {
+        color: var(--status-passed-color);
+      }
+      .benchmark-table-container td.status-failed {
+        color: var(--status-failed-color);
+      }
+
+      footer {
+        background-color: var(--footer-bg);
+        color: var(--text-color);
+        text-align: center;
+        padding: 25px 0;
+        font-size: 0.9em;
+        margin-top: 40px;
+        border-top: 1px solid var(--footer-border);
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+      }
+      .footer-links {
+        margin-top: 10px;
+      }
+      .footer-links a {
+        color: var(--footer-link-color);
+        text-decoration: none;
+        margin: 0 10px;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--footer-link-hover-color);
+        text-decoration: underline;
+      }
+      .footer-links span {
+        color: var(--footer-link-color);
+      }
+
+      @media (max-width: 768px) {
         header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-            position: relative;
-            background-image: url('images/quantum_header_bg.webp');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            min-height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+          padding: 40px 20px;
+          min-height: 200px;
         }
-
-        header::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: var(--header-overlay);
-            z-index: 1;
-        }
-
-        header .container {
-            position: relative;
-            z-index: 2;
-        }
-
         header h1 {
-            font-family: var(--heading-font);
-            font-size: 3.2em;
-            margin-bottom: 0.3em;
-            letter-spacing: 2px;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+          font-size: 2.2em;
         }
-
         header .subtitle {
-            font-size: 1.4em;
-            font-weight: 300;
-            color: #E0E0E0;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
-            line-height: 1.5;
+          font-size: 1.1em;
         }
-
         h2 {
-            font-family: var(--heading-font);
-            color: var(--accent-color);
-            text-align: left;
-            margin-top: 1.5em;
-            margin-bottom: 0.8em;
-            font-size: 2em;
+          font-size: 1.6em;
         }
-        h2:first-child {
-            margin-top: 0;
-        }
-
-        h3 {
-            font-family: var(--heading-font);
-            color: var(--accent-color);
-            font-size: 1.4em;
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
-        }
-
-        section {
-            padding: 20px 0;
-        }
-
         .breadcrumb-nav {
-            padding: 15px 0;
-            font-size: 0.9em;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 20px;
+          padding: 10px 0;
         }
-        .breadcrumb-nav a {
-            color: var(--link-color);
-            text-decoration: none;
-        }
-        .breadcrumb-nav a:hover {
-            text-decoration: underline;
-            color: var(--link-hover-color);
+        h3 {
+          font-size: 1.2em;
         }
 
-        .content-section p, .content-section ul {
-            margin-bottom: 1.2em;
-            line-height: 1.7;
-            font-size: 1.05em;
-        }
-        .content-section ul {
-            list-style: disc;
-            padding-left: 25px;
-        }
-        .content-section li {
-            margin-bottom: 0.5em;
-        }
-
-        .step-details {
-            margin-bottom: 2em;
-            padding-left: 15px;
-            border-left: 3px solid var(--secondary-color-bg);
-        }
-        
         .benchmark-table-container {
-            margin: 40px auto;
-            background-color: var(--card-bg-color);
-            border-radius: 8px;
-            box-shadow: 0 6px 18px var(--shadow-color);
-            max-width: 800px;
-            overflow: hidden;
+          box-shadow: none;
+          border-radius: 0;
+          margin-left: 0;
+          margin-right: 0;
+          padding: 0;
+          background-color: transparent;
         }
-        .benchmark-table-container table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9em;
+        .benchmark-table-container table,
+        .benchmark-table-container thead,
+        .benchmark-table-container tbody,
+        .benchmark-table-container th,
+        .benchmark-table-container td,
+        .benchmark-table-container tr {
+          display: block;
         }
         .benchmark-table-container caption {
-            padding: 15px;
-            font-size: 1.1em;
-            font-weight: bold;
-            font-family: var(--heading-font);
-            color: var(--secondary-color-text);
-            text-align: left;
+          background-color: var(--card-bg-color);
+          margin-bottom: 0;
+          padding-bottom: 10px;
+          border: 1px solid var(--border-color);
+          border-bottom: none;
+          border-top-left-radius: 6px;
+          border-top-right-radius: 6px;
         }
         .benchmark-table-container thead tr {
-            background-color: var(--secondary-color-bg);
-            color: white;
+          position: absolute;
+          top: -9999px;
+          left: -9999px;
         }
-        .benchmark-table-container th, .benchmark-table-container td {
-            padding: 12px 15px;
-            text-align: left;
+        .benchmark-table-container tr {
+          background-color: var(--card-bg-color);
+          margin-bottom: 10px;
+          border-radius: 6px;
+          overflow: hidden;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+          border: 1px solid var(--border-color);
         }
-        .benchmark-table-container tbody tr {
-            border-bottom: 1px solid var(--table-row-border);
-            transition: background-color 0.2s ease-in-out;
+        .benchmark-table-container tbody tr:first-of-type {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
         }
-        .benchmark-table-container tbody tr:last-child {
-            border-bottom: none;
+        .benchmark-table-container td {
+          border: none;
+          border-bottom: 1px solid var(--table-row-border);
+          position: relative;
+          padding: 12px;
+          padding-left: 45%;
+          text-align: right;
+          min-height: 40px;
         }
-        .benchmark-table-container tbody tr:hover {
-            background-color: var(--table-hover-bg);
+        .benchmark-table-container td:last-child {
+          border-bottom: none;
         }
-        .benchmark-table-container td:nth-child(2),
-        .benchmark-table-container td:nth-child(3),
-        .benchmark-table-container th:nth-child(2),
-        .benchmark-table-container th:nth-child(3) {
-            text-align: right;
-            font-family: var(--mono-font);
+        .benchmark-table-container td:before {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          left: 12px;
+          width: 40%;
+          padding-right: 10px;
+          white-space: nowrap;
+          text-align: left;
+          font-weight: bold;
+          color: var(--accent-color);
         }
-        .benchmark-table-container td:nth-child(4),
-        .benchmark-table-container th:nth-child(4) {
-            text-align: center;
-            font-weight: bold;
+        .benchmark-table-container td:nth-of-type(1):before {
+          content: "Operation:";
         }
-        .benchmark-table-container td.status-passed { color: var(--status-passed-color); }
-        .benchmark-table-container td.status-failed { color: var(--status-failed-color); }
-
-        footer {
-            background-color: var(--footer-bg);
-            color: var(--text-color);
-            text-align: center;
-            padding: 25px 0;
-            font-size: 0.9em;
-            margin-top: 40px;
-            border-top: 1px solid var(--footer-border);
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+        .benchmark-table-container td:nth-of-type(2):before {
+          content: "Avg Time (ms):";
         }
-        .footer-links {
-            margin-top: 10px;
+        .benchmark-table-container td:nth-of-type(3):before {
+          content: "Std Dev (ms):";
         }
-        .footer-links a {
-            color: var(--footer-link-color);
-            text-decoration: none;
-            margin: 0 10px;
-            transition: color 0.2s;
+        .benchmark-table-container td:nth-of-type(4):before {
+          content: "Status:";
         }
-        .footer-links a:hover {
-            color: var(--footer-link-hover-color);
-            text-decoration: underline;
-        }
-        .footer-links span {
-            color: var(--footer-link-color);
-        }
-        
-        @media (max-width: 768px) {
-            header { padding: 40px 20px; min-height: 200px; }
-            header h1 { font-size: 2.2em; }
-            header .subtitle { font-size: 1.1em; }
-            h2 { font-size: 1.6em; }
-            .breadcrumb-nav { padding: 10px 0; }
-            h3 { font-size: 1.2em; }
-            
-            .benchmark-table-container {
-                box-shadow: none;
-                border-radius: 0;
-                margin-left: 0;
-                margin-right: 0;
-                padding: 0;
-                background-color: transparent;
-            }
-            .benchmark-table-container table,
-            .benchmark-table-container thead,
-            .benchmark-table-container tbody,
-            .benchmark-table-container th,
-            .benchmark-table-container td,
-            .benchmark-table-container tr {
-                display: block;
-            }
-            .benchmark-table-container caption {
-                background-color: var(--card-bg-color);
-                margin-bottom: 0;
-                padding-bottom: 10px;
-                border: 1px solid var(--border-color);
-                border-bottom: none;
-                border-top-left-radius: 6px;
-                border-top-right-radius: 6px;
-            }
-            .benchmark-table-container thead tr {
-                position: absolute;
-                top: -9999px;
-                left: -9999px;
-            }
-            .benchmark-table-container tr {
-                background-color: var(--card-bg-color);
-                margin-bottom: 10px;
-                border-radius: 6px;
-                overflow: hidden;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-                border: 1px solid var(--border-color);
-            }
-            .benchmark-table-container tbody tr:first-of-type {
-                border-top-left-radius: 0;
-                border-top-right-radius: 0;
-            }
-            .benchmark-table-container td {
-                border: none;
-                border-bottom: 1px solid var(--table-row-border);
-                position: relative;
-                padding: 12px;
-                padding-left: 45%;
-                text-align: right;
-                min-height: 40px;
-            }
-            .benchmark-table-container td:last-child {
-                border-bottom: none;
-            }
-            .benchmark-table-container td:before {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                left: 12px;
-                width: 40%;
-                padding-right: 10px;
-                white-space: nowrap;
-                text-align: left;
-                font-weight: bold;
-                color: var(--accent-color);
-            }
-            .benchmark-table-container td:nth-of-type(1):before { content: "Operation:"; }
-            .benchmark-table-container td:nth-of-type(2):before { content: "Avg Time (ms):"; }
-            .benchmark-table-container td:nth-of-type(3):before { content: "Std Dev (ms):"; }
-            .benchmark-table-container td:nth-of-type(4):before { content: "Status:"; }
-        }
+      }
     </style>
 
     <script>
-        (function() {
-            const theme = localStorage.getItem('qre_theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', theme);
-        })();
+      (function () {
+        const theme = localStorage.getItem("qre_theme") || "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <button id="theme-toggle" title="Toggle light/dark theme">
-        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      <svg
+        class="sun-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg
+        class="moon-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
     </button>
     <header class="page-header">
-        <div class="container">
-            <h1>Hybrid Cipher Layering</h1>
-            <p class="subtitle">A Core Innovation of Project QRE</p>
-        </div>
+      <div class="container">
+        <h1>Hybrid Cipher Layering</h1>
+        <p class="subtitle">A Core Innovation of Project QRE</p>
+      </div>
     </header>
 
     <nav class="breadcrumb-nav container">
-        <a href="index.html">Home</a> > Hybrid Cipher Layering
+      <a href="index.html">Home</a> > Hybrid Cipher Layering
     </nav>
 
     <main>
-        <section id="epic-description" class="container content-section">
-            <h2>The Big Idea (Our Goal)</h2>
-            <p>Imagine we're tasked with protecting our most valuable information, not just for today but for many years to come. We know that future technologies, such as super-powerful quantum computers, could potentially break the digital "locks" (encryption) we commonly use today. This part of our project, which we're calling "Hybrid Cipher Layering," is about building a brand-new, mighty digital fortress. Instead of relying on just one type of lock, we're designing a system that utilizes multiple, distinct layers of advanced security codes, making it exceptionally difficult for anyone to gain unauthorized access, even with future tools.</p>
+      <section id="epic-description" class="container content-section">
+        <h2>The Technology Behind the Lock</h2>
+        <p>
+          In the era of quantum computing, traditional encryption methods face
+          an existential threat. QRE Locker addresses this by implementing a
+          <strong>Hybrid Cipher Architecture</strong>. Instead of relying on a
+          single algorithm, we combine the speed and reliability of classical
+          symmetric encryption with the cutting-edge security of post-quantum
+          key encapsulation.
+        </p>
 
-            <h3>1. Choosing the Right "Locks"</h3>
-            <div class="step-details">
-                <p>First, we need to select the best tools for the job. We'll choose two main types of "digital locks" (cryptographic algorithms).</p>
-                <ul>
-                    <li>One will be a tried-and-true, super-efficient lock that's excellent for everyday data protection (like a high-quality bank vault door – this is our "symmetric algorithm").</li>
-                    <li>The other will be a cutting-edge, next-generation lock specifically designed to be unbreakable by future quantum computers (think of a futuristic energy shield – this is our "post-quantum algorithm").</li>
-                </ul>
-                <p>We'll carefully research and document why we've chosen these specific locks to ensure they are the best fit.</p>
-            </div>
+        <h3>1. The "Dual Lock" Strategy</h3>
+        <div class="step-details">
+          <p>
+            Every file encrypted by QRE Locker is protected by two distinct
+            cryptographic layers:
+          </p>
+          <ul>
+            <li>
+              <strong>Classical Layer (AES-256-GCM):</strong>
+              We use the Advanced Encryption Standard (AES) with a 256-bit key
+              in Galois/Counter Mode (GCM). This provides military-grade
+              confidentiality and ensures data integrity (you know if the file
+              was tampered with).
+            </li>
+            <li>
+              <strong>Post-Quantum Layer (ML-KEM-1024):</strong>
+              We wrap the AES session key using Module-Lattice-Based
+              Key-Encapsulation Mechanism (formerly Kyber). This algorithm is
+              selected by NIST as the primary standard for resisting attacks
+              from future quantum computers.
+            </li>
+          </ul>
+        </div>
 
-            <h3>2. Layering the Locks – Double (or Triple) Security</h3>
-            <div class="step-details">
-                <p>We won't just use these locks side by side; we'll make them work together in clever ways.</p>
-                <ul>
-                    <li><strong>Parallel Protection:</strong> Imagine a treasure chest that requires two different keys from two distinct types of locks to be opened simultaneously. We'll set up a system where our data is protected by both our chosen locks simultaneously.</li>
-                    <li><strong>Protecting the Key with a Key:</strong> Another approach is like having a robust, quick lock on the main door (our symmetric algorithm protecting the data), but the key to <em>that</em> door is itself kept in an even smaller, virtually impenetrable safe that only a special future-proof key can open (our post-quantum algorithm protecting the first key). This "layered" approach adds significant extra security.</li>
-                </ul>
-            </div>
+        <h3>2. How It Works (The Encryption Flow)</h3>
+        <div class="step-details">
+          <p>When you click "Lock", the following process happens instantly:</p>
+          <ol>
+            <li>
+              <strong>Ephemeral Key Generation:</strong> The app generates a
+              brand new, random AES-256 session key and a fresh Kyber-1024
+              keypair specifically for this file.
+            </li>
+            <li>
+              <strong>Data Encryption:</strong> The file content is compressed
+              (Zstd) and then encrypted using the AES session key.
+            </li>
+            <li>
+              <strong>Key Encapsulation:</strong> The AES session key is
+              encapsulated using the Kyber public key. This "capsule" is stored
+              in the file header.
+            </li>
+            <li>
+              <strong>Key Wrapping:</strong> The Kyber private key (needed to
+              open the capsule) is encrypted using your Passphrase (and Keyfile,
+              if used).
+            </li>
+          </ol>
+          <p>
+            This means that even if a quantum computer breaks one layer in the
+            future, the other layer remains secure. An attacker would need to
+            break <em>both</em> distinct mathematical problems to read your
+            data.
+          </p>
+        </div>
 
-            <h3>3. Creating Super-Strong, Unique "Keys"</h3>
-            <div class="step-details">
-                <p>Every lock needs a key. For our digital locks, these keys need to be incredibly strong and unique. Instead of relying solely on a simple password that someone might guess, we're designing a system to create these keys by blending together different types of information.</p>
-                <p>Think of it like a master locksmith who forges a key not just from one piece of metal but by combining a password you provide, maybe some unique characteristics of the device being used, or even other distinct pieces of information. This makes the final key much more robust.</p>
-            </div>
+        <h3>3. Stateless & Decentralized Key Management</h3>
+        <div class="step-details">
+          <p>
+            Unlike complex enterprise systems that require a central key server
+            ("Vault"), QRE Locker uses a
+            <strong>Stateless Architecture</strong>.
+          </p>
+          <p>
+            All the cryptographic information needed to decrypt the file is
+            stored <em>inside the file header itself</em>, protected by your
+            Passphrase. This makes QRE Locker ideal for long-term archival and
+            offline storage. You don't need to maintain a database or worry
+            about losing a key server; as long as you remember your passphrase
+            (and have your Keyfile), you can decrypt your data anywhere,
+            forever.
+          </p>
+        </div>
 
-            <h3>4. Keeping Our Master Keys Safe</h3>
-            <div class="step-details">
-                <p>Once we have these super-strong keys, we need an equally secure place to store them for this initial version (our Proof-of-Concept). We'll create a basic but secure "digital key safe."</p>
-                <p>We'll also map out how, in later stages of the project, we can upgrade this to utilize specialized, super-secure hardware (such as a Hardware Security Module or HSM) for ultimate key protection.</p>
-            </div>
+        <h3>4. Integrity & Authentication</h3>
+        <div class="step-details">
+          <p>
+            Encryption is useless if an attacker can modify your file without
+            you knowing. QRE Locker uses
+            <strong>Authenticated Encryption (AEAD)</strong>. The file header
+            contains a cryptographic validation token.
+          </p>
+          <p>
+            When you attempt to unlock a file, the app instantly verifies your
+            password against this token
+            <em>before</em> processing the data. If the password is wrong, or if
+            the file header has been corrupted or tampered with by a single bit,
+            the operation halts immediately, protecting you from malicious
+            payloads.
+          </p>
+        </div>
 
-            <h3>5. Ensuring Speed and Efficiency</h3>
-            <div class="step-details">
-                <p>All this robust security is fantastic, but it also needs to be practical. We don't want a fortress that takes ages to open! A key part of this part is to ensure that locking (encrypting) and unlocking (decrypting) data with our new multi-layered system remains fast enough for everyday use, especially when handling typical amounts of information. We'll test this to make sure it meets our performance targets.</p>
-            </div>
-			
-			<h2>Performance: Secure and Efficient</h2>
-            <p>A key goal for our Hybrid Cipher Layering is to provide robust security without sacrificing speed. We've rigorously tested its performance, and for typical data sizes (like a 1MB file), our system encrypts and decrypts well within our target of one-tenth of a second. This ensures it's both secure and efficient for practical use.</p>
-            <p>Here's a summary of our performance benchmarks for the current Proof-of-Concept (Target: < 100ms per operation):</p>
+        <h2>Performance: Built for Speed</h2>
+        <p>
+          Security shouldn't slow you down. QRE Locker is built in
+          <strong>Rust</strong>, a systems programming language known for
+          blazing speed and memory safety.
+        </p>
+        <p>
+          By leveraging hardware acceleration (AES-NI) and efficient compression
+          (Zstd), QRE Locker achieves encryption speeds that are often limited
+          only by your disk's write speed. The Post-Quantum operations (Kyber)
+          add negligible overhead, taking only milliseconds even on standard
+          hardware.
+        </p>
 
-            <div class="benchmark-table-container">
-                <table>
-                    <caption>Benchmark Report: Hybrid Cipher Layering (1MB Data)</caption>
-                    <thead>
-                        <tr>
-                            <th>Operation</th>
-                            <th>Avg Time (ms)</th>
-                            <th>Std Dev (ms)</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Parallel Encrypt (Vault, Concurrent AES, 1MB)</td>
-                            <td>26.509</td>
-                            <td>7.465</td>
-                            <td class="status-passed">PASSED</td>
-                        </tr>
-                        <tr>
-                            <td>Parallel Decrypt (Vault, C1 path, 1MB)</td>
-                            <td>21.336</td>
-                            <td>9.766</td>
-                            <td class="status-passed">PASSED</td>
-                        </tr>
-                        <tr>
-                            <td>Layered Encrypt (Vault, 1MB)</td>
-                            <td>22.104</td>
-                            <td>8.534</td>
-                            <td class="status-passed">PASSED</td>
-                        </tr>
-                        <tr>
-                            <td>Layered Decrypt (Vault, 1MB)</td>
-                            <td>22.627</td>
-                            <td>7.409</td>
-                            <td class="status-passed">PASSED</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <p style="text-align:center; font-weight:bold; margin-top:10px;">All operations met the performance target!</p>
+        <h2>The Outcome</h2>
+        <p>
+          With QRE Locker v2.0, "Hybrid Cipher Layering" is no longer just a
+          theory. It is a downloadable, functional reality available to
+          everyone. We have successfully bridged the gap between academic
+          cryptography and usable desktop software, providing a robust defense
+          against the threats of tomorrow.
+        </p>
 
-            <h2>The Outcome</h2>
-            <p>We completed "Hybrid Cipher Layering" and have created the foundational engine of our quantum-resistant security system. It will be a robust mechanism that smartly combines current best-practice encryption with future-proof techniques, all underpinned by intensely generated, uniquely secure keys that are kept safe. This will provide us with a robust defense against both current threats and those on the horizon.</p>
-        </section>
+        <div style="text-align: center; margin-top: 40px">
+          <a
+            href="https://github.com/powergr/quantum-locker/releases/latest"
+            class="cta-button"
+            style="
+              display: inline-block;
+              padding: 12px 30px;
+              background-color: var(--secondary-color-bg);
+              color: white;
+              text-decoration: none;
+              border-radius: 5px;
+              font-weight: bold;
+            "
+            >Download QRE Locker</a
+          >
+        </div>
+      </section>
     </main>
 
-<footer>
-    <div class="container">
-        <p>© 2025 Project QRE. Last update: June 2025</p>
-        <div class="footer-links">
-            <a href="about.html">About Us</a>
-            <span>|</span>
-            <a href="https://github.com/powergr/Project_QRE" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <span>|</span>
-            <a href="blog.html">Blog</a>
-            <span>|</span>
-            <a href="contact.html">Contact</a>
-            <span>|</span>
-            <a href="terms.html">Terms</a>
-            <span>|</span>
-            <a href="privacy.html">Privacy</a>
+    <footer>
+      <div class="container">
+        <p>
+          © 2025–<span id="year"></span> Project QRE. Last updated:
+          <span id="last-updated">January 2026</span>
+        </p>
+          <a href="about.html">About Us</a>
+          <span>|</span>
+          <a
+            href="https://github.com/powergr/quantum-locker/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub</a
+          >
+          <span>|</span>
+          <a href="blog.html">Blog</a>
+          <span>|</span>
+          <a href="contact.html">Contact</a>
+          <span>|</span>
+          <a href="terms.html">Terms</a>
+          <span>|</span>
+          <a href="privacy.html">Privacy</a>
         </div>
-    </div>
-</footer>
+      </div>
+    </footer>
 
-    <script>
-        const themeToggleButton = document.getElementById('theme-toggle');
-
-        themeToggleButton.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('qre_theme', newTheme);
-        });
+        <script>
+      const startYear = 2025;
+      const currentYear = new Date().getFullYear();
+      document.getElementById("year").textContent =
+        currentYear > startYear ? currentYear : startYear;
     </script>
-</body>
+    <script>
+      const themeToggleButton = document.getElementById("theme-toggle");
+
+      themeToggleButton.addEventListener("click", () => {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("qre_theme", newTheme);
+      });
+    </script>
+  </body>
 </html>

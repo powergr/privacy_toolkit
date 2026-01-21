@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog - Project QRE</title>
+    <title>Blog - QRE Privacy Toolkit</title>
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://projectqre.com/blog.html" />
     <meta
       property="og:title"
-      content="The Project QRE Blog | Updates & Research"
+      content="QRE Privacy Toolkit Blog | Updates & Research"
     />
     <meta
       property="og:description"
@@ -23,13 +23,10 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://projectqre.com/blog.html" />
-    <meta
-      property="twitter:title"
-      content="The Project QRE Blog | Updates & Research"
-    />
+    <meta property="twitter:title" content="QRE Privacy Toolkit Blog" />
     <meta
       property="twitter:description"
-      content="Follow the latest technical updates, research findings, and project milestones from the Project QRE team."
+      content="Updates on QRE Privacy Toolkit development."
     />
     <meta
       property="twitter:image"
@@ -42,7 +39,6 @@
 
     <link rel="canonical" href="https://projectqre.com/blog.html" />
 
-    <!-- Add your favicon code here -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -54,7 +50,10 @@
       rel="preload"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
       as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
     />
     <noscript
       ><link
@@ -116,7 +115,9 @@
         color: var(--text-color);
         line-height: 1.6;
         overflow-x: hidden;
-        transition: background-color 0.3s ease, color 0.3s ease;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
       }
       #theme-toggle {
         position: fixed;
@@ -229,7 +230,9 @@
         padding: 30px;
         border-radius: 8px;
         border-left: 5px solid var(--secondary-color-bg);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
       }
       .post-item:hover {
         transform: translateY(-5px);
@@ -275,7 +278,9 @@
         font-size: 0.9em;
         margin-top: 40px;
         border-top: 1px solid var(--footer-border);
-        transition: background-color 0.3s ease, border-color 0.3s ease;
+        transition:
+          background-color 0.3s ease,
+          border-color 0.3s ease;
       }
       .footer-links {
         margin-top: 10px;
@@ -345,46 +350,28 @@
 
     <main class="container">
       <div class="post-listing">
-        <!-- Post 1: Announcement -->
+        <!-- Post 1: Rebrand Announcement -->
         <article class="post-item">
           <h2 class="post-title">
-            <a href="blog-qre-v2-3-announcement.html">
-              Introducing QRE Locker v2.3: Post-Quantum Security for Everyone</a
-            >
+            <a href="blog-qre-v2-5-announcement.html">
+              Announcing QRE Privacy Toolkit v2.5: The Swiss Army Knife for
+              Privacy
+            </a>
           </h2>
-          <div class="post-meta">Published on January 11, 2026</div>
+          <div class="post-meta">Published on January 21, 2026</div>
           <p class="post-excerpt">
-            We are proud to announce the release of QRE Locker v2.3, a complete
-            rewrite of our original prototype. Built with Rust and Tauri, this
-            new desktop application brings military-grade AES-256 and
-            post-quantum Kyber encryption to your desktop—offline, fast, and
-            easier than ever.
+            We are redefining QRE Locker. Meet the new
+            <strong>QRE Privacy Toolkit</strong>. Version 2.5 expands beyond
+            simple file encryption to include a Password Vault, Secure File
+            Shredder, and full Android support. It's the only tool you need to
+            secure your digital life locally.
           </p>
-          <a href="blog-qre-v2-3-announcement.html" class="read-more"
+          <a href="blog-qre-v2-5-announcement.html" class="read-more"
             >Read more »</a
           >
         </article>
 
-        <!-- Post 2: Technical Deep Dive -->
-        <article class="post-item">
-          <h2 class="post-title">
-            <a href="blog-stateless-encryption.html">
-              Why We Ditched the Cloud: The Case for Stateless Encryption
-            </a>
-          </h2>
-          <div class="post-meta">Published on December 29, 2025</div>
-          <p class="post-excerpt">
-            Our initial research relied on complex server infrastructure like
-            HashiCorp Vault. While secure for enterprises, it wasn't right for
-            individuals. Learn how we re-architected QRE to store encrypted keys
-            directly inside your files, eliminating the need for servers while
-            maintaining perfect forward secrecy.
-          </p>
-          <a href="blog-stateless-encryption.html" class="read-more"
-            >Read more »</a
-          >
-        </article>
-        <!-- Post 3: Feature Highlight -->
+        <!-- Post 2: Paranoid Mode -->
         <article class="post-item">
           <h2 class="post-title">
             <a href="blog-paranoid-mode.html">
@@ -413,12 +400,14 @@
         <div class="footer-links">
           <a href="about.html">About Us</a><span>|</span
           ><a
-            href="https://github.com/powergr/quantum-locker/"
+            href="https://github.com/powergr/qre-privacy-toolkit/"
             target="_blank"
             rel="noopener noreferrer"
             >GitHub</a
           ><span>|</span><a href="blog.html">Blog</a><span>|</span
-          ><a href="contact.html">Contact</a><span>|</span
+          ><a href="https://github.com/powergr/qre-privacy-toolkit/releases"
+            >Releases</a
+          ><span>|</span><a href="contact.html">Contact</a><span>|</span
           ><a href="terms.html">Terms</a><span>|</span
           ><a href="privacy.html">Privacy</a>
         </div>

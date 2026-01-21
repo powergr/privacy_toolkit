@@ -1,22 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Why We Ditched the Cloud - Project QRE</title>
+    <title>Announcing QRE Privacy Toolkit v2.5</title>
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="article" />
     <meta
       property="og:url"
-      content="https://projectqre.com/blog-stateless-encryption.html"
+      content="https://projectqre.com/blog-qre-v2-5-announcement.html"
     />
-    <meta
-      property="og:title"
-      content="Why We Ditched the Cloud: The Case for Stateless Encryption"
-    />
+    <meta property="og:title" content="Announcing QRE Privacy Toolkit v2.5" />
     <meta
       property="og:description"
-      content="Our journey from centralized HashiCorp Vault servers to a local-first, stateless architecture. Learn why true privacy requires disconnecting from the cloud."
+      content="Meet the Privacy Swiss Army Knife. Secure Files, Password Vault, and Shredder in one app."
     />
     <meta
       property="og:image"
@@ -27,28 +24,24 @@
     <meta property="twitter:card" content="summary_large_image" />
     <meta
       property="twitter:url"
-      content="https://projectqre.com/blog-stateless-encryption.html"
+      content="https://projectqre.com/blog-qre-v2-5-announcement.html"
     />
     <meta
       property="twitter:title"
-      content="Why We Ditched the Cloud: The Case for Stateless Encryption"
+      content="Announcing QRE Privacy Toolkit v2.5"
     />
     <meta
       property="twitter:description"
-      content="Our journey from centralized HashiCorp Vault servers to a local-first, stateless architecture. Learn why true privacy requires disconnecting from the cloud."
+      content="Meet the Privacy Swiss Army Knife. Secure Files, Password Vault, and Shredder in one app."
     />
     <meta
       property="twitter:image"
       content="https://projectqre.com/images/qre-social-share.webp"
     />
-    <meta
-      name="description"
-      content="Project QRE explores the architectural shift from cloud-based key management to local, stateless encryption using key wrapping and Rust."
-    />
 
     <link
       rel="canonical"
-      href="https://projectqre.com/blog-stateless-encryption.html"
+      href="https://projectqre.com/blog-qre-v2-5-announcement.html"
     />
 
     <!-- Favicon -->
@@ -63,7 +56,10 @@
       rel="preload"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
       as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
     />
     <noscript>
       <link
@@ -130,9 +126,10 @@
         color: var(--text-color);
         line-height: 1.6;
         overflow-x: hidden;
-        transition: background-color 0.3s ease, color 0.3s ease;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
       }
-      /* Theme Toggle */
       #theme-toggle {
         position: fixed;
         top: 15px;
@@ -168,7 +165,6 @@
       [data-theme="light"] .moon-icon {
         display: block;
       }
-      /* Container & Header */
       .container {
         width: 90%;
         max-width: 900px;
@@ -234,8 +230,6 @@
         text-decoration: underline;
         color: var(--link-hover-color);
       }
-
-      /* --- SINGLE POST STYLING --- */
       .single-post-content {
         background-color: var(--card-bg-color);
         padding: 40px;
@@ -287,16 +281,22 @@
         font-family: "Roboto Mono", monospace;
         font-size: 0.9em;
       }
-      blockquote {
-        border-left: 4px solid var(--accent-color);
-        padding-left: 20px;
-        margin-left: 0;
-        color: var(--text-color);
-        opacity: 0.9;
-        font-style: italic;
+      .btn-download {
+        display: inline-block;
+        background-color: var(--accent-color);
+        color: #fff;
+        padding: 12px 25px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: 20px;
+        transition: background-color 0.2s;
       }
-
-      /* Footer */
+      .btn-download:hover {
+        background-color: var(--secondary-color-bg);
+        text-decoration: none;
+        color: #fff;
+      }
       footer {
         background-color: var(--footer-bg);
         color: var(--text-color);
@@ -305,7 +305,9 @@
         font-size: 0.9em;
         margin-top: 40px;
         border-top: 1px solid var(--footer-border);
-        transition: background-color 0.3s ease, border-color 0.3s ease;
+        transition:
+          background-color 0.3s ease,
+          border-color 0.3s ease;
       }
       .footer-links {
         margin-top: 10px;
@@ -332,7 +334,6 @@
     </script>
   </head>
   <body>
-    <!-- Theme Toggle Button -->
     <button id="theme-toggle" title="Toggle light/dark theme">
       <svg
         class="sun-icon"
@@ -351,8 +352,9 @@
         <line x1="1" y1="12" x2="3" y2="12"></line>
         <line x1="21" y1="12" x2="23" y2="12"></line>
         <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg
-      ><svg
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg
         class="moon-icon"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -373,103 +375,70 @@
     </header>
 
     <nav class="breadcrumb-nav container">
-      <a href="index.html">Home</a> &gt; <a href="blog.html">Blog</a> &gt; Why
-      We Ditched the Cloud
+      <a href="index.html">Home</a> &gt; <a href="blog.html">Blog</a> &gt;
+      Announcing QRE Toolkit v2.5
     </nav>
 
     <main class="container">
       <article class="single-post-content">
-        <h1>Why We Ditched the Cloud: The Case for Stateless Encryption</h1>
+        <h1>Announcing QRE Privacy Toolkit v2.5</h1>
         <div class="post-meta-single">
-          Published on December 20, 2025 by
-          <strong>The Project QRE Team</strong>
+          Published on January 21, 2026 by <strong>The Project QRE Team</strong>
         </div>
 
         <div class="post-body">
           <p>
-            When Project QRE began, our architecture looked like every other
-            enterprise security tool: a central server managing keys, heavy
-            infrastructure using HashiCorp Vault, and constant internet
-            connectivity requirements.
+            Today, we are excited to introduce
+            <strong>QRE Privacy Toolkit v2.5</strong>. This release marks a
+            significant evolution from a single-purpose file locker into a
+            comprehensive, local-first privacy suite designed for everyone.
           </p>
           <p>
-            It was secure. It was robust.
-            <strong>And it was completely wrong for our mission.</strong>
+            We have redesigned the application from the ground up to be modular,
+            faster, and available everywhere—including Android.
           </p>
 
-          <h2>The Problem with Cloud Key Management</h2>
+          <h2>1. Unlimited File Encryption</h2>
           <p>
-            Cloud-based encryption relies on "The Trust of Others." When you
-            upload a file to a secure cloud service, the keys to unlock that
-            file usually reside on the same infrastructure as the file itself.
-          </p>
-          <p>
-            This creates three critical vulnerabilities for personal privacy:
-          </p>
-          <ul>
-            <li>
-              <strong>Single Point of Failure:</strong> If the provider shuts
-              down, gets hacked, or is served a warrant, your access to your own
-              data disappears.
-            </li>
-            <li>
-              <strong>Telemetry Leakage:</strong> Even if the provider can't
-              read your files, they know <em>when</em> you access them,
-              <em>where</em> you are, and <em>how often</em> you decrypt them.
-            </li>
-            <li>
-              <strong>Dependency:</strong> You cannot access your own tax
-              returns during an internet outage.
-            </li>
-          </ul>
-
-          <h2>The Pivot to Local-First</h2>
-          <p>
-            We realized that to build a tool that truly respects user
-            sovereignty, we had to eliminate the server entirely. We rewrote QRE
-            from scratch using <strong>Rust</strong> and a
-            <strong>Stateless Architecture</strong>.
+            The new <strong>Streaming Engine</strong> allows you to encrypt
+            files of any size. Whether it's a 100GB video project or a full
+            system backup, QRE Toolkit processes it chunk-by-chunk without
+            consuming your RAM.
           </p>
 
-          <h3>How Stateless Encryption Works</h3>
+          <h2>2. Password Vault</h2>
           <p>
-            In QRE Locker, there is no database. Instead, we use "Key Wrapping"
-            (similar to a Russian Doll):
-          </p>
-          <ol>
-            <li>
-              <strong>The Data Key:</strong> A random AES-256 key encrypts your
-              file.
-            </li>
-            <li>
-              <strong>The Wrapper:</strong> That Data Key is encrypted by a
-              Kyber-1024 public key.
-            </li>
-            <li>
-              <strong>The Master:</strong> The Kyber private key is encrypted by
-              your Password (via Argon2id).
-            </li>
-          </ol>
-          <p>
-            This entire bundle is stored
-            <strong>inside the header of the encrypted file itself</strong>.
+            Stop trusting cloud services with your passwords. The new
+            <strong>Password Vault</strong> lets you store logins, recovery
+            codes, and sensitive notes securely on your device. It is
+            Zero-Knowledge and completely offline.
           </p>
 
-          <blockquote>
-            "The lock travels with the box. You hold the only key."
-          </blockquote>
+          <h2>3. Secure Shredder</h2>
+          <p>
+            When you delete a file, it isn't really gone. Our new
+            <strong>Secure Shredder</strong>
+            performs a 3-pass overwrite (DoD standard) on desktop systems to
+            ensure data is mathematically unrecoverable before deletion.
+          </p>
 
-          <h2>Why This Matters</h2>
+          <h2>4. Android Support</h2>
           <p>
-            This architecture means you can put a <code>.qre</code> file on a
-            USB drive and bury it in the desert for 50 years. As long as you
-            remember your password (and have the QRE software), you can unlock
-            it. No server pings, no subscriptions, no cloud validation required.
+            Privacy shouldn't be limited to your desktop. QRE Toolkit runs
+            natively on Android, allowing you to encrypt photos directly from
+            your gallery and share secure files seamlessly.
           </p>
+
+          <h2>Download Now</h2>
           <p>
-            It shifts the responsibility of security entirely to the user, but
-            in exchange, it offers absolute digital autonomy.
+            QRE Privacy Toolkit v2.5 is available now for Windows, Linux, macOS,
+            and Android.
           </p>
+          <a
+            href="https://github.com/powergr/qre-privacy-toolkit/releases/"
+            class="btn-download"
+            >Download Latest Release</a
+          >
         </div>
       </article>
     </main>
@@ -483,12 +452,14 @@
         <div class="footer-links">
           <a href="about.html">About Us</a><span>|</span
           ><a
-            href="https://github.com/powergr/quantum-locker/"
+            href="https://github.com/powergr/qre-privacy-toolkit/"
             target="_blank"
             rel="noopener noreferrer"
             >GitHub</a
           ><span>|</span><a href="blog.html">Blog</a><span>|</span
-          ><a href="contact.html">Contact</a><span>|</span
+          ><a href="https://github.com/powergr/qre-privacy-toolkit/releases"
+            >Releases</a
+          ><span>|</span><a href="contact.html">Contact</a><span>|</span
           ><a href="terms.html">Terms</a><span>|</span
           ><a href="privacy.html">Privacy</a>
         </div>

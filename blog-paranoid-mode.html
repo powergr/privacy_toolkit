@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -63,7 +63,10 @@
       rel="preload"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
       as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
     />
     <noscript>
       <link
@@ -130,7 +133,9 @@
         color: var(--text-color);
         line-height: 1.6;
         overflow-x: hidden;
-        transition: background-color 0.3s ease, color 0.3s ease;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
       }
       /* Theme Toggle */
       #theme-toggle {
@@ -297,7 +302,9 @@
         font-size: 0.9em;
         margin-top: 40px;
         border-top: 1px solid var(--footer-border);
-        transition: background-color 0.3s ease, border-color 0.3s ease;
+        transition:
+          background-color 0.3s ease,
+          border-color 0.3s ease;
       }
       .footer-links {
         margin-top: 10px;
@@ -457,7 +464,7 @@
         <div class="footer-links">
           <a href="about.html">About Us</a><span>|</span
           ><a
-            href="https://github.com/powergr/quantum-locker/"
+            href="https://github.com/powergr/qre-privacy-toolkit/"
             target="_blank"
             rel="noopener noreferrer"
             >GitHub</a

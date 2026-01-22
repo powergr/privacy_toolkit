@@ -1,9 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us - Project QRE</title>
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; connect-src 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests;"
+    />
+    <title>About Us - QRE Privacy Toolkit</title>
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://projectqre.com/about.html" />
@@ -49,7 +54,10 @@
       rel="preload"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
       as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
     />
     <noscript
       ><link
@@ -112,7 +120,9 @@
         color: var(--text-color);
         line-height: 1.6;
         overflow-x: hidden;
-        transition: background-color 0.3s ease, color 0.3s ease;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
       }
       #theme-toggle {
         position: fixed;
@@ -297,7 +307,9 @@
         font-size: 0.9em;
         margin-top: 40px;
         border-top: 1px solid var(--footer-border);
-        transition: background-color 0.3s ease, border-color 0.3s ease;
+        transition:
+          background-color 0.3s ease,
+          border-color 0.3s ease;
       }
       .footer-links {
         margin-top: 10px;

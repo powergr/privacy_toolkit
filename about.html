@@ -446,13 +446,12 @@
 
         <h2>Frequently Asked Questions (FAQ)</h2>
 
-        <h3>Q: What is "Hybrid" encryption, and why use it?</h3>
+        <h3>Q: What is encryption, and why use it?</h3>
         <p>
-          Hybrid encryption means we use two layers of protection: a classical
-          layer (AES-256) and a post-quantum layer (ML-KEM/Kyber). We do this so
-          you don't have to choose between proven speed and future-proof
-          security. Even if one algorithm fails, your data remains protected by
-          the other.
+          Encryption means we use protection of a classical layer (AES-256_GCM).
+          We do this so you don't have to choose between proven speed and
+          future-proof security. Even if one algorithm fails, your data remains
+          protected by the other.
         </p>
 
         <h3>Q: What happens if I lose my Keyfile or Passphrase?</h3>
@@ -466,7 +465,7 @@
 
         <h3>Q: Do I need an internet connection to use QRE Locker?</h3>
         <p>
-          No. QRE Locker v2.2 is an <strong>offline-first</strong> desktop
+          No. QRE Locker v2.5 is an <strong>offline-first</strong> desktop
           application. All encryption, key derivation, and entropy generation
           happen locally on your device. We do not transmit your keys or data to
           the cloud.
@@ -478,7 +477,7 @@
           full source code for QRE Locker (built in Rust and React) is available
           on our
           <a
-            href="https://github.com/powergr/quantum-locker/"
+            href="https://github.com/powergr/qre-privacy-toolkit"
             style="color: var(--link-color)"
             >GitHub repository</a
           >
@@ -516,7 +515,7 @@
           <a href="about.html">About Us</a>
           <span>|</span>
           <a
-            href="https://github.com/powergr/quantum-locker/"
+            href="https://github.com/powergr/qre-privacy-toolkit"
             target="_blank"
             rel="noopener noreferrer"
             >GitHub</a

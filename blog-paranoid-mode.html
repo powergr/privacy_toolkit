@@ -9,325 +9,35 @@
       content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; connect-src 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests;"
     />
     <title>Paranoid Mode: Harvesting Entropy - Project QRE</title>
-    <!-- Open Graph / Social Media -->
     <meta property="og:type" content="article" />
-    <meta
-      property="og:url"
-      content="https://projectqre.com/blog-paranoid-mode.html"
-    />
-    <meta
-      property="og:title"
-      content="Paranoid Mode: Harvesting Entropy from Human Movement"
-    />
-    <meta
-      property="og:description"
-      content="Can you trust your computer's random number generator? Learn how QRE Locker mixes system entropy with chaotic human input for maximum security."
-    />
-    <meta
-      property="og:image"
-      content="https://projectqre.com/images/qre-social-share.webp"
-    />
-
-    <!-- Twitter -->
+    <meta property="og:url" content="https://projectqre.com/blog-paranoid-mode.html" />
+    <meta property="og:title" content="Paranoid Mode: Harvesting Entropy from Human Movement" />
+    <meta property="og:description" content="Can you trust your computer's random number generator? Learn how QRE Locker mixes system entropy with chaotic human input for maximum security." />
+    <meta property="og:image" content="https://projectqre.com/images/qre-social-share.webp" />
     <meta property="twitter:card" content="summary_large_image" />
-    <meta
-      property="twitter:url"
-      content="https://projectqre.com/blog-paranoid-mode.html"
-    />
-    <meta
-      property="twitter:title"
-      content="Paranoid Mode: Harvesting Entropy from Human Movement"
-    />
-    <meta
-      property="twitter:description"
-      content="Can you trust your computer's random number generator? Learn how QRE Locker mixes system entropy with chaotic human input for maximum security."
-    />
-    <meta
-      property="twitter:image"
-      content="https://projectqre.com/images/qre-social-share.webp"
-    />
-    <meta
-      name="description"
-      content="An in-depth look at Project QRE's Paranoid Mode, which utilizes hybrid entropy sources to defeat RNG prediction attacks."
-    />
+    <meta property="twitter:url" content="https://projectqre.com/blog-paranoid-mode.html" />
+    <meta property="twitter:title" content="Paranoid Mode: Harvesting Entropy from Human Movement" />
+    <meta property="twitter:description" content="Can you trust your computer's random number generator? Learn how QRE Locker mixes system entropy with chaotic human input for maximum security." />
+    <meta property="twitter:image" content="https://projectqre.com/images/qre-social-share.webp" />
+    <meta name="description" content="An in-depth look at Project QRE's Paranoid Mode, which utilizes hybrid entropy sources to defeat RNG prediction attacks." />
+    <link rel="canonical" href="https://projectqre.com/blog-paranoid-mode.html" />
 
-    <link
-      rel="canonical"
-      href="https://projectqre.com/blog-paranoid-mode.html"
-    />
-
-    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Fonts -->
     <link
       rel="preload"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
       as="style"
-      onload="
-        this.onload = null;
-        this.rel = 'stylesheet';
-      "
+      onload="this.onload=null;this.rel='stylesheet';"
     />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
-      />
-    </noscript>
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" /></noscript>
 
-    <style>
-      /* --- inherited styles from blog.html --- */
-      :root {
-        --heading-font: "Orbitron", sans-serif;
-        --body-font: "Roboto", sans-serif;
-      }
-      [data-theme="dark"] {
-        --primary-color: #0d47a1;
-        --secondary-color-bg: #1976d2;
-        --secondary-color-text: #58afff;
-        --accent-color: #64b5f6;
-        --text-color: #e0e0e0;
-        --bg-color: #121212;
-        --card-bg-color: #1e1e1e;
-        --border-color: #333;
-        --footer-bg: #0a0a0a;
-        --footer-border: #222;
-        --link-color: var(--accent-color);
-        --link-hover-color: #90caf9;
-        --header-overlay: rgba(0, 0, 0, 0.5);
-        --icon-color: #e0e0e0;
-        --icon-hover-bg: rgba(255, 255, 255, 0.1);
-        --footer-link-color: #aaa;
-        --footer-link-hover-color: #fff;
-        --code-bg: #2d2d2d;
-      }
-      [data-theme="light"] {
-        --primary-color: #1565c0;
-        --secondary-color-bg: #1976d2;
-        --secondary-color-text: #0d47a1;
-        --accent-color: #1e88e5;
-        --text-color: #212121;
-        --bg-color: #f4f6f8;
-        --card-bg-color: #fff;
-        --border-color: #e0e0e0;
-        --footer-bg: #e9ecef;
-        --footer-border: #dee2e6;
-        --link-color: #0d47a1;
-        --link-hover-color: #0b3a7d;
-        --header-overlay: rgba(0, 0, 0, 0.3);
-        --icon-color: #212121;
-        --icon-hover-bg: rgba(0, 0, 0, 0.05);
-        --footer-link-color: #555;
-        --footer-link-hover-color: #000;
-        --code-bg: #e0e0e0;
-      }
-      *,
-      :after,
-      :before {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family: var(--body-font);
-        background-color: var(--bg-color);
-        color: var(--text-color);
-        line-height: 1.6;
-        overflow-x: hidden;
-        transition:
-          background-color 0.3s ease,
-          color 0.3s ease;
-      }
-      /* Theme Toggle */
-      #theme-toggle {
-        position: fixed;
-        top: 15px;
-        right: 15px;
-        z-index: 1000;
-        cursor: pointer;
-        background-color: transparent;
-        border: none;
-        padding: 8px;
-        border-radius: 50%;
-        transition: background-color 0.2s ease-in-out;
-      }
-      #theme-toggle:focus,
-      #theme-toggle:hover {
-        background-color: var(--icon-hover-bg);
-        outline: 0;
-      }
-      #theme-toggle svg {
-        width: 24px;
-        height: 24px;
-        stroke: var(--icon-color);
-        pointer-events: none;
-      }
-      [data-theme="dark"] .moon-icon {
-        display: none;
-      }
-      [data-theme="dark"] .sun-icon {
-        display: block;
-      }
-      [data-theme="light"] .sun-icon {
-        display: none;
-      }
-      [data-theme="light"] .moon-icon {
-        display: block;
-      }
-      /* Container & Header */
-      .container {
-        width: 90%;
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 20px 0;
-      }
-      header {
-        background-color: var(--primary-color);
-        color: #fff;
-        padding: 60px 20px;
-        text-align: center;
-        position: relative;
-        background-image: url(images/quantum_header_bg.webp);
-        background-size: cover;
-        background-position: 50%;
-        background-repeat: no-repeat;
-        min-height: 250px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      }
-      header:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: var(--header-overlay);
-        z-index: 1;
-      }
-      header .container {
-        position: relative;
-        z-index: 2;
-      }
-      header h1 {
-        font-family: var(--heading-font);
-        font-size: 3.2em;
-        margin-bottom: 0.3em;
-        letter-spacing: 2px;
-        color: #fff;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-      }
-      header .subtitle {
-        font-size: 1.4em;
-        font-weight: 300;
-        color: #e0e0e0;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-        line-height: 1.5;
-      }
-      .breadcrumb-nav {
-        padding: 15px 0;
-        font-size: 0.9em;
-        border-bottom: 1px solid var(--border-color);
-        margin-bottom: 20px;
-      }
-      .breadcrumb-nav a {
-        color: var(--link-color);
-        text-decoration: none;
-      }
-      .breadcrumb-nav a:hover {
-        text-decoration: underline;
-        color: var(--link-hover-color);
-      }
+    <link rel="stylesheet" href="styles.css" />
 
-      /* --- SINGLE POST STYLING --- */
-      .single-post-content {
-        background-color: var(--card-bg-color);
-        padding: 40px;
-        border-radius: 8px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      }
-      .single-post-content h1 {
-        font-family: var(--heading-font);
-        color: var(--accent-color);
-        margin-top: 0;
-        font-size: 2.2em;
-      }
-      .post-meta-single {
-        font-size: 0.95em;
-        color: var(--text-color);
-        opacity: 0.7;
-        margin-bottom: 2em;
-        padding-bottom: 1em;
-        border-bottom: 1px solid var(--border-color);
-      }
-      .single-post-content h2 {
-        font-family: var(--heading-font);
-        margin-top: 1.5em;
-        color: var(--secondary-color-text);
-        border-left: 4px solid var(--accent-color);
-        padding-left: 15px;
-      }
-      .single-post-content h3 {
-        font-family: var(--body-font);
-        margin-top: 1.2em;
-        color: var(--text-color);
-        font-weight: 700;
-      }
-      .single-post-content p {
-        margin-bottom: 1.2em;
-        font-size: 1.05em;
-      }
-      .single-post-content ul {
-        margin-bottom: 1.5em;
-        padding-left: 20px;
-      }
-      .single-post-content li {
-        margin-bottom: 0.5em;
-      }
-      .single-post-content code {
-        background-color: var(--code-bg);
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-family: "Roboto Mono", monospace;
-        font-size: 0.9em;
-      }
-
-      /* Footer */
-      footer {
-        background-color: var(--footer-bg);
-        color: var(--text-color);
-        text-align: center;
-        padding: 25px 0;
-        font-size: 0.9em;
-        margin-top: 40px;
-        border-top: 1px solid var(--footer-border);
-        transition:
-          background-color 0.3s ease,
-          border-color 0.3s ease;
-      }
-      .footer-links {
-        margin-top: 10px;
-      }
-      .footer-links a {
-        color: var(--footer-link-color);
-        text-decoration: none;
-        margin: 0 10px;
-        transition: color 0.2s;
-      }
-      .footer-links a:hover {
-        color: var(--footer-link-hover-color);
-        text-decoration: underline;
-      }
-      .footer-links span {
-        color: var(--footer-link-color);
-      }
-    </style>
     <script>
       (function () {
         const theme = localStorage.getItem("qre_theme") || "dark";
@@ -336,35 +46,15 @@
     </script>
   </head>
   <body>
-    <!-- Theme Toggle Button -->
     <button id="theme-toggle" title="Toggle light/dark theme">
-      <svg
-        class="sun-icon"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
+      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="5"></circle>
-        <line x1="12" y1="1" x2="12" y2="3"></line>
-        <line x1="12" y1="21" x2="12" y2="23"></line>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-        <line x1="1" y1="12" x2="3" y2="12"></line>
-        <line x1="21" y1="12" x2="23" y2="12"></line>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg
-      ><svg
-        class="moon-icon"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
+        <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
       </svg>
     </button>
@@ -377,16 +67,14 @@
     </header>
 
     <nav class="breadcrumb-nav container">
-      <a href="index.html">Home</a> &gt; <a href="blog.html">Blog</a> &gt;
-      Paranoid Mode
+      <a href="index.html">Home</a> &gt; <a href="blog.html">Blog</a> &gt; Paranoid Mode
     </nav>
 
     <main class="container">
       <article class="single-post-content">
         <h2>Paranoid Mode: Harvesting Entropy from Human Movement</h2>
         <div class="post-meta-single">
-          Published on November 15, 2025 by
-          <strong>The Project QRE Team</strong>
+          Published on November 15, 2025 by <strong>The Project QRE Team</strong>
         </div>
 
         <div class="post-body">
@@ -421,14 +109,8 @@
             generation process:
           </p>
           <ul>
-            <li>
-              <strong>Mouse Movements:</strong> We track the precise X/Y
-              coordinates of your mouse cursor.
-            </li>
-            <li>
-              <strong>Micro-Timing:</strong> We capture the exact nanosecond
-              intervals between input events.
-            </li>
+            <li><strong>Mouse Movements:</strong> We track the precise X/Y coordinates of your mouse cursor.</li>
+            <li><strong>Micro-Timing:</strong> We capture the exact nanosecond intervals between input events.</li>
           </ul>
           <p>
             Human hand movements are chaotic. The microscopic jitters and
@@ -450,7 +132,6 @@
             add a layer of randomness that exists outside the mathematical realm
             of the CPU.
           </p>
-
           <p>
             For 99% of users, the standard mode is secure. For the 1% who face
             adversaries with unlimited resources, Paranoid Mode provides that
@@ -460,41 +141,7 @@
       </article>
     </main>
 
-    <footer>
-      <div class="container">
-        <p>
-          © 2025–<span id="year"></span> Project QRE. Last updated:
-          <span id="last-updated">January 2026</span>
-        </p>
-        <div class="footer-links">
-          <a href="about.html">About Us</a><span>|</span
-          ><a
-            href="https://github.com/powergr/qre-privacy-toolkit/"
-            target="_blank"
-            rel="noopener noreferrer"
-            >GitHub</a
-          ><span>|</span><a href="blog.html">Blog</a><span>|</span
-          ><a href="contact.html">Contact</a><span>|</span
-          ><a href="terms.html">Terms</a><span>|</span
-          ><a href="privacy.html">Privacy</a>
-        </div>
-      </div>
-    </footer>
-    <script>
-      const startYear = 2025;
-      const currentYear = new Date().getFullYear();
-      document.getElementById("year").textContent =
-        currentYear > startYear ? currentYear : startYear;
-    </script>
-    <script>
-      const themeToggleButton = document.getElementById("theme-toggle");
-      themeToggleButton.addEventListener("click", () => {
-        const currentTheme =
-          document.documentElement.getAttribute("data-theme");
-        const newTheme = currentTheme === "dark" ? "light" : "dark";
-        document.documentElement.setAttribute("data-theme", newTheme);
-        localStorage.setItem("qre_theme", newTheme);
-      });
-    </script>
+    <div id="footer-placeholder"></div>
+    <script src="shared.js"></script>
   </body>
 </html>

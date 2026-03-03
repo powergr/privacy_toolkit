@@ -43,7 +43,7 @@
     />
     <meta
       name="description"
-      content="Get in touch with the team at Project QRE."
+      content="Get in touch with the team at Project QRE. Report security vulnerabilities, ask questions, or contribute to our local-first privacy toolkit."
     />
     <link rel="canonical" href="https://projectqre.com/contact.html" />
 
@@ -70,10 +70,49 @@
 
     <link rel="stylesheet" href="styles.css" />
 
-    <!-- Page-specific: contact h2 is centered -->
     <style>
-      h2 {
-        text-align: center;
+      /* Page-specific styling for the richer layout */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin-top: 30px;
+      }
+
+      @media (max-width: 768px) {
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .info-box {
+        background: var(--panel-bg, #252526);
+        border: 1px solid var(--border, #454545);
+        padding: 25px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+      }
+
+      .info-box h3 {
+        margin-top: 0;
+        color: var(--accent, #007acc);
+        font-size: 1.2rem;
+      }
+
+      .faq-item {
+        margin-bottom: 15px;
+      }
+
+      .faq-item strong {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--text-main);
+      }
+
+      .faq-item p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--text-dim);
       }
     </style>
 
@@ -130,49 +169,124 @@
     </nav>
 
     <main class="container">
-      <section>
-        <h2>Get In Touch</h2>
+      <section style="text-align: center; max-width: 800px; margin: 0 auto">
+        <h2 style="text-align: center">How Can We Help?</h2>
         <p class="contact-intro">
-          Have a question about the project, a technical inquiry, or want to
-          follow our progress? Please fill out the form below, and we'll get
-          back to you as soon as possible.
+          Project QRE is an open-source, local-first privacy initiative focused
+          on secure file encryption, password vault protection, and permanent
+          data destruction tools. Whether you are a security researcher, a
+          developer, or an everyday user, we welcome your feedback.
         </p>
-
-        <section class="contact-info">
-          <p>
-            Project QRE is an open-source, local-first privacy initiative
-            focused on secure file encryption, password vault protection, and
-            permanent data destruction tools. We welcome technical feedback,
-            vulnerability reports, feature suggestions, and collaboration
-            inquiries.
-          </p>
-          <p>
-            If you are a security researcher, developer, or privacy advocate and
-            would like to contribute or discuss improvements, please reach out.
-            We value responsible disclosure and constructive feedback.
-          </p>
-        </section>
-
-        <form
-          class="contact-form"
-          action="https://formspree.io/f/mqabpeyj"
-          method="POST"
-        >
-          <div class="form-group">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" required />
-          </div>
-          <div class="form-group">
-            <label for="email">Your Email</label>
-            <input type="email" id="email" name="email" required />
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" required></textarea>
-          </div>
-          <button type="submit" class="submit-btn">Send Message</button>
-        </form>
       </section>
+
+      <div class="contact-grid">
+        <!-- LEFT COLUMN: Form -->
+        <div>
+          <div class="info-box">
+            <h3>Send a Message</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                color: var(--text-dim);
+                margin-bottom: 20px;
+              "
+            >
+              Please fill out the form below. For bug reports or feature
+              requests, please include your Operating System and QRE version
+              number.
+            </p>
+            <form
+              class="contact-form"
+              action="https://formspree.io/f/mqabpeyj"
+              method="POST"
+            >
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: FAQs and Security Info -->
+        <div>
+          <div class="info-box">
+            <h3>Security & Vulnerability Disclosure</h3>
+            <p
+              style="
+                font-size: 0.9rem;
+                color: var(--text-dim);
+                line-height: 1.5;
+              "
+            >
+              Security is our highest priority. If you are a security researcher
+              and believe you have found a cryptographic flaw, a memory leak
+              (failure to zeroize), or a vulnerability in our Tauri backend,
+              please contact us immediately.
+              <br /><br />
+              We value responsible disclosure and will work with you to patch
+              the vulnerability before public disclosure. You can use the form
+              on this page or open a private security advisory on our GitHub
+              repository.
+            </p>
+          </div>
+
+          <div class="info-box">
+            <h3>Before You Ask (FAQ)</h3>
+
+            <div class="faq-item">
+              <strong
+                >I lost my Master Password. Can you recover my files?</strong
+              >
+              <p>
+                No. QRE is a "Zero-Knowledge" tool. Your Master Key is generated
+                locally and never leaves your device. If you lose your password
+                and your Recovery Code, your data is mathematically
+                unrecoverable. We cannot bypass AES-256-GCM.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <strong>How do I report a bug or request a tool?</strong>
+              <p>
+                The best way to request new features or report non-critical bugs
+                is by opening an Issue on our
+                <a
+                  href="https://github.com/powergr/qre-privacy-toolkit"
+                  style="color: var(--accent)"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >official GitHub repository</a
+                >. This allows the community to track and contribute to the fix.
+              </p>
+            </div>
+
+            <div class="faq-item">
+              <strong>Do you collect telemetry or analytics?</strong>
+              <p>
+                The QRE Privacy Toolkit desktop and mobile apps collect absolute
+                zero telemetry. The app is entirely offline-first, only making
+                external requests if you explicitly check for software updates
+                or use the HIBP Breach Checker.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
     <script src="shared.js"></script>

@@ -10,7 +10,7 @@
     />
     <meta
       name="description"
-      content="QRE Privacy Toolkit: The all-in-one local privacy suite. Encrypt files, store passwords, and shred sensitive data securely on Windows, Mac, Linux, and Android."
+      content="QRE Privacy Toolkit: The all-in-one local privacy suite. Encrypt files, store passwords, and shred sensitive data securely on Desktop and Android."
     />
     <title>QRE Privacy Toolkit | Secure Files & Passwords</title>
 
@@ -24,14 +24,29 @@
     <!-- Open Graph & Twitter Cards -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://projectqre.com/index.html" />
-    <meta property="og:title" content="QRE Privacy Toolkit: Your Digital Safe" />
-    <meta property="og:description" content="Free, open-source tool for File Encryption, Password Management, and Secure Deletion. Local-first privacy for everyone." />
-    <meta property="og:image" content="https://projectqre.com/images/qre-social-share.webp" />
+    <meta
+      property="og:title"
+      content="QRE Privacy Toolkit: Your Digital Safe"
+    />
+    <meta
+      property="og:description"
+      content="Free, open-source tool for File Encryption, Password Management, and Secure Deletion. Local-first privacy for everyone."
+    />
+    <meta
+      property="og:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://projectqre.com/index.html" />
     <meta property="twitter:title" content="QRE Privacy Toolkit" />
-    <meta property="twitter:description" content="Encrypt files. Store passwords. Shred data. Zero Knowledge, Local-First." />
-    <meta property="twitter:image" content="https://projectqre.com/images/qre-social-share.webp" />
+    <meta
+      property="twitter:description"
+      content="Encrypt files. Store passwords. Shred data. Zero Knowledge, Local-First."
+    />
+    <meta
+      property="twitter:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
     <link rel="canonical" href="https://projectqre.com/" />
 
     <!-- Preload hero image -->
@@ -42,9 +57,16 @@
       rel="preload"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
       as="style"
-      onload="this.onload=null;this.rel='stylesheet';"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
     />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" /></noscript>
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+    /></noscript>
 
     <!-- Shared Styles -->
     <link rel="stylesheet" href="styles.css" />
@@ -52,20 +74,35 @@
     <!-- Page-specific overrides -->
     <style>
       /* Index uses a wider container and taller header */
-      .container { max-width: 1100px; }
-      header { min-height: 300px; }
-      header .container { max-width: 800px; }
-      header h1 { font-size: 3.5em; }
-      main { padding-top: 0; }
-      #status p, #contact p {
+      .container {
+        max-width: 1100px;
+      }
+      header {
+        min-height: 300px;
+      }
+      header .container {
+        max-width: 800px;
+      }
+      header h1 {
+        font-size: 3.5em;
+      }
+      main {
+        padding-top: 0;
+      }
+      #status p,
+      #contact p {
         text-align: center;
         font-size: 1.1em;
         max-width: 700px;
         margin-left: auto;
         margin-right: auto;
       }
-      #contact p { margin-bottom: 25px; }
-      #contact { text-align: center; }
+      #contact p {
+        margin-bottom: 25px;
+      }
+      #contact {
+        text-align: center;
+      }
     </style>
 
     <script>
@@ -77,14 +114,34 @@
   </head>
   <body>
     <button id="theme-toggle" title="Toggle light/dark theme">
-      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        class="sun-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <circle cx="12" cy="12" r="5"></circle>
-        <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-        <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
       </svg>
-      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        class="moon-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
       </svg>
     </button>
@@ -105,16 +162,43 @@
           your desktop and phone. Encrypt sensitive files, manage passwords
           offline, and shred data permanently—all without the cloud.
         </p>
-        <img src="images/qre.webp" alt="QRE Toolkit Interface" class="hero-screenshot" />
+        <img
+          src="images/qre.webp"
+          alt="QRE Toolkit Interface"
+          class="hero-screenshot"
+        />
       </section>
 
-      <section id="project-overview-cta-section" style="border-bottom: 1px solid var(--border-color)">
-        <div class="container" style="text-align: center; padding-top: 30px; padding-bottom: 30px">
+      <section
+        id="project-overview-cta-section"
+        style="border-bottom: 1px solid var(--border-color)"
+      >
+        <div
+          class="container"
+          style="text-align: center; padding-top: 30px; padding-bottom: 30px"
+        >
           <div class="cta-button-group">
-            <a href="https://github.com/powergr/qre-privacy-toolkit/releases/latest" class="cta-button">Download Latest Release</a>
-            <a href="https://github.com/powergr/qre-privacy-toolkit" class="cta-button secondary" target="_blank" rel="noopener noreferrer">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            <a
+              href="https://github.com/powergr/qre-privacy-toolkit/releases/latest"
+              class="cta-button"
+              >Download Latest Release</a
+            >
+            <a
+              href="https://github.com/powergr/qre-privacy-toolkit"
+              class="cta-button secondary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                />
               </svg>
               <span>View Source</span>
             </a>
@@ -127,39 +211,83 @@
         <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon-wrapper">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feature-svg-icon">
-                <path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feature-svg-icon"
+              >
+                <path
+                  d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3"
+                />
               </svg>
             </div>
             <h3>File Encryption</h3>
             <div class="feature-card-text-content">
-              <p>Secure photos, documents, and videos with AES-256-GCM. Our streaming engine handles files of unlimited size (100GB+) without slowing down your PC or phone.</p>
+              <p>
+                Secure photos, documents, and videos with AES-256-GCM. Our
+                streaming engine handles files of unlimited size (100GB+)
+                without slowing down your PC or phone.
+              </p>
             </div>
           </div>
           <div class="feature-card">
             <div class="feature-icon-wrapper">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feature-svg-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feature-svg-icon"
+              >
                 <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
-                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
+                <path
+                  d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"
+                ></path>
                 <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
               </svg>
             </div>
             <h3>Password Vault</h3>
             <div class="feature-card-text-content">
-              <p>Store your passwords, recovery codes, and sensitive notes in an encrypted vault. Zero-Knowledge and completely offline.</p>
+              <p>
+                Store your passwords, recovery codes, and sensitive notes in an
+                encrypted vault. Zero-Knowledge and completely offline.
+              </p>
             </div>
           </div>
           <div class="feature-card">
             <div class="feature-icon-wrapper">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feature-svg-icon">
-                <path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feature-svg-icon"
+              >
+                <path d="M4 7l16 0" />
+                <path d="M10 11l0 6" />
+                <path d="M14 11l0 6" />
                 <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
                 <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
               </svg>
             </div>
             <h3>Secure Shredder</h3>
             <div class="feature-card-text-content">
-              <p>Permanently destroy sensitive files before selling a laptop or USB drive. Uses 3-pass overwriting to prevent data recovery tools from working.</p>
+              <p>
+                Permanently destroy sensitive files before selling a laptop or
+                USB drive. Uses 3-pass overwriting to prevent data recovery
+                tools from working.
+              </p>
             </div>
           </div>
         </div>
@@ -170,14 +298,28 @@
         <div class="timeline-container">
           <div class="timeline-item past">
             <div class="timeline-dot">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 12l5 5l10 -10" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="3"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M5 12l5 5l10 -10" />
               </svg>
             </div>
             <div class="timeline-content">
               <h3>Core Encryption</h3>
               <div class="timeline-duration">2025</div>
-              <p>Established the Rust cryptographic engine (AES-256 + Argon2id) and the local keychain architecture.</p>
+              <p>
+                Established the Rust cryptographic engine (AES-256 + Argon2id)
+                and the local keychain architecture.
+              </p>
             </div>
           </div>
           <div class="timeline-item current">
@@ -185,7 +327,12 @@
             <div class="timeline-content">
               <h3>QRE Toolkit v2.6</h3>
               <div class="timeline-duration">Current Release</div>
-              <p><strong>Cross-Platform:</strong> Now available on Android with native file sharing.<br /><strong>New Tools:</strong> Added many new tools.<br /><strong>Performance:</strong> New Streaming Engine handles files of any size.</p>
+              <p>
+                <strong>Cross-Platform:</strong> Now available on Android with
+                native file sharing.<br /><strong>New Tools:</strong> Added many
+                new tools.<br /><strong>Performance:</strong> New Streaming
+                Engine handles files of any size.
+              </p>
             </div>
           </div>
           <div class="timeline-item future">
@@ -193,7 +340,10 @@
             <div class="timeline-content">
               <h3>Future Roadmap</h3>
               <div class="timeline-duration">2026+</div>
-              <p>Please share your thoughts of additional tools to add in our contact page.</p>
+              <p>
+                Please share your thoughts of additional tools to add in our
+                contact page.
+              </p>
             </div>
           </div>
         </div>
@@ -201,17 +351,40 @@
 
       <section id="status" class="container">
         <h2>Zero Knowledge. Zero Trust.</h2>
-        <p>QRE Toolkit operates on a strict <strong>Zero-Knowledge</strong> model. We have no servers, no accounts, and no way to recover your password. Your keys never leave your device.</p>
+        <p>
+          QRE Toolkit operates on a strict
+          <strong>Zero-Knowledge</strong> model. We have no servers, no
+          accounts, and no way to recover your password. Your keys never leave
+          your device.
+        </p>
       </section>
 
       <section id="contact" class="container">
         <h2>Support & Community</h2>
         <p>Found a bug? Have a feature request? Join us on GitHub.</p>
-        <a href="https://github.com/powergr/qre-privacy-toolkit/issues" class="cta-button">Report Issue</a>
+        <a
+          href="https://github.com/powergr/qre-privacy-toolkit/issues"
+          class="cta-button"
+          >Report Issue</a
+        >
       </section>
     </main>
 
     <div id="footer-placeholder"></div>
     <script src="shared.js"></script>
+
+    <footer>
+      <div class="container">
+        <p>
+          &copy; 2025&ndash;<span id="footer-year"></span> Project QRE. Last
+          updated: <span id="footer-month"></span>
+        </p>
+        <div class="footer-links">
+          <a href="about.html">About Us</a> | <a href="blog.html">Blog</a> |
+          <a href="contact.html">Contact</a> | <a href="terms.html">Terms</a> |
+          <a href="privacy.html">Privacy</a>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

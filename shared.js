@@ -4,36 +4,6 @@
  */
 (function () {
   /* ------------------------------------------------------------------
-     1. Footer HTML
-     ------------------------------------------------------------------ */
-  const footerHTML = `
-    <footer>
-      <div class="container">
-        <p>
-          &copy; 2025&ndash;<span id="footer-year"></span> Project QRE.
-          Last updated: <span id="footer-month"></span>
-        </p>
-        <div class="footer-links">
-          <a href="about.html">About Us</a><span> | </span>
-          <a href="https://github.com/powergr/qre-privacy-toolkit/" target="_blank" rel="noopener noreferrer">GitHub</a><span> | </span>
-          <a href="https://github.com/powergr/qre-privacy-toolkit/releases" target="_blank" rel="noopener noreferrer">Releases</a><span> | </span>
-          <a href="blog.html">Blog</a><span> | </span>
-          <a href="contact.html">Contact</a><span> | </span>
-          <a href="terms.html">Terms</a><span> | </span>
-          <a href="privacy.html">Privacy</a>
-        </div>
-      </div>
-    </footer>`;
-
-  /* ------------------------------------------------------------------
-     2. Inject Footer
-     ------------------------------------------------------------------ */
-  const placeholder = document.getElementById("footer-placeholder");
-  if (placeholder) {
-    placeholder.outerHTML = footerHTML;
-  }
-
-  /* ------------------------------------------------------------------
      3. Copyright Year & Last Updated Month
      ------------------------------------------------------------------ */
   const now = new Date();

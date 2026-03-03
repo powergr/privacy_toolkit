@@ -92,7 +92,9 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* --------------------------------------------------------------------------
@@ -124,10 +126,18 @@ body {
   pointer-events: none;
 }
 
-[data-theme="dark"] .moon-icon { display: none; }
-[data-theme="dark"] .sun-icon  { display: block; }
-[data-theme="light"] .sun-icon { display: none; }
-[data-theme="light"] .moon-icon { display: block; }
+[data-theme="dark"] .moon-icon {
+  display: none;
+}
+[data-theme="dark"] .sun-icon {
+  display: block;
+}
+[data-theme="light"] .sun-icon {
+  display: none;
+}
+[data-theme="light"] .moon-icon {
+  display: block;
+}
 
 /* --------------------------------------------------------------------------
    4. Layout
@@ -227,7 +237,9 @@ footer {
   font-size: 0.9em;
   margin-top: 40px;
   border-top: 1px solid var(--footer-border);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .footer-links {
@@ -296,7 +308,9 @@ section:last-of-type {
   padding: 30px;
   border-radius: 8px;
   border-left: 5px solid var(--secondary-color-bg);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .post-item:hover {
@@ -687,7 +701,10 @@ section:last-of-type {
   padding: 25px;
   border-radius: 8px;
   box-shadow: 0 4px 15px var(--shadow-color);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -764,6 +781,7 @@ section:last-of-type {
 .hero-screenshot {
   max-width: 800px;
   width: 100%;
+  height: auto;
   border-radius: 12px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   margin: 40px auto 0;
@@ -808,8 +826,14 @@ section:last-of-type {
   margin-bottom: 0;
 }
 
-.timeline-item:nth-child(odd)  { left: 0;   padding-right: 30px; }
-.timeline-item:nth-child(even) { left: 50%; padding-left: 30px; }
+.timeline-item:nth-child(odd) {
+  left: 0;
+  padding-right: 30px;
+}
+.timeline-item:nth-child(even) {
+  left: 50%;
+  padding-left: 30px;
+}
 
 .timeline-dot {
   position: absolute;
@@ -820,7 +844,9 @@ section:last-of-type {
   top: 25px;
   border-radius: 50%;
   z-index: 3;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -832,8 +858,12 @@ section:last-of-type {
   stroke: #fff;
 }
 
-.timeline-item:nth-child(odd)  .timeline-dot { right: -12px; }
-.timeline-item:nth-child(even) .timeline-dot { left: -12px; }
+.timeline-item:nth-child(odd) .timeline-dot {
+  right: -12px;
+}
+.timeline-item:nth-child(even) .timeline-dot {
+  left: -12px;
+}
 
 .timeline-content {
   padding: 20px 25px;

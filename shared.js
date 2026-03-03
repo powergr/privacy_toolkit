@@ -1,12 +1,9 @@
-/**
- * QRE Privacy Toolkit — Shared Site Scripts
- * Handles: footer injection, copyright year, and theme toggle.
- */
-(function () {
+document.addEventListener("DOMContentLoaded", function () {
   /* ------------------------------------------------------------------
-     3. Copyright Year & Last Updated Month
-     ------------------------------------------------------------------ */
+     Copyright Year & Last Updated Month
+  ------------------------------------------------------------------ */
   const now = new Date();
+
   const yearEl = document.getElementById("footer-year");
   if (yearEl) {
     const startYear = 2025;
@@ -21,8 +18,8 @@
   }
 
   /* ------------------------------------------------------------------
-     4. Theme Toggle
-     ------------------------------------------------------------------ */
+     Theme Toggle
+  ------------------------------------------------------------------ */
   const toggleBtn = document.getElementById("theme-toggle");
   if (toggleBtn) {
     toggleBtn.addEventListener("click", function () {
@@ -33,4 +30,4 @@
       localStorage.setItem("qre_theme", newTheme);
     });
   }
-})();
+});

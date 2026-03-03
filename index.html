@@ -178,9 +178,22 @@
           src="images/qre.webp"
           alt="QRE Privacy Toolkit Interface"
           class="hero-screenshot"
+          onclick="openLightbox()"
+          style="cursor: pointer"
           width="1200"
           height="829"
         />
+        <div id="qre-lightbox" class="lightbox" style="display: none">
+          <span class="lightbox-close" onclick="closeLightbox()" title="Close"
+            >&times;</span
+          >
+          <img
+            src="images/qre.webp"
+            alt="QRE Privacy Toolkit Interface"
+            class="lightbox-img"
+          />
+          <span class="lightbox-caption">QRE Privacy Toolkit Interface</span>
+        </div>
       </section>
 
       <section
@@ -403,5 +416,27 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      let lightbox = null;
+      function openLightbox() {
+        lightbox = document.getElementById("qre-lightbox");
+        lightbox.style.display = "flex";
+        document.body.style.overflow = "hidden"; // Prevent scroll
+      }
+      function closeLightbox() {
+        if (lightbox) {
+          lightbox.style.display = "none";
+          document.body.style.overflow = "";
+          lightbox = null;
+        }
+      }
+      document.addEventListener("click", function (e) {
+        if (e.target.id === "qre-lightbox") closeLightbox();
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && lightbox) closeLightbox();
+      });
+    </script>
   </body>
 </html>

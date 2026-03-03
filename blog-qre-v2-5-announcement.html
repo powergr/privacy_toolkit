@@ -10,16 +10,40 @@
     />
     <title>Announcing QRE Privacy Toolkit v2.5</title>
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://projectqre.com/blog-qre-v2-5-announcement.html" />
+    <meta
+      property="og:url"
+      content="https://projectqre.com/blog-qre-v2-5-announcement.html"
+    />
     <meta property="og:title" content="Announcing QRE Privacy Toolkit v2.5" />
-    <meta property="og:description" content="Meet the Privacy Swiss Army Knife. Secure Files, Password Vault, and Shredder in one app." />
-    <meta property="og:image" content="https://projectqre.com/images/qre-social-share.webp" />
+    <meta
+      property="og:description"
+      content="Meet the Privacy Swiss Army Knife. Secure Files, Password Vault, and Shredder in one app."
+    />
+    <meta
+      property="og:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://projectqre.com/blog-qre-v2-5-announcement.html" />
-    <meta property="twitter:title" content="Announcing QRE Privacy Toolkit v2.5" />
-    <meta property="twitter:description" content="Meet the Privacy Swiss Army Knife. Secure Files, Password Vault, and Shredder in one app." />
-    <meta property="twitter:image" content="https://projectqre.com/images/qre-social-share.webp" />
-    <link rel="canonical" href="https://projectqre.com/blog-qre-v2-5-announcement.html" />
+    <meta
+      property="twitter:url"
+      content="https://projectqre.com/blog-qre-v2-5-announcement.html"
+    />
+    <meta
+      property="twitter:title"
+      content="Announcing QRE Privacy Toolkit v2.5"
+    />
+    <meta
+      property="twitter:description"
+      content="Meet the Privacy Swiss Army Knife. Secure Files, Password Vault, and Shredder in one app."
+    />
+    <meta
+      property="twitter:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
+    <link
+      rel="canonical"
+      href="https://projectqre.com/blog-qre-v2-5-announcement.html"
+    />
 
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -31,9 +55,16 @@
       rel="preload"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
       as="style"
-      onload="this.onload=null;this.rel='stylesheet';"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
     />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap" /></noscript>
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+    /></noscript>
 
     <link rel="stylesheet" href="styles.css" />
 
@@ -46,14 +77,34 @@
   </head>
   <body>
     <button id="theme-toggle" title="Toggle light/dark theme">
-      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        class="sun-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <circle cx="12" cy="12" r="5"></circle>
-        <line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-        <line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
       </svg>
-      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        class="moon-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
       </svg>
     </button>
@@ -66,7 +117,8 @@
     </header>
 
     <nav class="breadcrumb-nav container">
-      <a href="index.html">Home</a> &gt; <a href="blog.html">Blog</a> &gt; Announcing QRE Toolkit v2.5
+      <a href="index.html">Home</a> &gt; <a href="blog.html">Blog</a> &gt;
+      Announcing QRE Privacy Toolkit v2.5
     </nav>
 
     <main class="container">
@@ -107,9 +159,9 @@
           <h2>3. Secure Shredder</h2>
           <p>
             When you delete a file, it isn't really gone. Our new
-            <strong>Secure Shredder</strong> performs a 3-pass overwrite (DoD standard)
-            on desktop systems to ensure data is mathematically unrecoverable before
-            deletion.
+            <strong>Secure Shredder</strong> performs a 3-pass overwrite (DoD
+            standard) on desktop systems to ensure data is mathematically
+            unrecoverable before deletion.
           </p>
 
           <h2>4. Android Support</h2>
@@ -124,7 +176,11 @@
             QRE Privacy Toolkit v2.5 is available now for Windows, Linux, macOS,
             and Android.
           </p>
-          <a href="https://github.com/powergr/qre-privacy-toolkit/releases/" class="btn-download">Download Latest Release</a>
+          <a
+            href="https://github.com/powergr/qre-privacy-toolkit/releases/"
+            class="btn-download"
+            >Download Latest Release</a
+          >
         </div>
       </article>
     </main>

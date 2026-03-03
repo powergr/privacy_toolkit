@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self'; connect-src 'self'; frame-ancestors 'self'; form-action 'self'; upgrade-insecure-requests;"
+    />
+    <title>Announcing QRE Privacy Toolkit v2.6.8 - Project QRE</title>
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://projectqre.com/blog-qre-v2-6-8-announcement.html"
+    />
+    <meta
+      property="og:title"
+      content="Announcing QRE Privacy Toolkit v2.6.8: The Complete Security Suite"
+    />
+    <meta
+      property="og:description"
+      content="Version 2.6.8 brings 12 offline tools, strict memory zeroization, and a hardened Rust backend to Windows, macOS, Linux, and Android."
+    />
+    <meta
+      property="og:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://projectqre.com/blog-qre-v2-6-8-announcement.html"
+    />
+    <meta
+      property="twitter:title"
+      content="Announcing QRE Privacy Toolkit v2.6.8"
+    />
+    <meta
+      property="twitter:description"
+      content="Version 2.6.8 brings 12 offline tools, strict memory zeroization, and a hardened Rust backend."
+    />
+    <meta
+      property="twitter:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
+    <link
+      rel="canonical"
+      href="https://projectqre.com/blog-qre-v2-6-8-announcement.html"
+    />
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+    /></noscript>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <script>
+      (function () {
+        const theme = localStorage.getItem("qre_theme") || "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <button id="theme-toggle" title="Toggle light/dark theme">
+      <svg
+        class="sun-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg
+        class="moon-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+
+    <header>
+      <div class="container">
+        <h1>Project QRE Blog</h1>
+        <p class="subtitle">Updates, Research, and Technical Deep Dives</p>
+      </div>
+    </header>
+
+    <nav class="breadcrumb-nav container">
+      <a href="index.html">Home</a> &gt; <a href="blog.html">Blog</a> &gt;
+      Announcing QRE Toolkit v2.6.8
+    </nav>
+
+    <main class="container">
+      <article class="single-post-content">
+        <h2>
+          Announcing QRE Privacy Toolkit v2.6.8: The Complete 12-Tool Security
+          Suite
+        </h2>
+        <div class="post-meta-single">
+          Published on March 3, 2026 by
+          <strong>The Project QRE Team</strong>
+        </div>
+
+        <div class="post-body">
+          <p>
+            When we first launched QRE Locker, our goal was simple: provide the
+            best local, offline file encryption possible. Today, with the
+            release of <strong>QRE Privacy Toolkit v2.6.8</strong>, we have
+            realized our vision of a complete, unified privacy ecosystem.
+          </p>
+          <p>
+            Version 2.6.8 is our largest, most rigorously audited release to
+            date. It expands the app into a powerhouse featuring
+            <strong>12 dedicated privacy tools</strong>, backed by a deeply
+            hardened Rust architecture.
+          </p>
+
+          <h2>The 12-Tool Arsenal</h2>
+          <p>
+            No more relying on scattered, ad-supported web tools to manage your
+            digital footprint. Everything you need is now processed locally on
+            your device:
+          </p>
+          <ul>
+            <li>
+              <strong>Encrypt Files:</strong> Our flagship AES-256-GCM streaming
+              engine for files of any size.
+            </li>
+            <li>
+              <strong>Passwords & Secure Notes:</strong> Offline, zero-knowledge
+              credential and text storage.
+            </li>
+            <li>
+              <strong>Bookmarks & Clipboard:</strong> Encrypted private links
+              and secure copy/paste history with auto-clearing.
+            </li>
+            <li>
+              <strong>Privacy Check & File Analyzer:</strong> Detect exposed
+              emails via k-Anonymity HIBP checks and identify malware using
+              spoofed file extensions.
+            </li>
+            <li>
+              <strong>Integrity Check & QR Generator:</strong> Validate file
+              hashes (SHA256, MD5) and generate Wi-Fi/Text QR codes completely
+              offline.
+            </li>
+            <li>
+              <strong>System Clean, Meta Cleaner & Shredder:</strong> Wipe
+              developer caches (npm, cargo), strip Exif data from photos, and
+              permanently destroy files with DoD-standard shredding.
+            </li>
+          </ul>
+
+          <h2>Cryptographic & Architecture Hardening</h2>
+          <p>
+            We don't just add features; we secure the foundation. In v2.6.8, we
+            performed a massive internal security audit resulting in several
+            critical upgrades:
+          </p>
+
+          <h3>1. Strict Memory Zeroization</h3>
+          <p>
+            When you decrypt a file or unlock your vault, cryptographic keys and
+            plaintext data temporarily reside in your system's RAM. We have
+            fully implemented the Rust <code>zeroize</code> crate. The moment a
+            key or sensitive payload goes out of scope, it is explicitly
+            overwritten with zeros, neutralizing RAM-scraping malware and
+            cold-boot attacks.
+          </p>
+
+          <h3>2. Hybrid Paranoid Mode (Entropy Mixing)</h3>
+          <p>
+            Our <a href="blog-paranoid-mode.html">Paranoid Mode</a> has been
+            completely rewritten. Instead of replacing the Operating System's
+            random number generator with human input, we now XOR-mix your
+            physical mouse/touch timing jitter <em>into</em> the OS CSPRNG. This
+            mathematically guarantees that your keys are immune to both bad user
+            input and theoretical hardware RNG backdoors.
+          </p>
+
+          <h3>3. System File Protection</h3>
+          <p>
+            To protect users from accidental (or malicious) OS corruption, the
+            backend now features a strict path-validation guard. The toolkit
+            refuses to lock, shred, or modify critical system paths (like
+            <code>C:\Windows</code> or <code>/bin</code>), ensuring the tool
+            remains safe even in the hands of novices.
+          </p>
+
+          <h2>Flawless Android Integration</h2>
+          <p>
+            We have perfected the mobile experience. The Android app now
+            features a native bottom-sheet UI, correct scoped storage
+            permissions (keeping the app sandboxed strictly to user data), and a
+            custom-built GitHub API updater that allows you to download new APKs
+            directly from the app—bypassing Google Play entirely for ultimate
+            privacy.
+          </p>
+
+          <h2>Download the Update</h2>
+          <p>
+            QRE Privacy Toolkit v2.6.8 is an open-source, local-first fortress.
+            It is available right now for Windows, macOS, Linux, and Android.
+          </p>
+          <a
+            href="https://github.com/powergr/qre-privacy-toolkit/releases/latest"
+            class="btn-download"
+            >Download v2.6.8</a
+          >
+        </div>
+      </article>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="shared.js"></script>
+  </body>
+</html>

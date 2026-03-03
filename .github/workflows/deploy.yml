@@ -3,22 +3,51 @@ name: Deploy Website via SSH
 on:
   push:
     branches:
-      - main  # Or master, depending on your default branch name
+      - main # Change if your branch is different
 
 jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+
     steps:
+      # 1️⃣ Checkout repository
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 2️⃣ Generate sitemap.xml automatically
+      - name: Generate sitemap.xml
+        run: |
+          echo '<?xml version="1.0" encoding="UTF-8"?>' > sitemap.xml
+          echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> sitemap.xml
+
+          for file in $(find . -name "*.html" ! -path "./node_modules/*"); do
+            path=$(echo $file | sed 's|^\./||')
+
+            if [ "$path" = "index.html" ]; then
+              url="https://projectqre.com/"
+            else
+              url="https://projectqre.com/${path}"
+            fi
+
+            # Get real last modified date from git
+            lastmod=$(git log -1 --format="%cI" -- "$file" || date -u +%Y-%m-%d)
+
+            echo "  <url>" >> sitemap.xml
+            echo "    <loc>$url</loc>" >> sitemap.xml
+            echo "    <lastmod>$lastmod</lastmod>" >> sitemap.xml
+            echo "  </url>" >> sitemap.xml
+          done
+
+          echo '</urlset>' >> sitemap.xml
+
+      # 3️⃣ Deploy everything (including sitemap.xml) via rsync
       - name: Deploy to Server with rsync
         uses: easingthemes/ssh-deploy@v5.1.0
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           REMOTE_HOST: ${{ secrets.SSH_HOST }}
           REMOTE_USER: ${{ secrets.SSH_USER }}
-          SOURCE: "./"  # The root of your repository
+          SOURCE: "./"
           TARGET: ${{ secrets.REMOTE_PATH }}
-          EXCLUDE: "/.github/, /node_modules/" # Exclude the workflow directory and other unnecessary files
+          EXCLUDE: "/.github/, /node_modules/"

@@ -183,17 +183,6 @@
           width="1200"
           height="829"
         />
-        <div id="qre-lightbox" class="lightbox" style="display: none">
-          <span class="lightbox-close" onclick="closeLightbox()" title="Close"
-            >&times;</span
-          >
-          <img
-            src="images/qre.webp"
-            alt="QRE Privacy Toolkit Interface"
-            class="lightbox-img"
-          />
-          <span class="lightbox-caption">QRE Privacy Toolkit Interface</span>
-        </div>
       </section>
 
       <section
@@ -416,6 +405,19 @@
         </div>
       </div>
     </footer>
+
+    <!-- Lightbox moved to body level so position:fixed is not trapped by a parent stacking context -->
+    <div id="qre-lightbox" class="lightbox" style="display: none">
+      <span class="lightbox-close" onclick="closeLightbox()" title="Close"
+        >&times;</span
+      >
+      <img
+        src="images/qre.webp"
+        alt="QRE Privacy Toolkit Interface"
+        class="lightbox-img"
+      />
+      <span class="lightbox-caption">QRE Privacy Toolkit Interface</span>
+    </div>
 
     <script>
       let lightbox = null;

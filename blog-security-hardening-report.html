@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none';
+           script-src 'self' 'unsafe-inline' static.cloudflareinsights.com;
+           style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+           font-src 'self' https://fonts.gstatic.com;
+           img-src 'self';
+           connect-src 'self' cloudflareinsights.com;
+           form-action 'self';
+           upgrade-insecure-requests;"
+    />
+    <title>Security Hardening Report: QRE v2.6.9 - Project QRE</title>
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://projectqre.com/blog-security-hardening-report.html"
+    />
+    <meta
+      property="og:title"
+      content="Security Hardening Report: QRE Privacy Toolkit v2.6.9"
+    />
+    <meta
+      property="og:description"
+      content="A deep dive into the security hardening work done for QRE v2.6.9 — covering dependency auditing, panic elimination, filesystem scope hardening, fuzz testing, and more."
+    />
+    <meta
+      property="og:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://projectqre.com/blog-security-hardening-report.html"
+    />
+    <meta
+      property="twitter:title"
+      content="Security Hardening Report: QRE Privacy Toolkit v2.6.9"
+    />
+    <meta
+      property="twitter:description"
+      content="A deep dive into the security hardening work done for QRE v2.6.9 — covering dependency auditing, panic elimination, filesystem scope hardening, fuzz testing, and more."
+    />
+    <meta
+      property="twitter:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
+    <meta
+      name="description"
+      content="A deep dive into the security hardening work done for QRE v2.6.9 — covering dependency auditing, panic elimination, filesystem scope hardening, fuzz testing, and more."
+    />
+    <link
+      rel="canonical"
+      href="https://projectqre.com/blog-security-hardening-report.html"
+    />
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+    /></noscript>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <script>
+      (function () {
+        const theme = localStorage.getItem("qre_theme") || "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <button id="theme-toggle" title="Toggle light/dark theme">
+      <svg
+        class="sun-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg
+        class="moon-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+
+    <header>
+      <div class="container">
+        <h1>Project QRE Blog</h1>
+        <p class="subtitle">Updates, Research, and Technical Deep Dives</p>
+      </div>
+    </header>
+
+    <nav class="breadcrumb-nav container">
+      <a href="index.html">Home</a> &gt; <a href="blog.html">Blog</a> &gt;
+      Security Hardening Report v2.6.9
+    </nav>
+
+    <main class="container">
+      <article class="single-post-content">
+        <h2>Security Hardening Report: QRE Privacy Toolkit v2.6.9</h2>
+        <div class="post-meta-single">
+          Published on March 8 2026 by <strong>The Project QRE Team</strong>
+        </div>
+
+        <div class="post-body">
+          <p>
+            With every release, we conduct a thorough security review of the
+            entire stack. This post documents the hardening work completed for
+            <strong>qre-gui v2.6.9</strong> (Tauri V2 + React/TypeScript +
+            Rust), from dependency auditing all the way through to fuzz testing
+            infrastructure. Transparency is a core value for a security tool, so
+            we are publishing the full findings here.
+          </p>
+
+          <h2>1. Dependency Security</h2>
+
+          <h3>rand 0.8 &rarr; 0.9 Migration</h3>
+          <p>
+            We upgraded <code>rand</code> and <code>rand_chacha</code> to
+            version 0.9 across the entire project, eliminating one of three
+            duplicate <code>rand</code> versions in the dependency tree. A
+            residual <code>rand 0.7.3</code> copy remains as a deep transitive
+            dependency inside Tauri itself and cannot be controlled from our
+            side.
+          </p>
+          <p>
+            The migration required adapting to a breaking API change:
+            <code>OsRng</code> no longer implements
+            <code>RngCore</code> directly in 0.9 &mdash; it now implements
+            <code>TryRngCore</code> because OS random number generation can
+            theoretically fail. Every <code>OsRng.fill_bytes()</code> call
+            across <code>crypto.rs</code>, <code>crypto_stream.rs</code>, and
+            <code>keychain.rs</code> was updated to use
+            <code>.try_fill_bytes(...).expect("OS RNG failed")</code>. The
+            <code>.expect()</code> is intentional: if the OS random number
+            generator is unavailable during key or nonce generation, there is no
+            safe fallback and the operation must abort immediately.
+          </p>
+          <p>
+            A version conflict in <code>keychain.rs</code> was resolved by
+            aliasing the two incompatible <code>OsRng</code> types, since
+            <code>argon2</code> re-exports an older <code>rand_core 0.6</code>
+            snapshot internally:
+          </p>
+          <pre><code>use argon2::password_hash::{rand_core::OsRng as Argon2OsRng, SaltString};
+use rand::{rngs::OsRng, TryRngCore};</code></pre>
+
+          <h3>cargo-audit &mdash; Advisory Review</h3>
+          <p>
+            Running <code>cargo audit</code> produced 19 warnings and 0 errors.
+            All warnings were triaged: the GTK3 bindings (10 crates),
+            <code>unic-*</code> crates (5 crates),
+            <code>proc-macro-error</code>, and <code>fxhash</code> are all
+            transitive Tauri dependencies and were deferred to upstream.
+          </p>
+          <p>
+            The one advisory worth calling out is
+            <strong>RUSTSEC-2024-0429</strong> for <code>glib</code> &mdash; an
+            unsound <code>Iterator</code> implementation buried inside
+            <code>webkit2gtk</code> internals. It is not directly callable from
+            application code, but is flagged for monitoring until a Tauri
+            release integrates glib 0.19+.
+          </p>
+          <p>
+            <code>bincode 1.3.3</code> &mdash; a direct project dependency
+            &mdash; is flagged as unmaintained and left as an active error in
+            <code>deny.toml</code> as a deliberate reminder to migrate to
+            bincode v2.
+          </p>
+
+          <h3>cargo-deny &mdash; License Compliance</h3>
+          <p>
+            658 license errors and 2 unlicense warnings were resolved. The
+            package was marked
+            <code>license = "proprietary"</code>, and the
+            <code>deny.toml</code> allowlist was expanded to cover the full
+            Tauri/Rust ecosystem: MIT, Apache-2.0, ISC, BSD-2-Clause,
+            BSD-3-Clause, Unicode-3.0, MPL-2.0, OpenSSL, Zlib, CC0-1.0, and
+            others. A <code>[[licenses.clarify]]</code> block was added for the
+            <code>ring</code> TLS crypto library, which bundles its license
+            non-standardly and cannot be auto-detected.
+          </p>
+
+          <h2>2. Rust Backend &mdash; Clippy Hardening</h2>
+          <p>
+            All 20 Clippy errors were resolved across 9 files, with
+            <code>cargo clippy -- -D warnings</code> now exiting clean. The most
+            security-relevant fix was in <code>utils.rs</code>: the
+            <code>set_readonly(false)</code> call was replaced with a
+            platform-gated implementation. On Unix, file permissions are now set
+            explicitly to <code>0o600</code> (owner read/write only) via
+            <code>PermissionsExt</code>. Other fixes across the codebase
+            involved collapsing nested matches, simplifying boolean logic,
+            removing needless borrows, and fixing range patterns.
+          </p>
+
+          <h2>3. Dead Code Removal</h2>
+          <p>
+            Two dead modules were identified and deleted from the Rust backend:
+          </p>
+          <ul>
+            <li>
+              <strong><code>entropy.rs</code></strong> &mdash; contained a
+              blocking stdin read (<code>io::stdin().read_line()</code>) that is
+              architecturally impossible to call in a GUI application.
+            </li>
+            <li>
+              <strong><code>secure_rng.rs</code></strong> &mdash; a
+              <code>ChaCha20</code> wrapper never called from production code.
+              Its two unit tests were migrated to <code>tests.rs</code> before
+              deletion.
+            </li>
+          </ul>
+          <p>
+            Two files were also flagged for removal from version control:
+            <code>src/components/layout/Sidebar.css</code> (orphaned stylesheet)
+            and <code>tauri.conf.json.backup</code> (a backup configuration file
+            that should never be committed to a repository).
+          </p>
+
+          <h2>4. Eliminating Panics in Production Code</h2>
+          <p>
+            A full <code>grep</code> across all source files identified every
+            <code>.unwrap()</code>, <code>.expect()</code>,
+            <code>panic!()</code>, <code>unimplemented!()</code>, and
+            <code>unreachable!()</code> call. These were sorted into two
+            categories: legitimate (test code, truly unrecoverable startup
+            failures, hardcoded regex) and production code that needed fixing.
+          </p>
+          <p>
+            The most significant fixes were 17 mutex panics across
+            <code>commands/files.rs</code> and <code>commands/vault.rs</code>.
+            Every <code>.lock().unwrap()</code> was replaced with:
+          </p>
+          <pre><code>state.master_key.lock().unwrap_or_else(|e| e.into_inner())</code></pre>
+          <p>
+            A poisoned mutex (caused by a thread panicking while holding the
+            lock) would previously cause every subsequent caller to panic
+            forever. <code>.into_inner()</code> recovers the data safely. Eight
+            <code>.parent().unwrap()</code> path calls and nine
+            <code>path.to_str().unwrap()</code>
+            UTF-8 path calls were similarly converted to propagate clean errors
+            to the frontend rather than crashing the backend.
+          </p>
+
+          <h2>5. Filesystem Scope Hardening</h2>
+          <p>
+            This was the most impactful security fix in the release. The
+            original Tauri
+            <code>default.json</code> contained <code>"**"</code> in the
+            <code>fs:scope</code> allow list, granting the application
+            unrestricted read/write access to the entire filesystem &mdash;
+            including system directories, SSH keys, browser profiles, and
+            credential stores.
+          </p>
+          <p>
+            The fix replaces <code>"**"</code> with <code>"$HOME/**"</code> for
+            all user content, and adds an explicit <code>deny</code> list
+            blocking the most sensitive subdirectories even within the home
+            folder:
+          </p>
+          <pre><code>"deny": [
+  "$HOME/.ssh/**",
+  "$HOME/.gnupg/**",
+  "$HOME/.aws/**",
+  "$HOME/.config/google-chrome/**",
+  "$HOME/.mozilla/**",
+  "$HOME/AppData/Roaming/Microsoft/**",
+  "$HOME/AppData/Local/Microsoft/**",
+  "$HOME/Library/Keychains/**",
+  "$HOME/Library/Passwords/**"
+]</code></pre>
+          <p>
+            It is worth emphasising that the Tauri capability scope is enforced
+            in Rust on the IPC bridge &mdash; it
+            <strong>cannot be bypassed by JavaScript</strong> running in the
+            WebView, regardless of XSS, malicious npm packages, or compromised
+            dependencies. The frontend <code>isDangerousPath()</code>
+            blacklist is retained as a UX layer only and is not relied upon as a
+            security boundary.
+          </p>
+
+          <h2>6. Frontend Fixes</h2>
+          <p>
+            Two frontend issues were resolved. In <code>VaultView.tsx</code>,
+            the password input field in the vault edit modal was missing
+            <code>type="password"</code>, causing entered passwords to be
+            displayed in plaintext. An Eye/EyeOff toggle was added using icons
+            already present in the project.
+          </p>
+          <p>
+            In <code>useFileSystem.ts</code>, <code>platform()</code> was being
+            called 5 times across the hook in inconsistent contexts. The result
+            is now cached once at hook initialisation via <code>useRef</code>.
+            This also fixed a bug where navigating to <code>"/"</code> on Linux
+            or macOS would call the Windows drive enumeration command, returning
+            an empty view with no way to navigate back.
+          </p>
+
+          <h2>7. Fuzz Testing Infrastructure</h2>
+          <p>
+            A fuzz target was created at
+            <code>src-tauri/fuzz/fuzz_targets/fuzz_decrypt.rs</code> targeting
+            the decrypt pipeline &mdash; the highest-value attack surface since
+            it processes untrusted, user-provided file bytes. The target
+            exercises three attack surfaces in a single pass:
+          </p>
+          <ul>
+            <li>
+              <strong>Malformed bincode</strong> &mdash; adversarially crafted
+              container deserialization
+            </li>
+            <li>
+              <strong>Invalid ciphertext</strong> &mdash; AES-GCM authentication
+              tag verification with random data
+            </li>
+            <li>
+              <strong>Decompression safety</strong> &mdash; zstd payloads that
+              could exhaust memory
+            </li>
+          </ul>
+          <p>
+            <code>cargo-fuzz</code> requires Linux and Rust nightly. A GitHub
+            Actions workflow was added to run fuzzing automatically on a weekly
+            schedule against <code>ubuntu-latest</code>, keeping it independent
+            of the development platform.
+          </p>
+
+          <h2>Remaining Action Items</h2>
+          <p>
+            The following items were identified but not resolved in this session
+            and are carried forward as tracked work:
+          </p>
+          <ul>
+            <li>
+              <strong>[High]</strong> Migrate <code>bincode</code> 1.x &rarr;
+              2.x (direct dep, flagged unmaintained)
+            </li>
+            <li>
+              <strong>[High]</strong> Monitor
+              <code>glib</code> RUSTSEC-2024-0429 and update Tauri when patched
+            </li>
+            <li>
+              <strong>[Medium]</strong> Add <code>proptest</code> roundtrip
+              invariants to complement fuzz testing
+            </li>
+            <li>
+              <strong>[Low]</strong> Audit <code>os:default</code> capability
+              for environment variable exposure
+            </li>
+            <li>
+              <strong>[Low]</strong> Align <code>rand</code> versions with Tauri
+              to eliminate the <code>rand 0.7.3</code> duplicate
+            </li>
+          </ul>
+        </div>
+      </article>
+    </main>
+
+    <script src="shared.js"></script>
+    <footer>
+      <div class="container">
+        <p>
+          &copy; 2025&ndash;<span id="footer-year"></span> Project QRE. Last
+          updated: <span id="footer-month"></span>
+        </p>
+        <div class="footer-links">
+          <a href="about.html">About Us</a> | <a href="blog.html">Blog</a> |
+          <a href="contact.html">Contact</a> | <a href="terms.html">Terms</a> |
+          <a href="privacy.html">Privacy</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      name="description"
+      content="A complete walkthrough of QRE Privacy Toolkit's authentication system — from first-time vault setup through daily unlock, session management, password recovery, and cryptographic design."
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none';
+           script-src 'self' 'unsafe-inline' static.cloudflareinsights.com;
+           style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+           font-src 'self' https://fonts.gstatic.com;
+           img-src 'self';
+           connect-src 'self' cloudflareinsights.com;
+           form-action 'self';
+           upgrade-insecure-requests;"
+    />
+    <title>How QRE Privacy Toolkit Protects Your Vault - Project QRE</title>
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://projectqre.com/blog-auth-deep-dive.html"
+    />
+    <meta
+      property="og:title"
+      content="How QRE Privacy Toolkit Protects Your Vault: Authentication System Deep Dive"
+    />
+    <meta
+      property="og:description"
+      content="A complete walkthrough of QRE Privacy Toolkit's authentication system — from first-time vault setup through daily unlock, session management, password recovery, and cryptographic design."
+    />
+    <meta
+      property="og:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://projectqre.com/blog-auth-deep-dive.html"
+    />
+    <meta
+      property="twitter:title"
+      content="How QRE Privacy Toolkit Protects Your Vault: Authentication System Deep Dive"
+    />
+    <meta
+      property="twitter:description"
+      content="A complete walkthrough of QRE Privacy Toolkit's authentication system — from first-time vault setup through daily unlock, session management, password recovery, and cryptographic design."
+    />
+    <meta
+      property="twitter:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
+    <link
+      rel="canonical"
+      href="https://projectqre.com/blog-auth-deep-dive.html"
+    />
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+    /></noscript>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <script>
+      (function () {
+        const theme = localStorage.getItem("qre_theme") || "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <button id="theme-toggle" title="Toggle light/dark theme">
+      <svg
+        class="sun-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg
+        class="moon-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+
+    <header>
+      <div class="container">
+        <h1>Project QRE Blog</h1>
+        <p class="subtitle">Updates, Research, and Technical Deep Dives</p>
+      </div>
+    </header>
+
+    <nav class="breadcrumb-nav container">
+      <a href="index.html">Home</a> &gt; <a href="blog.html">Blog</a> &gt; How
+      QRE Privacy Toolkit Protects Your Vault
+    </nav>
+
+    <main class="container">
+      <article class="single-post-content">
+        <h2>
+          How QRE Privacy Toolkit Protects Your Vault: Authentication System
+          Deep Dive
+        </h2>
+        <div class="post-meta-single">
+          Published on March 12, 2026 by <strong>The Project QRE Team</strong>
+        </div>
+
+        <div class="post-body">
+          <p>
+            Every password manager, encrypted vault, and private notes app makes
+            the same implicit promise: even if someone steals your device, they
+            cannot read your data. This post explains exactly how QRE Privacy
+            Toolkit keeps that promise &mdash; not in vague marketing language,
+            but in specific, auditable technical detail.
+          </p>
+          <p>
+            We will walk through every phase of the authentication lifecycle:
+            first-time vault creation, daily unlock, session management,
+            password recovery, and password changes. Along the way we will
+            explain the specific cryptographic techniques involved, why each
+            design decision was made, and what it means for your security in
+            practical terms. No prior cryptography knowledge is assumed.
+          </p>
+
+          <h2>1. The Core Philosophy: Local-First, Zero-Knowledge</h2>
+          <p>
+            Before any code runs, QRE Privacy Toolkit makes a foundational
+            architectural decision that shapes every security property that
+            follows: all cryptographic operations happen entirely on your
+            device. There is no server, no cloud sync, no authentication API,
+            and no account to create. QRE has zero knowledge of your password,
+            your master key, or the contents of your vault &mdash; because that
+            information never leaves your machine.
+          </p>
+          <p>
+            This is a meaningful trade-off. It means there is no &ldquo;forgot
+            password&rdquo; button that emails you a reset link, because there
+            is nothing to reset on a remote server. Recovery is handled through
+            a locally generated recovery code that you are responsible for
+            storing safely. The benefit of this trade-off is an extremely small
+            attack surface: there is no server to breach, no database of
+            password hashes to steal, and no network traffic to intercept.
+          </p>
+          <p>
+            <strong>Zero-Knowledge Guarantee:</strong> QRE has no copy of your
+            password, your master key, or your files. If you forget your
+            password and lose your recovery code, your data cannot be recovered
+            &mdash; by you or by anyone else. This is a feature, not a
+            limitation.
+          </p>
+
+          <h2>2. The Key Hierarchy: How Your Password Protects Your Files</h2>
+          <p>
+            The most common misconception about encrypted storage is that files
+            are encrypted directly with your password. If that were true,
+            changing your password would require re-encrypting every single file
+            you have ever stored &mdash; potentially terabytes of data. QRE uses
+            a more sophisticated design called
+            <strong>envelope encryption</strong>, which separates the concept of
+            authentication from the concept of encryption.
+          </p>
+
+          <h3>The Master Key</h3>
+          <p>
+            When you create a new vault, QRE generates a single 256-bit Master
+            Key using your operating system&rsquo;s cryptographically secure
+            random number generator (CSPRNG). This key is the actual
+            cryptographic secret that encrypts and decrypts all of your files,
+            passwords, notes, and bookmarks. It is completely random and has no
+            relationship to your password whatsoever.
+          </p>
+          <p>
+            This Master Key lives in RAM only while you are logged in. The
+            moment you lock the vault or close the app, it is actively
+            overwritten with zeros in memory before being released &mdash; a
+            process called
+            <strong>zeroization</strong>, implemented via Rust&rsquo;s
+            <code>ZeroizeOnDrop</code> trait. This means it cannot be recovered
+            from a memory dump, swap file, or hibernation image after logout.
+          </p>
+
+          <h3>The Keychain File</h3>
+          <p>
+            The Master Key itself is never written to disk in plaintext.
+            Instead, it is stored in a file called
+            <code>keychain.json</code> inside your OS application data directory
+            &mdash; but stored in encrypted form. The keychain file contains two
+            independent encrypted copies of the Master Key, called slots:
+          </p>
+          <ul>
+            <li>
+              <strong>Slot 1 &mdash; Password Slot:</strong> The Master Key
+              encrypted with a key derived from your master password.
+            </li>
+            <li>
+              <strong>Slot 2 &mdash; Recovery Slot:</strong> The same Master Key
+              encrypted with a key derived from your recovery code.
+            </li>
+          </ul>
+          <p>
+            Neither slot contains your password or your recovery code. Both
+            slots contain only the Master Key in AES-256-GCM encrypted form. An
+            attacker who obtains <code>keychain.json</code> gains nothing
+            without the password or the recovery code &mdash; the Master Key
+            remains mathematically inaccessible.
+          </p>
+          <p>
+            This design means a password change is a small, fast operation: QRE
+            decrypts the Master Key using your current password, re-encrypts it
+            with your new password, and writes the updated Slot 1 back to disk.
+            The actual files you have encrypted are completely untouched,
+            regardless of how many times you change your password.
+          </p>
+
+          <h2>3. First-Time Setup: Creating Your Vault</h2>
+          <p>
+            The setup flow is triggered the first time QRE launches and finds no
+            <code>keychain.json</code> in the app data directory. Here is
+            precisely what happens, step by step:
+          </p>
+
+          <h3>Step 1 &mdash; Password strength is validated on the frontend</h3>
+          <p>
+            Before any cryptographic operation begins, the TypeScript frontend
+            evaluates your chosen password using a strength scoring algorithm
+            that checks length, character variety, and common patterns. A score
+            below 3 out of 4 is rejected immediately with a clear message. This
+            ensures that Argon2id (introduced in Step 3) is working from a
+            reasonably strong input.
+          </p>
+
+          <h3>Step 2 &mdash; A 256-bit Master Key is generated</h3>
+          <p>
+            Rust code calls <code>OsRng.try_fill_bytes()</code> &mdash; the
+            operating system&rsquo;s CSPRNG &mdash; to fill a 32-byte array with
+            cryptographically random data. This is the Master Key. It is
+            immediately wrapped in a <code>ZeroizeOnDrop</code> struct so it
+            cannot outlive its intended scope in memory.
+          </p>
+
+          <h3>
+            Step 3 &mdash; A Key Encryption Key (KEK) is derived from your
+            password using Argon2id
+          </h3>
+          <p>
+            Your password is intentionally weak compared to a random 256-bit key
+            &mdash; it is short, human-memorable, and has limited entropy.
+            Argon2id bridges this gap by being deliberately slow and
+            memory-intensive, making brute-force attacks computationally
+            expensive.
+          </p>
+          <p>
+            QRE&rsquo;s parameters: 64&nbsp;MB of RAM, 3 iterations, 4 parallel
+            threads, producing a 256-bit output. A unique random salt is
+            generated for this slot and stored in the keychain file. The salt
+            ensures two vaults with the same password produce completely
+            different KEKs.
+          </p>
+
+          <h3>
+            Step 4 &mdash; The Master Key is encrypted with the KEK using
+            AES-256-GCM
+          </h3>
+          <p>
+            AES-256-GCM (Galois/Counter Mode) is an authenticated encryption
+            algorithm. It provides both confidentiality (the data cannot be read
+            without the key) and integrity (any tampering with the ciphertext is
+            detectable). A fresh 96-bit random nonce is generated for this
+            operation and stored alongside the ciphertext in Slot 1. The KEK
+            itself is immediately zeroized after this step &mdash; it exists
+            only for the duration of the encryption operation.
+          </p>
+
+          <h3>Step 5 &mdash; A 128-bit recovery code is generated</h3>
+          <p>
+            A random recovery code is generated using the format
+            <code>QRE-XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX</code>, where each
+            group is a 32-bit cryptographically random integer formatted as
+            uppercase hexadecimal. Four groups &times; 32 bits = 128 bits of
+            entropy, meeting NIST SP 800-63B guidance for long-lived recovery
+            secrets. A second, independent KEK is derived from this recovery
+            code using Argon2id (with its own random salt), and the Master Key
+            is encrypted again to produce Slot 2.
+          </p>
+
+          <h3>
+            Step 6 &mdash; The keychain file is written to disk atomically
+          </h3>
+          <p>
+            The completed keychain structure &mdash; containing the vault ID,
+            KDF parameters, Slot 1, and Slot 2 &mdash; is serialized to JSON and
+            written using an atomic write pattern. The data is first written to
+            a temporary <code>.tmp</code> file. Once the write completes
+            successfully, the file is renamed over the final destination. On all
+            major operating systems, <code>rename()</code> within the same
+            filesystem is a single atomic operation. The keychain can never be
+            observed in a partial or empty state, even if the process is killed
+            mid-write.
+          </p>
+
+          <h3>Step 7 &mdash; The recovery code is displayed exactly once</h3>
+          <p>
+            The recovery code is shown to you on screen with a copy-to-clipboard
+            button. The clipboard is automatically cleared after 30 seconds.
+            Once you click &ldquo;I have saved it&rdquo;, the recovery code
+            string is cleared from React state. It is never shown again. QRE has
+            no record of it.
+          </p>
+
+          <h3>Step 8 &mdash; The Master Key is loaded into the session</h3>
+          <p>
+            The decrypted Master Key is stored in a
+            <code>Mutex&lt;Option&lt;MasterKey&gt;&gt;</code> inside the Tauri
+            application state. The vault is now unlocked and all features are
+            accessible. No further authentication is required until the session
+            is locked.
+          </p>
+
+          <p>
+            <strong>What is stored on disk after setup?</strong> The
+            <code>keychain.json</code> file contains: a vault UUID, the Argon2id
+            KDF parameters (memory, iterations, parallelism), two random salts,
+            two random nonces, and two encrypted blobs. It contains no plaintext
+            passwords, no recovery codes, and no Master Key. The file is safe to
+            back up to cloud storage &mdash; it is useless without your password
+            or recovery code.
+          </p>
+
+          <h2>4. Daily Use: Unlocking the Vault</h2>
+          <p>
+            After the initial setup, every subsequent launch finds
+            <code>keychain.json</code> on disk. The app presents the lock screen
+            and waits for your master password. Here is exactly what happens
+            when you unlock:
+          </p>
+
+          <h3>The Unlock Process</h3>
+          <ol>
+            <li>
+              You enter your master password into the password field and press
+              Unlock.
+            </li>
+            <li>
+              The TypeScript frontend calls
+              <code>invoke('login', { password })</code> &mdash; Tauri&rsquo;s
+              IPC bridge &mdash; which passes the password string to the Rust
+              backend over a secure local channel.
+            </li>
+            <li>
+              Before touching the keychain, the backend checks an in-memory rate
+              limiter. If five or more consecutive failed attempts have
+              occurred, an exponential backoff penalty is enforced: 5 failures
+              &rarr; 30 seconds, 6 &rarr; 60 seconds, 7 &rarr; 120 seconds, up
+              to a cap of 8 minutes at 9+ failures. This timer is stored in a
+              thread-safe
+              <code>AtomicU32</code> and resets to zero on a successful login.
+            </li>
+            <li>
+              The <code>keychain.json</code> file is read from disk and
+              deserialized. The stored Argon2id parameters (memory, iterations,
+              parallelism, and the Slot 1 salt) are extracted.
+            </li>
+            <li>
+              Argon2id is run with your password and the stored salt,
+              reproducing the original KEK. Because the salt is the same as when
+              the vault was created, the output is deterministic &mdash; the
+              same password will always produce the same KEK for this vault.
+            </li>
+            <li>
+              The KEK is used to attempt AES-256-GCM decryption of the Slot 1
+              ciphertext. If the password was correct, decryption succeeds and
+              the 32-byte Master Key is recovered. If the password was wrong,
+              the AES-GCM authentication tag will not match &mdash; decryption
+              fails and an &ldquo;Incorrect Password&rdquo; error is returned.
+            </li>
+            <li>
+              The password string and the KEK are immediately cleared from
+              memory. The Master Key is stored in the session state. The
+              frontend transitions to the dashboard.
+            </li>
+          </ol>
+
+          <h3>Why Wrong Passwords Fail Reliably</h3>
+          <p>
+            A wrong password does not produce an error during the Argon2id step.
+            Argon2id will always produce a 256-bit output, regardless of whether
+            the input password was correct. The error is detected only when
+            AES-GCM attempts to verify the authentication tag of the encrypted
+            blob. This means the unlock function has no mechanism to confirm
+            whether a guess was &ldquo;close&rdquo; or not &mdash; any wrong
+            password produces a uniformly random-looking KEK that will fail
+            authentication, with no information leakage about the correct
+            password.
+          </p>
+          <p>
+            <strong>Rate Limiting Note:</strong> The in-memory rate limiter
+            resets when the application restarts. This is deliberate &mdash; a
+            persistent lock-out counter could permanently deny access to a
+            legitimate user. The primary brute-force protection comes from
+            Argon2id itself: each guess costs real CPU time and memory on the
+            attacker&rsquo;s hardware, regardless of the rate limiter.
+          </p>
+
+          <h2>5. Session Management: Staying Secure While Logged In</h2>
+          <p>
+            Unlocking the vault is only the beginning of the security story.
+            Once you are logged in, QRE must ensure the vault cannot be accessed
+            by someone who walks up to your unlocked computer.
+          </p>
+
+          <h3>Automatic Session Lock</h3>
+          <p>
+            QRE monitors four user activity signals: mouse movement, keyboard
+            input, mouse clicks, and touch events. A timer is reset to zero each
+            time any of these events fires. If 14 minutes pass with no activity,
+            QRE shows a countdown warning modal with a 60-second timer. If you
+            interact with the app before the countdown ends, the session
+            continues. If you do not, the vault locks automatically.
+          </p>
+
+          <h3>What Locking Actually Does</h3>
+          <p>
+            Locking is not just a UI state change. When the vault locks, the
+            Rust backend&rsquo;s <code>logout</code> command sets the Master Key
+            in the session state to <code>None</code>. Because the Master Key is
+            stored inside a <code>ZeroizeOnDrop</code> wrapper, the 32 bytes are
+            actively overwritten with zeros when the <code>Option</code> is set
+            to <code>None</code>. The key is gone from memory. An attacker who
+            gains access to the process&rsquo;s memory after logout cannot
+            reconstruct the Master Key from RAM.
+          </p>
+
+          <h3>The Session State Architecture</h3>
+          <p>
+            The Master Key is held inside a Tauri application state object with
+            the following structure:
+          </p>
+          <pre><code>pub struct SessionState {
+    pub master_key: Arc&lt;Mutex&lt;Option&lt;MasterKey&gt;&gt;&gt;,
+}</code></pre>
+          <p>Each component serves a security purpose:</p>
+          <ul>
+            <li>
+              <strong><code>Arc</code></strong> (Atomically Reference Counted):
+              Allows the state to be shared safely across multiple threads
+              without copying.
+            </li>
+            <li>
+              <strong><code>Mutex</code>:</strong> Ensures only one thread can
+              read or write the Master Key at a time, preventing data races.
+            </li>
+            <li>
+              <strong><code>Option</code>:</strong> The key is
+              <code>Some(key)</code> when unlocked and <code>None</code> when
+              locked, making the locked/unlocked distinction impossible to
+              bypass &mdash; there is no value to read when the vault is locked.
+            </li>
+          </ul>
+          <p>
+            If the <code>Mutex</code> ever becomes poisoned (a thread panicked
+            while holding the lock), all commands return a &ldquo;Session state
+            is corrupted, please re-login&rdquo; error rather than silently
+            proceeding with potentially inconsistent data.
+          </p>
+
+          <h2>6. Encryption in Practice: What AES-256-GCM Actually Provides</h2>
+
+          <h3>Confidentiality</h3>
+          <p>
+            AES with a 256-bit key is widely considered computationally
+            unbreakable. The best known attack against AES-256 requires 2<sup
+              >254.4</sup
+            >
+            operations &mdash; a number so astronomically large that no computer
+            conceivable under current physics could perform it in any meaningful
+            timeframe.
+          </p>
+
+          <h3>Authenticity and Integrity</h3>
+          <p>
+            The GCM (Galois/Counter Mode) component adds authenticated
+            encryption. Along with the ciphertext, AES-GCM produces a 128-bit
+            authentication tag. When decrypting, the tag is verified before the
+            plaintext is released. If any byte of the ciphertext has been
+            modified &mdash; whether by an attacker or by disk corruption
+            &mdash; decryption fails entirely and no plaintext is returned.
+            QRE&rsquo;s encrypted files cannot be silently corrupted. Any
+            tampering is detected.
+          </p>
+
+          <h3>Nonces and Why They Must Be Random</h3>
+          <p>
+            AES-GCM requires a 96-bit nonce (number used once). Using the same
+            nonce twice with the same key is catastrophic &mdash; it allows an
+            attacker to recover the keystream and decrypt messages encrypted
+            with that nonce. QRE generates a fresh cryptographically random
+            nonce for every single encryption operation, stored alongside the
+            ciphertext. Fresh random nonces make nonce reuse statistically
+            impossible.
+          </p>
+
+          <h2>7. Argon2id: Why Password Hashing Is Hard</h2>
+          <p>
+            The most common attack against password-based encryption is brute
+            force: try every possible password until one works. Modern GPUs can
+            check billions of SHA-256 hashes per second, making simple hashing
+            completely inadequate for protecting user-chosen passwords.
+          </p>
+          <p>
+            Argon2id is a <strong>memory-hard</strong> key derivation function
+            (KDF). Memory-hard means the algorithm intentionally requires a
+            large amount of RAM to compute. GPUs have less RAM per compute unit
+            than CPUs, making parallel brute-force attacks on Argon2id far less
+            effective than they would be against simple hash functions.
+          </p>
+
+          <h3>QRE&rsquo;s Parameters</h3>
+          <pre><code>Memory:      64 MB
+Iterations:  3 passes
+Parallelism: 4 threads
+Output:      256 bits</code></pre>
+          <p>
+            These are the OWASP-recommended settings for desktop applications.
+            At these parameters, a single password guess requires 64&nbsp;MB of
+            RAM and multiple CPU passes &mdash; a deliberate performance cost
+            that is barely noticeable to a legitimate user performing a single
+            unlock, but completely crippling to an attacker trying millions of
+            guesses.
+          </p>
+          <p>
+            Because the KDF parameters are stored inside
+            <code>keychain.json</code>, they can be upgraded in future versions
+            of QRE. Existing vaults continue to use whatever parameters they
+            were created with. New vaults use the latest defaults.
+          </p>
+
+          <h3>The Role of Salts</h3>
+          <p>
+            Each slot in the keychain has its own independent, randomly
+            generated salt. The salt is not secret &mdash; it is stored in
+            plaintext in
+            <code>keychain.json</code> &mdash; but it ensures each Argon2id
+            computation is unique, even if two users have the same password.
+            Without salts, an attacker could pre-compute a table of common
+            passwords. With unique random salts, every brute-force attempt must
+            start fresh for each specific vault.
+          </p>
+
+          <h2>8. Password Recovery: The Recovery Code Flow</h2>
+          <p>
+            If you forget your master password, your only path to recovery is
+            the recovery code shown to you during setup. This section explains
+            how that flow works and why it does not compromise security.
+          </p>
+
+          <h3>What the Recovery Code Is</h3>
+          <p>
+            The recovery code is a randomly generated secret in the format
+            <code>QRE-XXXXXXXX-XXXXXXXX-XXXXXXXX-XXXXXXXX</code>, where each X
+            is a hexadecimal character. Four groups of eight characters encode
+            128 bits of cryptographic entropy &mdash; enough that guessing it by
+            brute force is computationally infeasible even without Argon2id. The
+            recovery code is also processed through the same Argon2id pipeline
+            as your password, so it gets the same memory-hard brute-force
+            protection on top of its own high entropy.
+          </p>
+
+          <h3>The Recovery Flow</h3>
+          <ol>
+            <li>
+              You enter your recovery code and a new master password on the
+              recovery screen.
+            </li>
+            <li>
+              The rate limiter for recovery attempts is checked. After five
+              failed attempts, the same exponential backoff that protects the
+              login screen is applied.
+            </li>
+            <li>
+              Argon2id derives a KEK from the recovery code using Slot 2&rsquo;s
+              stored salt.
+            </li>
+            <li>
+              AES-GCM decrypts Slot 2 to recover the Master Key. If the recovery
+              code is wrong, this fails and the error counter increments.
+            </li>
+            <li>
+              With the Master Key now available, Argon2id derives a new KEK from
+              your new password with a freshly generated salt.
+            </li>
+            <li>
+              The Master Key is re-encrypted with this new KEK and written back
+              to disk as Slot 1 &mdash; atomically.
+            </li>
+            <li>
+              The session is unlocked with the recovered Master Key. The vault
+              is accessible again.
+            </li>
+          </ol>
+          <p>
+            The actual encrypted files are completely untouched throughout this
+            process. The Master Key is the same one that was created during
+            setup. Only the outer envelope &mdash; the encrypted wrapper in
+            <code>keychain.json</code> &mdash; changes. Recovery is therefore
+            fast, regardless of how many files are in the vault.
+          </p>
+          <p>
+            <strong>Recovery Code Security:</strong> The recovery code is shown
+            exactly once. QRE never stores it anywhere &mdash; not on disk, not
+            on a server, not in application memory after you acknowledge it. If
+            you lose the recovery code and forget your password, the vault
+            contents are permanently inaccessible. Store the recovery code in a
+            physically secure location, separate from the device running QRE.
+          </p>
+
+          <h2>9. Changing Your Password</h2>
+
+          <h3>Current Password Verification</h3>
+          <p>
+            Before any change is made, you must provide your current password.
+            The backend independently verifies this by running the full Argon2id
+            + AES-GCM unlock process against the existing Slot 1 &mdash; the
+            same code path used during normal login. If the current password is
+            wrong, the change is rejected and no modification is made to the
+            keychain file. This prevents a scenario where an attacker briefly
+            accesses your unlocked session and changes the password to one they
+            control.
+          </p>
+
+          <h3>Strength and Uniqueness Validation</h3>
+          <p>
+            The new password is evaluated by the same strength scoring used
+            during initial setup (score of 3 or higher required). An additional
+            check enforces that the new password must be different from the
+            current one. Both checks happen on the frontend before the backend
+            is contacted, providing immediate feedback.
+          </p>
+
+          <h3>The Key Operation</h3>
+          <p>
+            With the current password verified and the new password validated, a
+            new random salt is generated, a new KEK is derived from the new
+            password via Argon2id, and the Master Key (already in memory from
+            the active session) is re-encrypted with the new KEK. The updated
+            Slot 1 is written atomically to disk. The Master Key does not
+            change. Slot 2 (the recovery code slot) is not modified. All
+            encrypted files remain untouched.
+          </p>
+
+          <h2>10. Atomic Writes: Protecting Against Data Loss</h2>
+          <p>
+            Any time a security-critical file is modified on disk, there is a
+            window of vulnerability: what happens if the process is killed, the
+            operating system crashes, or the disk runs out of space mid-write?
+          </p>
+          <p>
+            A naive implementation opens the file for writing (which immediately
+            truncates it to zero bytes) and then writes the new data. If
+            anything goes wrong, the file is left empty or partially written
+            &mdash; for a keychain file, this means permanent, unrecoverable
+            data loss. QRE uses an atomic write pattern for every keychain
+            mutation:
+          </p>
+          <ol>
+            <li>
+              New keychain data is serialized and written to a temporary file
+              <code>keychain.tmp</code> in the same directory as the real
+              keychain.
+            </li>
+            <li>
+              Only once the write completes successfully is the
+              <code>rename()</code> operation performed.
+            </li>
+            <li>
+              On all major operating systems, <code>rename()</code> within the
+              same filesystem is atomic. The file is either the old version or
+              the new version &mdash; it is never empty or partial.
+            </li>
+          </ol>
+          <p>
+            This pattern protects you during password changes, recovery flows,
+            recovery code resets, and initial vault creation. In every case, if
+            the operation is interrupted at any point before the rename
+            completes, the original keychain is completely intact.
+          </p>
+
+          <h2>11. Backups: The Keychain File Is Safe to Copy</h2>
+          <p>
+            Because the keychain file is a self-contained encrypted blob, it can
+            be backed up anywhere &mdash; a USB drive, cloud storage, email to
+            yourself &mdash; without compromising security. Without your
+            password or recovery code, the file is cryptographically useless to
+            anyone who obtains it.
+          </p>
+          <p>
+            QRE tracks whether you have performed a backup using a sentinel file
+            in the app data directory. The first time you encrypt a file after
+            setting up the vault, a reminder is shown encouraging you to export
+            the keychain. The reminder does not reappear after you complete a
+            backup.
+          </p>
+          <p>
+            <strong>Backup Best Practice:</strong> Store your keychain backup
+            and your recovery code in separate physical locations. A backup is
+            only useful if you can still decrypt it &mdash; which requires your
+            password or your recovery code. If both are in the same place,
+            losing that location means losing everything.
+          </p>
+
+          <h2>12. The Complete Architecture at a Glance</h2>
+          <p>
+            Every layer of the authentication system and its security purpose:
+          </p>
+          <ul>
+            <li>
+              <strong>File encryption &mdash; AES-256-GCM:</strong>
+              Confidentiality and integrity for all vault data.
+            </li>
+            <li>
+              <strong>Key derivation &mdash; Argon2id:</strong> Transforms weak
+              passwords into strong 256-bit keys; resists GPU brute-force.
+            </li>
+            <li>
+              <strong
+                >Master Key storage &mdash; <code>ZeroizeOnDrop</code>:</strong
+              >
+              Overwrites key bytes in RAM on logout; prevents memory forensics.
+            </li>
+            <li>
+              <strong>KDF salts &mdash; CSPRNG (<code>OsRng</code>):</strong>
+              Unique per slot; prevents rainbow tables and cross-vault attacks.
+            </li>
+            <li>
+              <strong
+                >Encryption nonces &mdash; CSPRNG (<code>OsRng</code>):</strong
+              >
+              Unique per operation; prevents nonce-reuse attacks.
+            </li>
+            <li>
+              <strong
+                >Keychain writes &mdash; Atomic <code>rename()</code>:</strong
+              >
+              Prevents data loss if the process is killed mid-write.
+            </li>
+            <li>
+              <strong>Login protection &mdash; Exponential backoff:</strong>
+              Raises the cost of online brute-force against the login screen.
+            </li>
+            <li>
+              <strong>Recovery protection &mdash; Exponential backoff:</strong>
+              Same protection applied to the recovery code path.
+            </li>
+            <li>
+              <strong
+                >Session key &mdash;
+                <code>Mutex&lt;Option&lt;T&gt;&gt;</code>:</strong
+              >
+              Enforces locked/unlocked state; fails safely on mutex poison.
+            </li>
+            <li>
+              <strong
+                >Password change guard &mdash; Current password check:</strong
+              >
+              Prevents session-hijack password escalation.
+            </li>
+            <li>
+              <strong>Recovery code &mdash; 128-bit CSPRNG entropy:</strong>
+              Meets NIST SP 800-63B guidance for long-lived recovery secrets.
+            </li>
+          </ul>
+
+          <h2>13. Threat Model: What QRE Protects Against</h2>
+          <p>
+            Good security engineering requires stating explicitly what a system
+            is designed to protect against &mdash; and what it is not.
+          </p>
+
+          <h3>Protected Against</h3>
+          <ul>
+            <li>
+              <strong>Stolen device (locked screen):</strong> The Master Key is
+              in RAM only when unlocked. A locked or powered-off device exposes
+              only <code>keychain.json</code>, which is computationally
+              protected by Argon2id.
+            </li>
+            <li>
+              <strong>Stolen <code>keychain.json</code>:</strong> The file
+              contains only ciphertext. Without the password or recovery code,
+              it is useless. Argon2id makes offline brute-force expensive.
+            </li>
+            <li>
+              <strong>Brute-force against the unlock screen:</strong>
+              Exponential backoff limits the practical guess rate in-app.
+              Argon2id limits the rate even if the attacker extracts the
+              keychain file.
+            </li>
+            <li>
+              <strong>Session hijacking (password change):</strong> Changing the
+              password requires proving knowledge of the current password, even
+              from an active session.
+            </li>
+            <li>
+              <strong>Disk corruption during writes:</strong> Atomic
+              <code>rename()</code> guarantees the keychain is never left in a
+              partial state.
+            </li>
+            <li>
+              <strong>Memory forensics after logout:</strong>
+              <code>ZeroizeOnDrop</code> overwrites key bytes before releasing
+              memory.
+            </li>
+          </ul>
+
+          <h3>Not Protected Against</h3>
+          <ul>
+            <li>
+              <strong>Compromised OS or process:</strong> If an attacker has
+              code execution in the same process or root access while the vault
+              is unlocked, the Master Key in RAM is accessible. No
+              application-layer security can defend against this.
+            </li>
+            <li>
+              <strong>Keyloggers:</strong> A keylogger recording keystrokes at
+              the OS level captures the master password as it is typed.
+            </li>
+            <li>
+              <strong>Physical access to an unlocked session:</strong> The
+              auto-lock timer (14 minutes) reduces this window but does not
+              eliminate it. Use OS-level screen lock for tighter protection.
+            </li>
+            <li>
+              <strong>Forgotten password and lost recovery code:</strong> This
+              is unrecoverable by design. There is no server-side fallback.
+            </li>
+          </ul>
+
+          <h2>Conclusion</h2>
+          <p>
+            QRE Privacy Toolkit&rsquo;s authentication system is built on a
+            small set of well-understood, widely audited cryptographic
+            primitives: AES-256-GCM for encryption, Argon2id for key derivation,
+            and OS-provided CSPRNGs for randomness. No novel cryptography is
+            involved &mdash; the design deliberately avoids it.
+          </p>
+          <p>
+            The architectural decisions &mdash; envelope encryption, two
+            independent keychain slots, atomic file writes, in-memory
+            zeroization, and the zero-knowledge stance toward your password
+            &mdash; all serve the same goal: your data should be accessible only
+            to you, on your device, with your password. That guarantee should
+            hold even if the keychain file is stolen, even if the app is
+            crash-killed mid-write, and even if someone briefly sits down at
+            your unlocked computer.
+          </p>
+          <p>
+            The full source code is available in the QRE Privacy Toolkit
+            repository. The cryptographic code is fuzz-tested, and the
+            authentication logic has been independently reviewed. We encourage
+            technically inclined readers to read the code and hold us to the
+            standards described here.
+          </p>
+        </div>
+      </article>
+    </main>
+
+    <script src="shared.js"></script>
+    <footer>
+      <div class="container">
+        <p>
+          &copy; 2025&ndash;<span id="footer-year"></span> Project QRE. Last
+          updated: <span id="footer-month"></span>
+        </p>
+        <div class="footer-links">
+          <a href="about.html">About Us</a> | <a href="blog.html">Blog</a> |
+          <a href="contact.html">Contact</a> | <a href="terms.html">Terms</a> |
+          <a href="privacy.html">Privacy</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

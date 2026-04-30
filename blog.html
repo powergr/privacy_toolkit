@@ -139,7 +139,32 @@
           technical breakdowns, and future roadmap updates.
         </p>
       </section>
+
       <div class="post-listing">
+        <article class="post-item">
+          <h2 class="post-title">
+            <a href="blog-timelock-encryption.html">
+              Time-Lock Encryption in QRE v2.7.6 &mdash; A Technical Deep Dive
+            </a>
+          </h2>
+          <div class="post-meta">Published on April 30, 2026</div>
+          <p class="post-excerpt">
+            A complete technical walkthrough of the new
+            <strong>Time-Lock Encryption</strong> feature introduced in v2.7.6.
+            Covers the cryptographic model, the
+            <strong>V7 file format</strong> with its fixed 4&nbsp;KB header
+            region, the two-layer clock-manipulation defense combining
+            <strong>NTP verification</strong> (median of three servers, no
+            external crates) and an <strong>in-file ratchet mechanism</strong>
+            that persists the highest witnessed timestamp directly inside the
+            <code>.qre</code> file — no sidecar files, no third parties, and no
+            internet connection required for locking.
+          </p>
+          <a href="blog-timelock-encryption.html" class="read-more"
+            >Read more &raquo;</a
+          >
+        </article>
+
         <article class="post-item">
           <h2 class="post-title">
             <a href="blog-auth-deep-dive.html">
@@ -149,9 +174,9 @@
           </h2>
           <div class="post-meta">Published on March 12, 2026</div>
           <p class="post-excerpt">
-            A complete walkthrough of QRE Privacy Toolkit &rsquo;s
-            authentication system &mdash; from first-time vault creation through
-            daily unlock, session management, and password recovery. Covers the
+            A complete walkthrough of QRE Privacy Toolkit&rsquo;s authentication
+            system &mdash; from first-time vault creation through daily unlock,
+            session management, and password recovery. Covers the
             <strong>envelope encryption</strong> key hierarchy,
             <strong>Argon2id</strong> KDF parameters,
             <strong>AES-256-GCM</strong>
@@ -163,16 +188,17 @@
             >Read more &raquo;</a
           >
         </article>
+
         <article class="post-item">
           <h2 class="post-title">
             <a href="blog-security-hardening-report.html">
               Security Hardening Report: QRE Privacy Toolkit v2.6.9
             </a>
           </h2>
-          <div class="post-meta">Published on March 8 2026</div>
+          <div class="post-meta">Published on March 8, 2026</div>
           <p class="post-excerpt">
             A full walkthrough of the security hardening work completed for
-            v2.6.9 — including
+            v2.6.9 &mdash; including
             <strong>rand 0.9 migration</strong>, cargo-audit and cargo-deny
             triage, Clippy hardening, dead code removal, panic elimination
             across 34 production call sites, a critical filesystem scope fix
@@ -180,9 +206,10 @@
             of a fuzz testing pipeline targeting the decrypt attack surface.
           </p>
           <a href="blog-security-hardening-report.html" class="read-more"
-            >Read more »</a
+            >Read more &raquo;</a
           >
         </article>
+
         <article class="post-item">
           <h2 class="post-title">
             <a href="blog-qre-v2-6-8-announcement.html">
@@ -196,7 +223,7 @@
             automatic memory wiping, and flawless Android integration.
           </p>
           <a href="blog-qre-v2-6-8-announcement.html" class="read-more"
-            >Read more »</a
+            >Read more &raquo;</a
           >
         </article>
 
@@ -208,11 +235,14 @@
           </h2>
           <div class="post-meta">Published on January 13, 2026</div>
           <p class="post-excerpt">
-            Can you trust your computer's random number generator? Discover how
-            QRE Privacy Toolkit mitigates hardware RNG backdoors by XOR-mixing
-            microsecond human timing jitter into the AES-256 encryption seed.
+            Can you trust your computer&rsquo;s random number generator?
+            Discover how QRE Privacy Toolkit mitigates hardware RNG backdoors by
+            XOR-mixing microsecond human timing jitter into the AES-256
+            encryption seed.
           </p>
-          <a href="blog-paranoid-mode.html" class="read-more">Read more »</a>
+          <a href="blog-paranoid-mode.html" class="read-more"
+            >Read more &raquo;</a
+          >
         </article>
 
         <article class="post-item">
@@ -230,7 +260,7 @@
             Shredder, and full Android support.
           </p>
           <a href="blog-qre-v2-5-announcement.html" class="read-more"
-            >Read more »</a
+            >Read more &raquo;</a
           >
         </article>
       </div>

@@ -1,0 +1,1216 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      name="description"
+      content="A deep technical dive into QRE Privacy Toolkit v2.7.6's Time-Lock Encryption feature — how it works, the cryptographic design, and how we harden it against clock manipulation attacks."
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; 
+           script-src 'self' 'unsafe-inline' static.cloudflareinsights.com; 
+           style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; 
+           font-src 'self' https://fonts.gstatic.com; 
+           img-src 'self'; 
+           connect-src 'self' cloudflareinsights.com; 
+           form-action 'self'; 
+           upgrade-insecure-requests;"
+    />
+    <title>Time-Lock Encryption in QRE v2.7.6 — A Technical Deep Dive</title>
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://projectqre.com/blog-timelock-encryption.html"
+    />
+    <meta
+      property="og:title"
+      content="Time-Lock Encryption in QRE v2.7.6 — A Technical Deep Dive"
+    />
+    <meta
+      property="og:description"
+      content="How QRE implements cryptographic time-locking with NTP verification and an in-file ratchet mechanism — no sidecars, no third parties."
+    />
+    <meta
+      property="og:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://projectqre.com/blog-timelock-encryption.html"
+    />
+    <meta
+      property="twitter:title"
+      content="Time-Lock Encryption in QRE v2.7.6 — A Technical Deep Dive"
+    />
+    <meta
+      property="twitter:description"
+      content="How QRE implements cryptographic time-locking with NTP verification and an in-file ratchet mechanism."
+    />
+    <meta
+      property="twitter:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
+    <link
+      rel="canonical"
+      href="https://projectqre.com/blog-timelock-encryption.html"
+    />
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+    /></noscript>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Article-specific styles -->
+    <style>
+      /* ── Code blocks ─────────────────────────────────────────────────── */
+      .code-block {
+        background: #0d1117;
+        border: 1px solid #30363d;
+        border-left: 3px solid var(--accent-color, #4f8ef7);
+        border-radius: 6px;
+        padding: 1.2rem 1.4rem;
+        overflow-x: auto;
+        margin: 1.4rem 0;
+        font-family: "Roboto Mono", "Fira Code", monospace;
+        font-size: 0.85rem;
+        line-height: 1.7;
+        color: #e6edf3;
+      }
+      .code-block .comment {
+        color: #8b949e;
+      }
+      .code-block .keyword {
+        color: #ff7b72;
+      }
+      .code-block .type {
+        color: #ffa657;
+      }
+      .code-block .string {
+        color: #a5d6ff;
+      }
+      .code-block .number {
+        color: #79c0ff;
+      }
+      .code-block .fn-name {
+        color: #d2a8ff;
+      }
+
+      /* ── Callout boxes ───────────────────────────────────────────────── */
+      .callout {
+        border-radius: 8px;
+        padding: 1rem 1.2rem;
+        margin: 1.5rem 0;
+        display: flex;
+        gap: 0.9rem;
+        align-items: flex-start;
+        font-size: 0.93rem;
+        line-height: 1.6;
+      }
+      .callout-icon {
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .callout-security {
+        background: rgba(79, 142, 247, 0.08);
+        border: 1px solid rgba(79, 142, 247, 0.3);
+      }
+      .callout-warning {
+        background: rgba(255, 160, 0, 0.08);
+        border: 1px solid rgba(255, 160, 0, 0.3);
+      }
+      .callout-success {
+        background: rgba(63, 185, 80, 0.08);
+        border: 1px solid rgba(63, 185, 80, 0.3);
+      }
+
+      /* ── Attack resistance table ─────────────────────────────────────── */
+      .attack-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-size: 0.88rem;
+      }
+      .attack-table th {
+        background: rgba(79, 142, 247, 0.12);
+        padding: 0.7rem 1rem;
+        text-align: left;
+        font-weight: 600;
+        border-bottom: 1px solid rgba(79, 142, 247, 0.3);
+      }
+      .attack-table td {
+        padding: 0.65rem 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        vertical-align: top;
+      }
+      .attack-table tr:last-child td {
+        border-bottom: none;
+      }
+      .attack-table tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .badge-blocked {
+        display: inline-block;
+        background: rgba(63, 185, 80, 0.15);
+        color: #3fb950;
+        border: 1px solid rgba(63, 185, 80, 0.4);
+        border-radius: 4px;
+        padding: 1px 8px;
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+      .badge-partial {
+        display: inline-block;
+        background: rgba(255, 160, 0, 0.15);
+        color: #ffa000;
+        border: 1px solid rgba(255, 160, 0, 0.4);
+        border-radius: 4px;
+        padding: 1px 8px;
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+      .badge-bypassed {
+        display: inline-block;
+        background: rgba(248, 81, 73, 0.15);
+        color: #f85149;
+        border: 1px solid rgba(248, 81, 73, 0.4);
+        border-radius: 4px;
+        padding: 1px 8px;
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+
+      /* ── File format diagram ─────────────────────────────────────────── */
+      .format-diagram {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        margin: 1.5rem 0;
+        font-family: "Roboto Mono", monospace;
+        font-size: 0.82rem;
+      }
+      .format-row {
+        display: flex;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .format-offset {
+        background: #161b22;
+        color: #8b949e;
+        padding: 6px 12px;
+        width: 90px;
+        flex-shrink: 0;
+        border-right: 1px solid #30363d;
+      }
+      .format-size {
+        background: #161b22;
+        color: #8b949e;
+        padding: 6px 12px;
+        width: 80px;
+        flex-shrink: 0;
+        border-right: 1px solid #30363d;
+      }
+      .format-field {
+        padding: 6px 14px;
+        flex: 1;
+        font-weight: 500;
+      }
+      .format-field-version {
+        background: #1c2333;
+        color: #79c0ff;
+      }
+      .format-field-header {
+        background: #1a2030;
+        color: #a5d6ff;
+      }
+      .format-field-timelock {
+        background: #1e1a2e;
+        color: #d2a8ff;
+      }
+      .format-field-padding {
+        background: #161b22;
+        color: #484f58;
+      }
+      .format-field-chunks {
+        background: #1b2420;
+        color: #3fb950;
+      }
+      .format-header-row {
+        background: #0d1117;
+        color: #8b949e;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        padding: 4px 0;
+        display: flex;
+      }
+      .format-header-row span {
+        padding: 0 12px;
+      }
+      .format-header-row span:first-child {
+        width: 90px;
+      }
+      .format-header-row span:nth-child(2) {
+        width: 80px;
+      }
+
+      /* ── Section anchors ─────────────────────────────────────────────── */
+      .post-body h2 {
+        margin-top: 2.5rem;
+      }
+      .post-body h3 {
+        margin-top: 1.8rem;
+        font-size: 1.05rem;
+        opacity: 0.9;
+      }
+
+      /* ── TOC ─────────────────────────────────────────────────────────── */
+      .toc {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        padding: 1.2rem 1.5rem;
+        margin: 1.5rem 0 2rem;
+      }
+      .toc p {
+        font-weight: 600;
+        margin: 0 0 0.7rem;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        opacity: 0.6;
+      }
+      .toc ol {
+        margin: 0;
+        padding-left: 1.3rem;
+      }
+      .toc li {
+        margin: 0.3rem 0;
+        font-size: 0.9rem;
+      }
+      .toc a {
+        opacity: 0.85;
+      }
+      .toc a:hover {
+        opacity: 1;
+      }
+
+      /* ── Version badge ───────────────────────────────────────────────── */
+      .version-badge {
+        display: inline-block;
+        background: rgba(79, 142, 247, 0.12);
+        border: 1px solid rgba(79, 142, 247, 0.35);
+        border-radius: 20px;
+        padding: 3px 12px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: #4f8ef7;
+        margin-left: 10px;
+        vertical-align: middle;
+        font-family: "Roboto Mono", monospace;
+      }
+    </style>
+
+    <script>
+      (function () {
+        const theme = localStorage.getItem("qre_theme") || "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <button id="theme-toggle" title="Toggle light/dark theme">
+      <svg
+        class="sun-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg
+        class="moon-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+
+    <header>
+      <div class="container">
+        <h1>Project QRE Blog</h1>
+        <p class="subtitle">Updates, Research, and Technical Deep Dives</p>
+      </div>
+    </header>
+
+    <nav class="breadcrumb-nav container">
+      <a href="index.html">Home</a> &gt; <a href="blog.html">Blog</a> &gt;
+      Time-Lock Encryption — A Technical Deep Dive
+    </nav>
+
+    <main class="container">
+      <article class="single-post-content">
+        <h2>
+          Time-Lock Encryption in QRE Privacy Toolkit
+          <span class="version-badge">v2.7.6</span>
+        </h2>
+        <div class="post-meta-single">
+          Published on April 30, 2026 by <strong>The Project QRE Team</strong>
+        </div>
+
+        <div class="post-body">
+          <p>
+            QRE Privacy Toolkit v2.7.6 introduces
+            <strong>Time-Lock Encryption</strong>
+            — the ability to seal a file so that it cannot be decrypted until a
+            specific date and time you choose in advance. This article is a
+            complete technical walkthrough of how it works: the cryptographic
+            design, the file format changes, the clock-manipulation defenses,
+            and the honest assessment of what it can and cannot protect against.
+          </p>
+
+          <div class="toc">
+            <p>Contents</p>
+            <ol>
+              <li><a href="#motivation">Motivation and Use Cases</a></li>
+              <li><a href="#design-goals">Design Goals</a></li>
+              <li><a href="#cryptographic-model">Cryptographic Model</a></li>
+              <li><a href="#file-format">File Format: V7</a></li>
+              <li><a href="#lock-flow">Encryption (Lock) Flow</a></li>
+              <li><a href="#unlock-flow">Decryption (Unlock) Flow</a></li>
+              <li>
+                <a href="#clock-hardening">Clock-Manipulation Hardening</a>
+              </li>
+              <li><a href="#ntp">Layer 1 — NTP Verification</a></li>
+              <li>
+                <a href="#ratchet">Layer 2 — In-File Ratchet Mechanism</a>
+              </li>
+              <li><a href="#attack-matrix">Attack Resistance Matrix</a></li>
+              <li><a href="#limitations">Honest Limitations</a></li>
+              <li><a href="#summary">Summary</a></li>
+            </ol>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="motivation">1. Motivation and Use Cases</h2>
+
+          <p>
+            Standard encryption protects a file from
+            <em>unauthorized parties</em>. Time-lock encryption adds a second
+            constraint: it protects a file from <em>premature access</em>, even
+            by the file's own owner. Once a file is time-locked, nobody — not
+            the person who locked it, not someone with the master password — can
+            decrypt it before the configured date arrives.
+          </p>
+
+          <p>
+            This is useful in a wider range of situations than it might first
+            appear:
+          </p>
+
+          <ul>
+            <li>
+              <strong>Journalists and lawyers</strong> sealing documents until
+              an embargo or court date lifts.
+            </li>
+            <li>
+              <strong>Developers</strong> locking credentials, API keys, or
+              signing keys until a product goes live.
+            </li>
+            <li>
+              <strong>Estate planning</strong> — instructions, passwords, or a
+              will that should only be readable after a specific event.
+            </li>
+            <li>
+              <strong>Dead man's switch disclosures</strong> — a file that a
+              trusted recipient can access after a deadline passes.
+            </li>
+            <li>
+              <strong>Personal commitments</strong> — locking away access to
+              something (a trading account export, a draft document) for a
+              cooling-off period.
+            </li>
+          </ul>
+
+          <p>
+            Unlike cloud-based time-lock services, QRE's implementation is
+            entirely local and offline. There is no server holding a key on your
+            behalf, and no third party involved at any point.
+          </p>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="design-goals">2. Design Goals</h2>
+
+          <p>
+            We defined four non-negotiable requirements before writing a single
+            line of code:
+          </p>
+
+          <ol>
+            <li>
+              <strong>Single-file.</strong> The entire time-lock state — the
+              expiry timestamp, the cryptographic binding — must live inside the
+              <code>.qre</code> file itself. No sidecar files, no companion
+              databases, no external state. A file you copy to a USB drive or
+              email to yourself must be fully self-contained.
+            </li>
+            <li>
+              <strong>No trusted third party.</strong> No server is ever
+              contacted during the lock or unlock process for key material. The
+              only external contact during unlock is an optional NTP query for
+              clock verification — and even that fails gracefully.
+            </li>
+            <li>
+              <strong>Clock-manipulation resistance.</strong> Simply changing
+              the system clock should not bypass the lock. We implement two
+              independent layers of defense against this.
+            </li>
+            <li>
+              <strong>Composable with existing security.</strong> The time-lock
+              must integrate with the existing AES-256-GCM streaming engine and
+              master key architecture without weakening either.
+            </li>
+          </ol>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="cryptographic-model">3. Cryptographic Model</h2>
+
+          <p>
+            The time-lock is built on top of QRE's existing
+            <strong>envelope encryption</strong> pattern. In a normal
+            <code>.qre</code> file, the actual file data is encrypted with a
+            random <em>File Encryption Key</em> (FEK), and the FEK is then
+            wrapped (encrypted) with a <em>Key Encryption Key</em> (KEK) derived
+            from the master password. Decrypting the file requires unwrapping
+            the FEK first.
+          </p>
+
+          <p>
+            For time-locked files, we add a second layer of key wrapping using a
+            randomly generated <strong>binding key</strong>:
+          </p>
+
+          <div class="callout callout-security">
+            <span class="callout-icon">🔐</span>
+            <div>
+              <strong>Key Hierarchy for Time-Locked Files</strong><br /><br />
+              <code>binding_key</code> — 256-bit random key generated at lock
+              time via OsRng (CSPRNG).<br />
+              <code>binding_key_hash = SHA-256(binding_key)</code> — used as the
+              effective keyfile when wrapping the FEK.<br />
+              <code
+                >encrypted_binding_key = AES-256-GCM(base_KEK,
+                binding_key)</code
+              >
+              — stored in the file header.<br /><br />
+              The <code>base_KEK</code> is derived from the master password
+              <strong>without</strong> any keyfile (using the domain separator
+              <code>"NO_KEYFILE"</code>). The FEK is wrapped with a
+              <code>file_KEK</code> derived from the master password
+              <strong>and</strong> <code>binding_key_hash</code> as the keyfile.
+            </div>
+          </div>
+
+          <p>
+            The result is that two secrets are required to decrypt any
+            time-locked file:
+          </p>
+          <ol>
+            <li>
+              The <strong>master password</strong> (to decrypt the binding key
+              from the header).
+            </li>
+            <li>
+              The <strong>binding key</strong> (to unwrap the FEK and therefore
+              decrypt the file body).
+            </li>
+          </ol>
+          <p>
+            Since the binding key is itself encrypted inside the file header, it
+            is only retrievable after the time-lock check passes. The check
+            happens
+            <em>before</em> any key derivation — we never attempt to decrypt the
+            binding key while the lock is active. This also means an attacker
+            cannot use timing side-channels to check whether the master password
+            is correct while a file is locked.
+          </p>
+
+          <p>
+            Two separate KEKs are derived to avoid key reuse between the binding
+            key encryption and the FEK wrapping:
+          </p>
+
+          <div class="code-block">
+            <span class="comment"
+              >// Base KEK: master key only, no keyfile</span
+            >
+            <span class="comment"
+              >// Used to encrypt the binding_key for storage in the
+              header</span
+            >
+            base_KEK = SHA-256(master_key ||
+            <span class="string">"NO_KEYFILE"</span>)
+
+            <span class="comment"
+              >// File KEK: master key + binding_key_hash as keyfile</span
+            >
+            <span class="comment"
+              >// Used to encrypt the validation tag and wrap the FEK</span
+            >
+            file_KEK = SHA-256(master_key ||
+            <span class="string">"KEYFILE_MIX"</span> || SHA-256(binding_key))
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="file-format">4. File Format: V7</h2>
+
+          <p>
+            QRE's streaming file format has evolved through several versions.
+            Time-locked files are written as <strong>Version 7</strong>. The key
+            difference from V6 is a <strong>fixed 4 KB header region</strong>
+            immediately after the 4-byte version prefix. This fixed region
+            allows the application to rewrite the header in-place (to update the
+            ratchet counter) without touching any of the encrypted data chunks
+            that follow.
+          </p>
+
+          <div class="format-diagram">
+            <div class="format-header-row">
+              <span>Offset</span>
+              <span>Size</span>
+              <span style="padding-left: 14px">Field</span>
+            </div>
+            <div class="format-row">
+              <div class="format-offset">0</div>
+              <div class="format-size">4 bytes</div>
+              <div class="format-field format-field-version">
+                Version marker = 7 (u32, little-endian)
+              </div>
+            </div>
+            <div class="format-row">
+              <div class="format-offset">4</div>
+              <div class="format-size">variable</div>
+              <div class="format-field format-field-header">
+                StreamHeader (bincode-serialized)<br /><small
+                  style="opacity: 0.7"
+                  >vault_id · validation_nonce · encrypted_validation_tag ·
+                  key_wrapping_nonce · encrypted_file_key · base_nonce ·
+                  original_filename · original_hash</small
+                >
+              </div>
+            </div>
+            <div class="format-row">
+              <div class="format-offset">↳</div>
+              <div class="format-size">nested</div>
+              <div class="format-field format-field-timelock">
+                TimeLockMeta (inside StreamHeader)<br /><small
+                  style="opacity: 0.7"
+                  >locked_until (u64, plaintext) · encrypted_binding_key ·
+                  binding_key_nonce · ratchet_max_seen (u64)</small
+                >
+              </div>
+            </div>
+            <div class="format-row">
+              <div class="format-offset">4 – 4099</div>
+              <div class="format-size">4096 bytes</div>
+              <div class="format-field format-field-padding">
+                Fixed header region (zero-padded to 4 KB)
+              </div>
+            </div>
+            <div class="format-row">
+              <div class="format-offset">4100+</div>
+              <div class="format-size">variable</div>
+              <div class="format-field format-field-chunks">
+                Encrypted data chunks<br /><small style="opacity: 0.7"
+                  >[chunk_len: u32][ciphertext: AES-256-GCM+zstd] × N</small
+                >
+              </div>
+            </div>
+          </div>
+
+          <p>
+            The <code>locked_until</code> field inside
+            <code>TimeLockMeta</code> is stored in plaintext. This is
+            intentional: it allows the application to display the countdown
+            timer and check the expiry without requiring the master password.
+            The <code>encrypted_binding_key</code> requires the master password
+            to decrypt and is never revealed while the lock is active.
+          </p>
+
+          <p>
+            The <code>ratchet_max_seen</code> field is also stored in plaintext
+            (inside the encrypted header region, but outside any AES wrapper).
+            This is by design — the ratchet value needs to be readable and
+            writable without the master key so that every unlock
+            <em>attempt</em> (including failed ones with the wrong password) can
+            update it.
+          </p>
+
+          <div class="callout callout-warning">
+            <span class="callout-icon">⚠️</span>
+            <div>
+              <strong>V5 and V6 compatibility</strong><br />
+              V5 files (pre-streaming) and V6 files (embedded time-lock,
+              variable-length header) continue to be read correctly. The version
+              byte at offset 0 tells the decryptor which deserialization path to
+              use. New time-locked files are always written as V7. Regular
+              (non-time-locked) encryptions continue to produce V6 files.
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="lock-flow">5. Encryption (Lock) Flow</h2>
+
+          <p>
+            When a user right-clicks a file and selects
+            <strong>Time-Lock…</strong>, the following sequence executes
+            entirely in a Rust background thread:
+          </p>
+
+          <div class="code-block">
+            <span class="comment"
+              >// Step 1 — Timestamp validation (Rust-side, authoritative)</span
+            >
+            <span class="fn-name">validate_unlock_at</span>(unlock_at)
+            <span class="comment"
+              >// rejects past timestamps, &lt; 1 min, &gt; 50 years</span
+            >
+
+            <span class="comment"
+              >// Step 2 — Generate binding_key via OS CSPRNG</span
+            >
+            <span class="keyword">let mut</span> binding_key =
+            <span class="fn-name">Zeroizing::new</span>([<span class="number"
+              >0u8</span
+            >; <span class="number">32</span>]); OsRng.<span class="fn-name"
+              >try_fill_bytes</span
+            >(&amp;<span class="keyword">mut</span> *binding_key)?;
+
+            <span class="comment"
+              >// Step 3 — Derive the effective keyfile hash</span
+            >
+            <span class="keyword">let</span> binding_key_hash =
+            SHA-256(binding_key);
+
+            <span class="comment"
+              >// Step 4 — Encrypt binding_key with base_KEK for header
+              storage</span
+            >
+            <span class="keyword">let</span> base_KEK =
+            <span class="fn-name">derive_wrapping_key</span>(master_key,
+            <span class="type">None</span>);
+            <span class="keyword">let</span> encrypted_binding_key =
+            AES-256-GCM(base_KEK, binding_key, nonce);
+
+            <span class="comment"
+              >// Step 5 — Wrap the FEK with file_KEK (master +
+              binding_key_hash)</span
+            >
+            <span class="keyword">let</span> file_KEK =
+            <span class="fn-name">derive_wrapping_key</span>(master_key,
+            <span class="type">Some</span>(&amp;binding_key_hash));
+            <span class="keyword">let</span> encrypted_file_key =
+            AES-256-GCM(file_KEK, FEK, nonce);
+
+            <span class="comment"
+              >// Step 6 — Build TimeLockMeta and embed in StreamHeader</span
+            >
+            <span class="keyword">let</span> meta = TimeLockMeta { locked_until:
+            unlock_at, encrypted_binding_key, binding_key_nonce: nonce,
+            ratchet_max_seen: <span class="number">0</span>,
+            <span class="comment">// starts at zero</span>
+            };
+
+            <span class="comment"
+              >// Step 7 — Write V7 file: 4-byte version + 4 KB fixed header +
+              chunks</span
+            >
+            <span class="fn-name">encrypt_file_stream</span>(input, output,
+            master_key, <span class="type">Some</span>(unlock_at), ...)
+          </div>
+
+          <p>
+            The frontend-supplied <code>unlock_at</code> value is treated as
+            untrusted. The Rust <code>validate_unlock_at</code> function
+            enforces a minimum of 60 seconds and a maximum of 50 years from the
+            current system time, and rejects zero and past timestamps outright.
+            The UI pre-validates the same bounds for responsiveness, but the
+            Rust check is the authoritative gate.
+          </p>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="unlock-flow">6. Decryption (Unlock) Flow</h2>
+
+          <p>
+            When a user attempts to unlock a <code>.qre</code> file, the
+            decryption path in <code>decrypt_file_stream</code> executes the
+            following sequence:
+          </p>
+
+          <div class="code-block">
+            <span class="comment"
+              >// Step 1 — Read version byte and deserialize header</span
+            >
+            <span class="keyword">let</span> version = file.<span
+              class="fn-name"
+              >read_u32_le</span
+            >(); <span class="keyword">let</span> header: StreamHeader =
+            <span class="fn-name">deserialize_header</span>(&amp;file, version);
+
+            <span class="comment"
+              >// Step 2 — Time-lock check (before ANY key derivation)</span
+            >
+            <span class="keyword">if let</span>
+            <span class="type">Some</span>(tl) = &amp;header.timelock {
+            <span class="keyword">let</span> authoritative_time =
+            <span class="fn-name">get_authoritative_time</span
+            >(tl.ratchet_max_seen);
+            <span class="comment"
+              >// → NTP if online, max(clock, ratchet) if offline</span
+            >
+
+            <span class="keyword">if</span> authoritative_time &lt;
+            tl.locked_until {
+            <span class="fn-name">update_ratchet_in_place</span>(path,
+            authoritative_time); <span class="comment">// V7 only</span>
+            <span class="keyword">return</span>
+            <span class="type">Err</span>(<span class="string"
+              >"TIME_LOCKED:&lt;unix_ts&gt;:&lt;human duration&gt;"</span
+            >); }
+
+            <span class="comment">// Lock expired — recover binding_key</span>
+            <span class="keyword">let</span> base_KEK =
+            <span class="fn-name">derive_wrapping_key</span>(master_key,
+            <span class="type">None</span>);
+            <span class="keyword">let</span> binding_key = AES-256-GCM-<span
+              class="fn-name"
+              >decrypt</span
+            >(base_KEK, tl.encrypted_binding_key);
+            <span class="keyword">let</span> effective_keyfile =
+            SHA-256(binding_key); }
+
+            <span class="comment"
+              >// Step 3 — Validate master password via the validation tag</span
+            >
+            <span class="keyword">let</span> file_KEK =
+            <span class="fn-name">derive_wrapping_key</span>(master_key,
+            effective_keyfile);
+            <span class="fn-name">verify_validation_tag</span>(file_KEK,
+            header.validation_nonce)?;
+
+            <span class="comment"
+              >// Step 4 — Unwrap FEK and decrypt chunks</span
+            >
+            <span class="keyword">let</span> FEK = AES-256-GCM-<span
+              class="fn-name"
+              >decrypt</span
+            >(file_KEK, header.encrypted_file_key);
+            <span class="fn-name">decrypt_and_write_chunks</span>(FEK,
+            output_dir);
+          </div>
+
+          <p>
+            The error returned on a locked file uses the prefix
+            <code>TIME_LOCKED:&lt;unix_ts&gt;:</code> so the frontend can parse
+            the exact expiry timestamp and render an accurate countdown timer,
+            while the rest of the message is the human-readable duration for
+            display.
+          </p>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="clock-hardening">7. Clock-Manipulation Hardening</h2>
+
+          <p>
+            The most obvious attack on any software time-lock is to simply
+            change the system clock. QRE implements two independent layers of
+            defense against this. Each layer catches a different class of
+            attack. Together they cover all practical bypass attempts short of a
+            hardware security module.
+          </p>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="ntp">8. Layer 1 — NTP Verification</h2>
+
+          <p>
+            When an unlock is attempted while the device is online, QRE queries
+            three well-known NTP servers in parallel using raw UDP sockets from
+            the Rust standard library (no external crates required):
+          </p>
+
+          <ul>
+            <li><code>time.cloudflare.com</code></li>
+            <li><code>time.google.com</code></li>
+            <li><code>pool.ntp.org</code></li>
+          </ul>
+
+          <p>
+            Each server receives a minimal 48-byte NTP v3 client packet. The
+            <em>transmit timestamp</em> is read from bytes 40–43 of the response
+            (big-endian u32 seconds, NTP epoch), converted to a Unix timestamp,
+            and collected. The <strong>median</strong> of all successful
+            responses is used as the authoritative time.
+          </p>
+
+          <div class="callout callout-security">
+            <span class="callout-icon">🛡️</span>
+            <div>
+              <strong>Why the median?</strong><br />
+              Using the median rather than the mean or minimum prevents a single
+              rogue or misconfigured server from skewing the result. Even if one
+              of the three servers returns a manipulated timestamp (due to a BGP
+              hijack or DNS spoofing), the median of three values will still be
+              a legitimate response from one of the other two servers.
+            </div>
+          </div>
+
+          <p>
+            If NTP is available, the system clock is ignored entirely for the
+            time check. An attacker who winds back the system clock while
+            remaining online will be caught immediately — the NTP response is
+            used instead.
+          </p>
+
+          <p>
+            If all three servers are unreachable (the device is offline or NTP
+            traffic is blocked), Layer 1 fails gracefully and Layer 2 takes
+            over.
+          </p>
+
+          <div class="code-block">
+            <span class="comment"
+              >// timelock_clock.rs — NTP query (no external crates)</span
+            >
+            <span class="keyword">fn</span>
+            <span class="fn-name">query_ntp_server</span>(server: &amp;<span
+              class="type"
+              >str</span
+            >) -&gt; <span class="type">Result</span>&lt;<span class="type"
+              >u64</span
+            >, <span class="type">String</span>&gt; {
+            <span class="keyword">let</span> socket = UdpSocket::<span
+              class="fn-name"
+              >bind</span
+            >(<span class="string">"0.0.0.0:0"</span>)?; socket.<span
+              class="fn-name"
+              >set_read_timeout</span
+            >(Duration::<span class="fn-name">from_secs</span>(<span
+              class="number"
+              >3</span
+            >))?; socket.<span class="fn-name">connect</span>(format!(<span
+              class="string"
+              >"{}:123"</span
+            >, server))?;
+
+            <span class="keyword">let mut</span> request = [<span class="number"
+              >0u8</span
+            >; <span class="number">48</span>]; request[<span class="number"
+              >0</span
+            >] = <span class="number">0x1B</span>;
+            <span class="comment">// LI=0, VN=3, Mode=3 (client)</span>
+            socket.<span class="fn-name">send</span>(&amp;request)?;
+
+            <span class="keyword">let mut</span> response = [<span
+              class="number"
+              >0u8</span
+            >; <span class="number">48</span>]; socket.<span class="fn-name"
+              >recv</span
+            >(&amp;<span class="keyword">mut</span> response)?;
+
+            <span class="comment"
+              >// Transmit Timestamp: bytes 40-43 (seconds, big-endian)</span
+            >
+            <span class="keyword">let</span> ntp_secs = u32::<span
+              class="fn-name"
+              >from_be_bytes</span
+            >([ response[<span class="number">40</span>], response[<span
+              class="number"
+              >41</span
+            >], response[<span class="number">42</span>], response[<span
+              class="number"
+              >43</span
+            >] ]) <span class="keyword">as</span> <span class="type">u64</span>;
+            Ok(ntp_secs - <span class="number">2_208_988_800</span>)
+            <span class="comment">// convert NTP epoch → Unix epoch</span> }
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="ratchet">9. Layer 2 — In-File Ratchet Mechanism</h2>
+
+          <p>
+            Layer 1 covers online attacks. Layer 2 covers the offline scenario:
+            an attacker who disconnects from the internet first, then rewinds
+            the system clock.
+          </p>
+
+          <p>
+            Every failed unlock attempt (where the time check fails, regardless
+            of whether the master password is correct) updates the
+            <code>ratchet_max_seen</code> field in the V7 file header:
+          </p>
+
+          <div class="code-block">
+            <span class="comment"
+              >// On every failed time-lock check (V7 files only):</span
+            >
+            <span class="keyword">let</span> new_ratchet =
+            tl.ratchet_max_seen.<span class="fn-name">max</span
+            >(authoritative_time); <span class="keyword">if</span> new_ratchet
+            &gt; tl.ratchet_max_seen {
+            <span class="fn-name">update_v7_header_in_place</span>(path,
+            new_ratchet);
+            <span class="comment"
+              >// Rewrites ONLY bytes 4–4099. Ciphertext chunks are never
+              touched.</span
+            >
+            }
+          </div>
+
+          <p>
+            The ratchet value is a
+            <strong>monotonically increasing</strong> counter. It can only go
+            up, never down. The next time an unlock is attempted — even if the
+            system clock has been rewound and the device is offline — the check
+            becomes:
+          </p>
+
+          <div class="code-block">
+            authoritative_time = <span class="fn-name">max</span>(system_clock,
+            ratchet_max_seen)
+            <span class="comment"
+              >// If system_clock = Jan 1 (rewound) but ratchet = March 15 (from
+              last attempt), // authoritative_time = March 15. The lock
+              holds.</span
+            >
+          </div>
+
+          <p>
+            The in-place rewrite is designed to be safe even on sudden power
+            loss: it writes exactly <code>HEADER_RESERVED_BYTES</code> (4096
+            bytes) to the file starting at byte offset 4. The encrypted data
+            chunks begin at byte 4100 and are completely untouched. A failed or
+            partial ratchet write degrades offline protection (the ratchet value
+            doesn't advance) but never corrupts the file or prevents future
+            decryption.
+          </p>
+
+          <div class="callout callout-success">
+            <span class="callout-icon">✅</span>
+            <div>
+              <strong>No sidecar files</strong><br />
+              An earlier design stored the ratchet value in a hidden companion
+              file (<code>.filename.qre.tl</code>). This was replaced in v2.7.6
+              with the embedded approach: all time-lock state, including the
+              ratchet, lives inside the single <code>.qre</code> file. Losing
+              the file loses the lock. There is nothing else to keep track of.
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="attack-matrix">10. Attack Resistance Matrix</h2>
+
+          <table class="attack-table">
+            <thead>
+              <tr>
+                <th>Attack scenario</th>
+                <th>Result</th>
+                <th>Mechanism</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Rewind system clock while online</td>
+                <td><span class="badge-blocked">BLOCKED</span></td>
+                <td>NTP time used instead of system clock</td>
+              </tr>
+              <tr>
+                <td>Block NTP traffic, rewind clock (offline)</td>
+                <td><span class="badge-blocked">BLOCKED</span></td>
+                <td>Ratchet records a higher time from last online access</td>
+              </tr>
+              <tr>
+                <td>Go offline before any prior access, rewind clock</td>
+                <td><span class="badge-bypassed">POSSIBLE</span></td>
+                <td>
+                  Ratchet is 0 (never written); falls back to system clock
+                </td>
+              </tr>
+              <tr>
+                <td>Single NTP server returns a manipulated timestamp</td>
+                <td><span class="badge-blocked">BLOCKED</span></td>
+                <td>Median of 3 servers; rogue value is discarded</td>
+              </tr>
+              <tr>
+                <td>All 3 NTP servers compromised simultaneously</td>
+                <td><span class="badge-partial">PARTIAL</span></td>
+                <td>
+                  Ratchet still holds if file was accessed while online
+                  previously
+                </td>
+              </tr>
+              <tr>
+                <td>Brute-force master password</td>
+                <td><span class="badge-blocked">BLOCKED</span></td>
+                <td>
+                  Argon2id key derivation (existing); time-lock adds no new
+                  surface
+                </td>
+              </tr>
+              <tr>
+                <td>Copy file and attempt on another machine</td>
+                <td><span class="badge-blocked">BLOCKED</span></td>
+                <td>
+                  Ratchet travels with the file; NTP applies on the new machine
+                  too
+                </td>
+              </tr>
+              <tr>
+                <td>Tamper with encrypted chunks to skip time check</td>
+                <td><span class="badge-blocked">BLOCKED</span></td>
+                <td>
+                  AES-256-GCM authentication tag covers each chunk; integrity
+                  verified post-decrypt
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="limitations">11. Honest Limitations</h2>
+
+          <p>
+            We believe in being transparent about what a security feature
+            <em>cannot</em> do, not just what it can.
+          </p>
+
+          <div class="callout callout-warning">
+            <span class="callout-icon">⚠️</span>
+            <div>
+              <strong>The fresh-system, fully-offline bypass</strong
+              ><br /><br />
+              If an attacker obtains the <code>.qre</code> file and the master
+              password, and they have never previously attempted to unlock the
+              file (so the ratchet is still 0), and they go fully offline before
+              rewinding the clock — they can bypass the time check. This
+              requires premeditated, multi-step effort and possession of the
+              master password, which already represents total compromise of the
+              user's vault.<br /><br />
+              This limitation is shared by every software-only time-lock
+              including VeraCrypt and BitLocker. Eliminating it entirely
+              requires hardware (a TPM, HSM, or secure enclave). QRE does not
+              use hardware security modules.
+            </div>
+          </div>
+
+          <p>
+            The time-lock is best understood as a
+            <strong>cryptographic commitment tool</strong>, not a DRM system. It
+            is designed to:
+          </p>
+          <ul>
+            <li>
+              Prevent accidental or impulsive early access by the file owner.
+            </li>
+            <li>Enforce embargoes and legal timing requirements.</li>
+            <li>Resist casual and opportunistic bypass attempts.</li>
+          </ul>
+          <p>
+            It is <em>not</em> designed to withstand a sophisticated attacker
+            who already possesses both the file and the master password, has
+            complete control of the hardware, and is willing to perform
+            multi-step offline manipulation. For that threat model, use a
+            hardware HSM.
+          </p>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="summary">12. Summary</h2>
+
+          <p>
+            Time-Lock Encryption in QRE v2.7.6 is a fully local, sidecar-free
+            implementation built on a V7 file format with a fixed 4 KB header
+            region. The cryptographic model uses a randomly generated binding
+            key to enforce a two-layer key dependency: both the master password
+            and the binding key are required to decrypt, and the binding key is
+            only revealed after the lock expires.
+          </p>
+
+          <p>
+            Clock manipulation is resisted by two independent mechanisms: NTP
+            verification using the median of three servers (online), and a
+            monotonically increasing ratchet counter stored in the file header
+            and updated in-place on every failed unlock attempt (offline). No
+            external state, no sidecar files, and no third-party servers are
+            required at any point.
+          </p>
+
+          <p>
+            The implementation requires no external Rust crates beyond what QRE
+            already uses — NTP queries are handled using
+            <code>std::net::UdpSocket</code> from the standard library. The
+            feature is covered by 83 automated Rust tests including the new
+            <code>timelock_clock</code> module's unit tests for ratchet
+            monotonicity, median selection, and NTP response parsing.
+          </p>
+
+          <a
+            href="https://github.com/powergr/qre-privacy-toolkit/releases/"
+            class="btn-download"
+            >Download QRE v2.7.6</a
+          >
+        </div>
+      </article>
+    </main>
+
+    <script src="shared.js"></script>
+    <footer>
+      <div class="container">
+        <p>
+          &copy; 2025&ndash;<span id="footer-year"></span> Project QRE. Last
+          updated: <span id="footer-month"></span>
+        </p>
+        <div class="footer-links">
+          <a href="about.html">About Us</a> | <a href="blog.html">Blog</a> |
+          <a href="contact.html">Contact</a> | <a href="terms.html">Terms</a> |
+          <a href="privacy.html">Privacy</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

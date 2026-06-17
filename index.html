@@ -407,7 +407,6 @@
       </div>
     </footer>
 
-    <!-- Lightbox moved to body level so position:fixed is not trapped by a parent stacking context -->
     <div id="qre-lightbox" class="lightbox" style="display: none">
       <span class="lightbox-close" onclick="closeLightbox()" title="Close"
         >&times;</span
@@ -425,7 +424,7 @@
       function openLightbox() {
         lightbox = document.getElementById("qre-lightbox");
         lightbox.style.display = "flex";
-        document.body.style.overflow = "hidden"; // Prevent scroll
+        document.body.style.overflow = "hidden";
       }
       function closeLightbox() {
         if (lightbox) {

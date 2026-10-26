@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      name="description"
+      content="QRE Privacy Toolkit v2.9.1: a new Home screen, file format 8 that hides file names, safer saving, Cancel for long jobs, and copy and paste with Explorer."
+    />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none';
+           script-src 'self' 'unsafe-inline' static.cloudflareinsights.com;
+           style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+           font-src 'self' https://fonts.gstatic.com;
+           img-src 'self';
+           connect-src 'self' cloudflareinsights.com;
+           form-action 'self';
+           upgrade-insecure-requests;"
+    />
+    <title>
+      Announcing QRE Privacy Toolkit v2.9.1: A Safer Format, Cancel, and
+      Explorer Copy and Paste - Project QRE
+    </title>
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://projectqre.com/blog-qre-v2-9-1-announcement.html"
+    />
+    <meta
+      property="og:title"
+      content="Announcing QRE Privacy Toolkit v2.9.1: A Safer Format, Cancel, and Explorer Copy and Paste"
+    />
+    <meta
+      property="og:description"
+      content="Version 2.9.1 hides file names inside encrypted files, checks every save, lets you cancel long jobs with Esc, and adds copy and paste with Explorer."
+    />
+    <meta
+      property="og:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://projectqre.com/blog-qre-v2-9-1-announcement.html"
+    />
+    <meta
+      property="twitter:title"
+      content="Announcing QRE Privacy Toolkit v2.9.1"
+    />
+    <meta
+      property="twitter:description"
+      content="File format 8, safer saving, Cancel for long jobs, and copy and paste with Explorer."
+    />
+    <meta
+      property="twitter:image"
+      content="https://projectqre.com/images/qre-social-share.webp"
+    />
+    <link
+      rel="canonical"
+      href="https://projectqre.com/blog-qre-v2-9-1-announcement.html"
+    />
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+      as="style"
+      onload="
+        this.onload = null;
+        this.rel = 'stylesheet';
+      "
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&family=Roboto+Mono&display=swap"
+    /></noscript>
+
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Article-specific styles -->
+    <style>
+      /* ── Callout boxes ───────────────────────────────────────────────── */
+      .callout {
+        border-radius: 8px;
+        padding: 1rem 1.2rem;
+        margin: 1.5rem 0;
+        display: flex;
+        gap: 0.9rem;
+        align-items: flex-start;
+        font-size: 0.93rem;
+        line-height: 1.6;
+      }
+      .callout-icon {
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .callout-security {
+        background: rgba(79, 142, 247, 0.08);
+        border: 1px solid rgba(79, 142, 247, 0.3);
+      }
+      .callout-warning {
+        background: rgba(255, 160, 0, 0.08);
+        border: 1px solid rgba(255, 160, 0, 0.3);
+      }
+      .callout-success {
+        background: rgba(63, 185, 80, 0.08);
+        border: 1px solid rgba(63, 185, 80, 0.3);
+      }
+
+      /* ── Summary and comparison tables ───────────────────────────────── */
+      .attack-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-size: 0.88rem;
+      }
+      .attack-table th {
+        background: rgba(79, 142, 247, 0.12);
+        padding: 0.7rem 1rem;
+        text-align: left;
+        font-weight: 600;
+        border-bottom: 1px solid rgba(79, 142, 247, 0.3);
+      }
+      .attack-table td {
+        padding: 0.65rem 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        vertical-align: top;
+      }
+      .attack-table tr:last-child td {
+        border-bottom: none;
+      }
+      .attack-table tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .badge-blocked {
+        display: inline-block;
+        background: rgba(63, 185, 80, 0.15);
+        color: #3fb950;
+        border: 1px solid rgba(63, 185, 80, 0.4);
+        border-radius: 4px;
+        padding: 1px 8px;
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+      .badge-bypassed {
+        display: inline-block;
+        background: rgba(248, 81, 73, 0.15);
+        color: #f85149;
+        border: 1px solid rgba(248, 81, 73, 0.4);
+        border-radius: 4px;
+        padding: 1px 8px;
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+
+      /* ── Section anchors ─────────────────────────────────────────────── */
+      .post-body h2 {
+        margin-top: 2.5rem;
+      }
+      .post-body h3 {
+        margin-top: 1.8rem;
+        font-size: 1.05rem;
+        opacity: 0.9;
+      }
+
+      /* ── TOC ─────────────────────────────────────────────────────────── */
+      .toc {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        padding: 1.2rem 1.5rem;
+        margin: 1.5rem 0 2rem;
+      }
+      .toc p {
+        font-weight: 600;
+        margin: 0 0 0.7rem;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        opacity: 0.6;
+      }
+      .toc ol {
+        margin: 0;
+        padding-left: 1.3rem;
+      }
+      .toc li {
+        margin: 0.3rem 0;
+        font-size: 0.9rem;
+      }
+      .toc a {
+        opacity: 0.85;
+      }
+      .toc a:hover {
+        opacity: 1;
+      }
+
+      /* ── Version badge ───────────────────────────────────────────────── */
+      .version-badge {
+        display: inline-block;
+        background: rgba(79, 142, 247, 0.12);
+        border: 1px solid rgba(79, 142, 247, 0.35);
+        border-radius: 20px;
+        padding: 3px 12px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: #4f8ef7;
+        margin-left: 10px;
+        vertical-align: middle;
+        font-family: "Roboto Mono", monospace;
+      }
+    </style>
+
+    <script>
+      (function () {
+        const theme = localStorage.getItem("qre_theme") || "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+  </head>
+  <body>
+    <button id="theme-toggle" title="Toggle light/dark theme">
+      <svg
+        class="sun-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <svg
+        class="moon-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+
+    <header>
+      <div class="container">
+        <h1>Project QRE Blog</h1>
+        <p class="subtitle">Updates, Research, and Technical Deep Dives</p>
+      </div>
+    </header>
+
+    <nav class="breadcrumb-nav container">
+      <a href="index.html">Home</a> &gt; <a href="blog.html">Blog</a> &gt;
+      Announcing QRE Toolkit v2.9.1
+    </nav>
+
+    <main class="container">
+      <article class="single-post-content">
+        <h2>
+          Announcing QRE Privacy Toolkit
+          <span class="version-badge">v2.9.1</span>
+        </h2>
+        <div class="post-meta-single">
+          Published on October 26, 2026 by
+          <strong>The Project QRE Team</strong>
+        </div>
+
+        <div class="post-body">
+          <p>
+            <strong>QRE Privacy Toolkit v2.9.1</strong> is our largest update
+            since the time-lock. It has a new look, a new file format, safer
+            saving everywhere, and two features that users asked for: a Cancel
+            button for long jobs, and copy and paste that works with Explorer.
+          </p>
+          <p>
+            This post walks through what changed and why. It also says what the
+            new format does <em>not</em> protect against, because we think that
+            matters as much as the features.
+          </p>
+
+          <div class="toc">
+            <p>Contents</p>
+            <ol>
+              <li><a href="#at-a-glance">At a Glance</a></li>
+              <li><a href="#home">A Home Screen You Can See at Once</a></li>
+              <li><a href="#format-8">File Format 8</a></li>
+              <li><a href="#safe-writing">Safer Writing and Checking</a></li>
+              <li><a href="#vault-files">Vault Files Join Format 8</a></li>
+              <li><a href="#cancel">Cancel a Long Job</a></li>
+              <li><a href="#explorer">Copy and Paste with Explorer</a></li>
+              <li><a href="#upgrading">Upgrading Older Locked Files</a></li>
+              <li><a href="#small-fixes">Smaller Changes Worth Knowing</a></li>
+              <li><a href="#checked">Built to Be Checked</a></li>
+              <li><a href="#limits">Honest Limits</a></li>
+              <li><a href="#update">Before You Update</a></li>
+            </ol>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="at-a-glance">1. At a Glance</h2>
+
+          <table class="attack-table">
+            <thead>
+              <tr>
+                <th>Area</th>
+                <th>What changed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Interface</strong></td>
+                <td>
+                  One-screen Home, a grouped sidebar, a jump bar on Ctrl+K, a
+                  status bar with the auto-lock countdown, and a bottom bar on
+                  phones.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>File format</strong></td>
+                <td>
+                  Format 8 hides the file name and the hash, and authenticates
+                  the whole header.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Safe saving</strong></td>
+                <td>
+                  Every new locked file is checked before it is called done.
+                  Nothing half-made is left next to your files.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Vault files</strong></td>
+                <td>
+                  Passwords, notes, bookmarks and clipboard history use format
+                  8 too. Old vaults move over the first time they are opened.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Control</strong></td>
+                <td>
+                  Cancel a long lock with Esc. Copy and paste files between QRE
+                  and Explorer on Windows.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Upgrades</strong></td>
+                <td>
+                  Three ways to rewrite older locked files in the new format,
+                  and a format badge in the Details panel.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Review</strong></td>
+                <td>
+                  A full format specification, an independent decoder, over 840
+                  Rust tests and more than 2,400 frontend tests.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="home">2. A Home Screen You Can See at Once</h2>
+
+          <p>
+            The Home screen is rebuilt as one screen. All twelve tools are in
+            view with no scrolling, even in a small laptop window. They are
+            grouped as <strong>Protect</strong>, <strong>Inspect</strong>,
+            <strong>Clean up</strong> and <strong>Create</strong>, each with its
+            own color. A Protection panel shows whether your keychain is backed
+            up, with a Back up now button.
+          </p>
+          <p>
+            Press <strong>Ctrl+K</strong> (Cmd+K on a Mac) anywhere to open the
+            jump bar. Type a few letters and press Enter to open a tool or run
+            an action such as Lock now or Back up keychain. It searches names
+            only. It never looks inside your passwords or notes.
+          </p>
+          <p>
+            The sidebar follows the same groups, and it can shrink to icons with
+            Ctrl+B. On computers, a status bar above every screen shows that the
+            vault is unlocked, a live countdown to the automatic lock, the
+            backup state, and a Lock button.
+          </p>
+
+          <h3>One flow for every tool</h3>
+          <p>
+            Every tool now follows the same path: a start screen with a drop
+            zone, a progress card while it works, then the result. Success
+            messages appear as a short notice that closes itself. Errors still
+            use a dialog, because they need to be read.
+          </p>
+
+          <h3>Files and phones</h3>
+          <p>
+            The Files screen gets a Places list, a selection bar, and a Details
+            panel with the type, size, date and location of what you selected.
+            Every part of the address bar is a button, and Ctrl+L lets you type
+            a path.
+          </p>
+          <p>
+            On a phone, the sidebar becomes a bottom bar with five places: Home,
+            Files, Passwords, Tools and More. Editing panels rise from the
+            bottom as sheets, and touch targets are at least 44 pixels tall.
+          </p>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="format-8">3. File Format 8</h2>
+
+          <p>
+            Until now, a locked file kept its header in the clear. Anyone
+            holding the file could read the original file name, such as
+            <code>tax-return-2024.pdf</code>, and the SHA-256 hash of the
+            content. Older formats also had no protection against someone
+            cutting the file at a chunk boundary and rewriting the hash to
+            match.
+          </p>
+          <p>
+            Format 8 fixes both problems. It is now the format for every new
+            locked file.
+          </p>
+
+          <table class="attack-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Formats 5 to 7</th>
+                <th>Format 8</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>File name readable without the key</td>
+                <td><span class="badge-bypassed">YES</span></td>
+                <td><span class="badge-blocked">NO</span></td>
+              </tr>
+              <tr>
+                <td>Plaintext hash readable without the key</td>
+                <td><span class="badge-bypassed">YES</span></td>
+                <td><span class="badge-blocked">NO</span></td>
+              </tr>
+              <tr>
+                <td>Header fields protected from editing</td>
+                <td>Only some</td>
+                <td>All of them, plus the version and length</td>
+              </tr>
+              <tr>
+                <td>A file cut at a chunk boundary is noticed</td>
+                <td><span class="badge-bypassed">NO</span></td>
+                <td><span class="badge-blocked">YES</span></td>
+              </tr>
+              <tr>
+                <td>Time-lock date can be changed in a hex editor</td>
+                <td><span class="badge-bypassed">YES</span></td>
+                <td><span class="badge-blocked">NO</span></td>
+              </tr>
+              <tr>
+                <td>A refused unlock rewrites the file</td>
+                <td>Yes, for time-locks</td>
+                <td>Never</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            The file name and the hash now sit inside an encrypted block. A
+            SHA-256 digest of every other header field is mixed into every
+            chunk, so changing any byte of the header, or moving chunks around,
+            makes the file fail to open. The time-lock date is tied to the
+            sealed binding key, so editing the date no longer opens anything.
+          </p>
+
+          <h3>Why the ratchet is gone</h3>
+          <p>
+            Version 7 time-locks stored a ratchet in the file: the highest time
+            the app had seen. While reviewing the design, we found that the
+            ratchet could only ever hold a time <em>earlier</em> than the lock
+            date. It never changed whether a file opens. Removing it also means
+            a locked file is never rewritten when an unlock is refused.
+          </p>
+
+          <h3>Clearer error messages</h3>
+          <p>
+            A damaged header used to look like a wrong password. In format 8 the
+            key check is separate from the rest of the header, so the two cases
+            give different messages. Damage to the key check's own few bytes
+            still looks like a wrong password, and the specification says so.
+          </p>
+
+          <div class="callout callout-warning">
+            <span class="callout-icon">⚠️</span>
+            <div>
+              <strong>Older apps cannot open format 8 files</strong><br /><br />
+              Files made by older versions still open and keep their visible
+              names until you lock them again. But a phone or computer that is
+              not updated cannot open a format 8 file. Update every device that
+              shares locked files.
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="safe-writing">4. Safer Writing and Checking</h2>
+
+          <p>
+            A file you cannot open is worse than no file. It looks like a
+            backup and is not one. So v2.9.1 changes how every file is written.
+          </p>
+          <ul>
+            <li>
+              <strong>Verify After Locking:</strong> By default, the app opens
+              each new locked file once, the same way unlocking does, before it
+              says the lock is done. If the file is damaged or cut short, it is
+              removed, and the message says your original is untouched. You can
+              switch this off in the options menu.
+            </li>
+            <li>
+              <strong>Nothing half-made:</strong> A locked file appears under
+              its real name only when it is complete and on disk. An unlocked
+              file appears only after every part and the whole-file hash have
+              been checked.
+            </li>
+            <li>
+              <strong>One-step saves:</strong> Vault files and a restored
+              keychain go through a temporary file that replaces the old one in
+              a single step. A crash or a full disk can no longer leave a vault
+              empty.
+            </li>
+            <li>
+              <strong>Contained output:</strong> A damaged or edited locked file
+              can no longer make the app create a file outside the folder you
+              chose.
+            </li>
+            <li>
+              <strong>Safer names:</strong> Characters that reverse the
+              direction of text, such as U+202E, are replaced. On Windows, names
+              like <code>CON</code> or <code>AUX .txt</code> are refused.
+            </li>
+            <li>
+              <strong>Bounded memory:</strong> A hostile chunk cannot expand to
+              more than 1 MiB when it is decompressed, and a tampered
+              <code>keychain.json</code> can no longer make the app try to
+              allocate gigabytes.
+            </li>
+          </ul>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="vault-files">5. Vault Files Join Format 8</h2>
+
+          <p>
+            Your passwords, notes, bookmarks and clipboard history are stored in
+            vault files. They used to have their own older container format,
+            with a readable hash of the content and a few unauthenticated header
+            fields. Now they are saved exactly like a locked file.
+          </p>
+          <ul>
+            <li>
+              The name inside and the hash of the content are sealed, and the
+              whole header is authenticated.
+            </li>
+            <li>
+              A vault file copied over another one, such as notes over
+              passwords, is refused.
+            </li>
+            <li>
+              Every save is opened again before it replaces the old file, so a
+              bad save cannot destroy a vault.
+            </li>
+          </ul>
+          <p>
+            Vaults from earlier versions move over the first time they are
+            opened. The content is carried over byte for byte. The move only
+            starts after the old file opened with the right key and parsed. If
+            it fails for any reason, the old file stays and the vault opens as
+            before.
+          </p>
+
+          <div class="callout callout-security">
+            <span class="callout-icon">🔐</span>
+            <div>
+              <strong>Going back to an older version</strong><br /><br />
+              After the move, apps older than v2.9.1 cannot open that vault
+              file. If you might go back, copy the four vault files
+              (<code>passwords.qre</code>, <code>notes.qre</code>,
+              <code>bookmarks.qre</code> and <code>clipboard.qre</code>) before
+              the first start of the new version.
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="cancel">6. Cancel a Long Job</h2>
+
+          <p>
+            While locking a 15 GB folder, we found there was no way to stop it.
+            That was a real gap, and it is closed.
+          </p>
+          <p>
+            While the app is locking, unlocking, upgrading or time-locking, press
+            <strong>Esc</strong> or click <strong>Cancel</strong> on the
+            progress card. The app stops at its next step, which is at most one
+            megabyte of work away. It removes the file it was writing, including
+            the temporary zip of a folder, and it never touches your originals.
+          </p>
+          <p>
+            Files that were already finished before you stopped stay finished,
+            and the message tells you how many. Copying, moving and deleting
+            cannot be stopped once they have started.
+          </p>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="explorer">7. Copy and Paste with Explorer</h2>
+
+          <p>
+            Copy and paste used to work only inside the app. Now
+            <strong>Ctrl+C</strong>, <strong>Ctrl+X</strong> and
+            <strong>Ctrl+V</strong> (and the right-click menu) put the selected
+            files on the Windows clipboard, in the same format Explorer uses. So
+            you can paste them in Explorer, and files you copy in Explorer can
+            be pasted into the open folder in QRE. A cut there is moved.
+          </p>
+          <p>
+            This works on Windows. On other systems and on Android, copy and
+            paste still work inside the app only. We have not tried the system
+            clipboard on macOS or Linux, so we do not claim it.
+          </p>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="upgrading">8. Upgrading Older Locked Files</h2>
+
+          <p>
+            Files made by older versions keep their visible names until they are
+            rewritten. There are now three ways to do that, and none of them
+            writes your data to the disk in the clear. Each file is decrypted and
+            sealed again in memory, and the new file is checked from start to
+            finish before it replaces the old one.
+          </p>
+          <ul>
+            <li>
+              <strong>Upgrade Older Locked Files</strong> in the options menu
+              finds the old files in the open folder and its sub folders.
+            </li>
+            <li>
+              <strong>Upgrade Format</strong> in the right-click menu rewrites
+              just the file you choose.
+            </li>
+            <li>
+              <strong>Upgrade Older Files When Unlocking</strong> is a setting
+              that is off until you turn it on. It rewrites a file right after
+              you unlock it.
+            </li>
+          </ul>
+          <p>
+            The Details panel now shows a format badge: current format, or an
+            older one with its version number. Files that are still
+            time-locked are skipped until the lock ends. Files locked with a key
+            file need that key file, and USB vault files need their vault
+            unlocked.
+          </p>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="small-fixes">9. Smaller Changes Worth Knowing</h2>
+
+          <ul>
+            <li>
+              <strong>Recovery code notice:</strong> Changing your password does
+              not replace the recovery code, so anyone who has seen it can still
+              open your vault. The app now says so and offers a new code in one
+              click. The old code stops working at once.
+            </li>
+            <li>
+              <strong>Auto-lock follows the real clock:</strong> A phone pauses
+              timers in the background and a computer stops them during sleep.
+              The app now locks at once when you return and the time is up.
+            </li>
+            <li>
+              <strong>Plain wording on the time-lock:</strong> The dialog and the
+              Help manual now say the lock is kept by the app, not by the
+              encryption. See the limits below.
+            </li>
+            <li>
+              <strong>Compression option renamed:</strong> The option called
+              Store (None) did not store anything. It is now called Fastest
+              (Minimal), which is what it does.
+            </li>
+            <li>
+              <strong>Large files in folders:</strong> A single file of 4 GB or
+              more inside a locked folder no longer makes the lock fail, and an
+              unreadable folder no longer leaves a partial zip behind.
+            </li>
+            <li>
+              <strong>System Cleaner:</strong> Emptying the Recycle Bin, flushing
+              DNS and clearing the clipboard no longer flash a black command
+              window, and a failed Recycle Bin run now reports its reason.
+            </li>
+            <li>
+              <strong>Android:</strong> The status bar icons are readable in the
+              light theme again, and the top bar in Passwords and Notes no
+              longer scrolls sideways.
+            </li>
+          </ul>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="checked">10. Built to Be Checked</h2>
+
+          <p>
+            A security tool should be easy to question. This release comes with
+            <code>FILE_FORMAT.md</code> in the repository, written for outside
+            reviewers. It has the byte layout, the threat model, a table of 18
+            known limits with their status, a log of every review finding and
+            the decision taken, and the full list of error messages.
+          </p>
+          <p>
+            It also has two sample files with a known key, and the source of a
+            second program that opens them. We wrote that decoder from the
+            specification alone, without looking at the Rust code. It checks
+            that the document describes the format completely.
+          </p>
+          <p>
+            The format went through two rounds of outside review. Several
+            findings changed the design: the ratchet was removed, the version and
+            header length were added to the digest, and the error messages were
+            split. Each one is in the review log.
+          </p>
+          <p>
+            The test suite now has over 840 Rust tests and more than 2,400
+            frontend tests. For the new code we also broke lines on purpose and
+            checked that a test failed. Where one did not, we wrote the missing
+            test. Each push to GitHub runs a fast subset on Windows, Linux and
+            macOS.
+          </p>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="limits">11. Honest Limits</h2>
+
+          <p>
+            We would rather you know what the app cannot do than find out later.
+          </p>
+
+          <div class="callout callout-warning">
+            <span class="callout-icon">⚠️</span>
+            <div>
+              <strong>What v2.9.1 does not protect against</strong><br /><br />
+              <strong>The time-lock is advisory.</strong> It is kept by the app,
+              not by the encryption. It guards against mistakes and impulse. It
+              does not stop someone who has your master password and the right
+              tools, and the date can be read without the password.<br /><br />
+              <strong>There is no rollback protection.</strong> Someone who can
+              write to your folders can put back an older valid copy of a locked
+              file or a vault file, and nothing will notice.<br /><br />
+              <strong>Locking a folder makes a temporary plaintext zip.</strong>
+              It sits next to the folder while the lock runs, and it is deleted
+              afterwards, not overwritten. A backup or sync tool watching the
+              folder may copy it.<br /><br />
+              <strong>A key file is hashed once.</strong> It is mixed in as a
+              single SHA-256 with no stretching, so use a random file as the key
+              file.
+            </div>
+          </div>
+
+          <p>
+            All of these are listed in the known-limits table in
+            <code>FILE_FORMAT.md</code>, with the reasoning for each decision.
+          </p>
+
+          <!-- ═══════════════════════════════════════════════════════════════ -->
+          <h2 id="update">12. Before You Update</h2>
+
+          <div class="callout callout-success">
+            <span class="callout-icon">✅</span>
+            <div>
+              <strong>A short checklist</strong><br /><br />
+              Back up your keychain from the Home screen.<br />
+              Copy your four vault files if you may go back to an older
+              version.<br />
+              Update every device that shares locked files, because older apps
+              cannot open format 8.<br />
+              Optionally, turn on Upgrade Older Locked Files for the folders
+              that matter most.
+            </div>
+          </div>
+
+          <p>
+            QRE Privacy Toolkit v2.9.1 is open source and local-first. It is
+            available for Windows, macOS, Linux and Android.
+          </p>
+
+          <a
+            href="https://github.com/powergr/qre-privacy-toolkit/releases/latest"
+            class="btn-download"
+            >Download v2.9.1</a
+          >
+        </div>
+      </article>
+    </main>
+
+    <script src="shared.js"></script>
+    <footer>
+      <div class="container">
+        <p>
+          &copy; 2025&ndash;<span id="footer-year"></span> Project QRE. Last
+          updated: <span id="footer-month"></span>
+        </p>
+        <div class="footer-links">
+          <a href="about.html">About Us</a> | <a href="blog.html">Blog</a> |
+          <a href="contact.html">Contact</a> | <a href="terms.html">Terms</a> |
+          <a href="privacy.html">Privacy</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
